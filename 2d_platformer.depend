@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1738632585 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1738804651 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+
+1738028479 c:\users\thinkpadx1\desktop\csci 178\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1738202618 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
+	<_common.h>
+
+1738633988 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_lightsetting.cpp
+	"_lightSetting.h"
+
+1738634183 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
+	<_common.h>
+
+1738805487 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+	"_scene.h"
+	<_lightSetting.h>
+	<_model.h>
+
+1738805657 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
+	<_common.h>
+
+1738805407 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_model.cpp
+	"_model.h"
+

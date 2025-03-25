@@ -37,21 +37,29 @@
 			<Add directory="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/include" />
 		</Compiler>
 		<Linker>
+			<Add library="../common/lib/libSOIL.a" />
 			<Add library="glut32" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
 			<Add library="winmm" />
 			<Add library="gdi32" />
+			<Add library="../common/lib/libirrKlang.a" />
 			<Add directory="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/lib" />
 		</Linker>
 		<Unit filename="include/_common.h" />
+		<Unit filename="include/_inputs.h" />
 		<Unit filename="include/_lightSetting.h" />
 		<Unit filename="include/_model.h" />
+		<Unit filename="include/_player.h" />
 		<Unit filename="include/_scene.h" />
+		<Unit filename="include/_textureLoader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/_inputs.cpp" />
 		<Unit filename="src/_lightSetting.cpp" />
 		<Unit filename="src/_model.cpp" />
+		<Unit filename="src/_player.cpp" />
 		<Unit filename="src/_scene.cpp" />
+		<Unit filename="src/_textureLoader.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

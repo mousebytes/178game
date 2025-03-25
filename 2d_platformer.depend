@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1738632585 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
+1740013860 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
 	<windows.h>
 	<_common.h>
 	<_scene.h>
 
-1738804651 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
 	<windows.h>
 	<iostream>
 	<gl/gl.h>
@@ -18,23 +18,48 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1738202618 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
 	<_common.h>
 
-1738633988 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_lightsetting.cpp
-	"_lightSetting.h"
+1740013861 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_lightsetting.cpp
+	"_lightsetting.h"
 
-1738634183 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1738805487 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1742896239 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
-	<_lightSetting.h>
+	<_lightsetting.h>
+	<_model.h>
+	<_inputs.h>
+	<_player.h>
+
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
+	<_common.h>
+	<_textureloader.h>
+
+1742888676 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_model.cpp
+	"_model.h"
+
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1668646408 c:\users\thinkpadx1\desktop\csci 178\common\include\soil.h
+
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
+	<_common.h>
 	<_model.h>
 
-1738805657 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
-	<_common.h>
+1740013861 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+	"_inputs.h"
 
-1738805407 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_model.cpp
-	"_model.h"
+1740013862 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
+	"_textureloader.h"
+
+1742889702 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+	<_textureLoader.h>
+
+1742889716 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+	"_player.h"
 

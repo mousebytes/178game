@@ -1,23 +1,25 @@
-#ifndef _SCENE_H
-#define _SCENE_H
+#ifndef _SCENE_
+#define _SCENE_
 
 #include<_common.h>
-
 
 class _scene
 {
     public:
-        _scene(); //constructor
-        virtual ~_scene(); // destructor
+        _scene();             //constructor
+        virtual ~_scene();    //destructor
 
-        GLint initGL(); // GLint instead of int because this will give you platform independency :) // initialize game objects
-        void reSize(GLint width, GLint Height); // resize window
-        void drawScene(); // render the final scene
+       GLint initGL();        //initialize game objects
+       void reSize(GLint width,GLint Height); // resize window
+       void  drawScene();     // Render the Final scene
 
-
+       int winMsg(HWND	hWnd,			// Handle For This Window
+                  UINT	uMsg,			// Message For This Window
+                  WPARAM	wParam,			// Additional Message Information
+                  LPARAM	lParam);
     protected:
 
     private:
 };
 
-#endif // _SCENE_H
+#endif // _SCENE_

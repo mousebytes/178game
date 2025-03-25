@@ -1,9 +1,14 @@
 #include "_scene.h"
-#include<_lightSetting.h>
+#include<_lightsetting.h>
 #include<_model.h>
+#include<_inputs.h>
+#include<_player.h>
 
-_lightSetting *mylight = new _lightSetting();
-_model *myModel = new _model(); // creating instance for model
+
+_lightSetting *myLight = new _lightSetting();
+_model *myModel = new _model();    // creating instance for model
+_inputs *input = new _inputs();
+_player *player = new _player();
 
 _scene::_scene()
 {
@@ -14,55 +19,79 @@ _scene::~_scene()
 {
     //dtor
 }
-
 GLint _scene::initGL()
 {
-    glClearColor(1.0,1.0,1.0,1.0);
-    glClearDepth(1.0);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_COLOR_MATERIAL);
+   glClearColor(1.0,1.0,1.0,1.0);
+   glClearDepth(1.0);
+   glEnable(GL_DEPTH_TEST);
+   glDepthFunc(GL_LEQUAL);
 
-    mylight->setLight(GL_LIGHT0);
+   glEnable(GL_BLEND); // for transparent bg
+   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-    return true;
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+   //glDisable(GL_LIGHTING);
 
+  // glEnable(GL_COLOR_MATERIAL);
+   myLight->setLight(GL_LIGHT0);
+
+   //myModel->initModel("images/skin.jpg");
+    player->initPlayer(1,1,"images/wall.png");
+
+
+   return true;
 }
 
-GLvoid _scene::reSize(GLsizei width, GLsizei height)
+void _scene::reSize(GLint width, GLint height)
 {
     GLfloat aspectRatio = (GLfloat)width/(GLfloat)height;
-    // keep track of the resize wwindow
+    // keep track of the resize window
     glViewport(0,0,width,height); // adjusting the viewport
-    glMatrixMode(GL_PROJECTION);// perspective projection settings
-    glLoadIdentity(); // identity matrix
+    glMatrixMode(GL_PROJECTION);  // perspective projection settings
+    glLoadIdentity();             // identity matrix
     gluPerspective(45,aspectRatio,0.1,100.0); // projection settings
-    glMatrixMode(GL_MODELVIEW); // camera and model settings
-    glLoadIdentity(); // identity matrix
-
+    glMatrixMode(GL_MODELVIEW);   // camera and model settings
+    glLoadIdentity();             // identity matrix
 }
+
 void _scene::drawScene()
 {
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); // clear bits in each iteration
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glPushMatrix();
+    gluLookAt(0,0,1,0,0,0,0,1,0);
 
-    glColor3f(1.0,0,0);
-    glTranslatef(0.0,0.0,-8.0);
-    glRotatef(30,0,1,0);
-    glutSolidTeapot(1.5);
+    //myModel->drawModel();
+    player->drawPlayer();
+}
+int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch(uMsg)
+    {
+    case WM_KEYDOWN:
+           input->wParam = wParam;
+           input->keyPressed(myModel);
+        break;
 
-    glPopMatrix();
 
-    glPushMatrix();
+    case WM_KEYUP: break;
 
-    glColor3f(0.0,1,0);
-    glTranslatef(8.0,0.0,-15.0);
-    glRotatef(30,1,0,0);
-    glutSolidCube(2.0);
-
-    glPopMatrix();
+    case WM_LBUTTONDOWN:
+    case WM_RBUTTONDOWN:
+        input->wParam = wParam;
+        input->mouseEventDown(myModel,LOWORD(lParam),HIWORD(lParam));
+        break;
+    case WM_LBUTTONUP:
+    case WM_RBUTTONUP:
+    case WM_MBUTTONUP:
+        input->mouseEventUp();
+        break;
+    case WM_MOUSEMOVE:
+        input->mouseMove(myModel,LOWORD(lParam),HIWORD(lParam));
+        break;
+    case WM_MOUSEWHEEL:
+        input->mouseWheel(myModel,(double)GET_WHEEL_DELTA_WPARAM(wParam));
+        break;
+    }
 }

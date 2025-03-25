@@ -1,5 +1,6 @@
 #ifndef _LIGHTSETTING_H
 #define _LIGHTSETTING_H
+
 #include<_common.h>
 
 class _lightSetting
@@ -8,24 +9,21 @@ class _lightSetting
         _lightSetting();
         virtual ~_lightSetting();
 
-
-        GLfloat light_ambient[4]  = { 0.0f, 0.0f, 0.0f, 1.0f }; // environment light
-        const GLfloat light_diffuse[4]  = { 1.0f, 1.0f, 1.0f, 1.0f }; // shadow light
-        const GLfloat light_specular[4] = { 1.0f, 1.0f, 1.0f, 1.0f }; // shininess
-        const GLfloat light_position[4] = { 2.0f, 5.0f, 5.0f, 0.0f }; // light position
+        const GLfloat light_ambient[4]  = { 0.0f, 0.0f, 0.0f, 1.0f };// Environment Light
+        const GLfloat light_diffuse[4]  = { 1.0f, 1.0f, 1.0f, 1.0f };//Shadow Light
+        const GLfloat light_specular[4] = { 1.0f, 1.0f, 1.0f, 1.0f };//Shininess
+        const GLfloat light_position[4] = { 2.0f, 5.0f, 5.0f, 0.0f };//Light position
 
         const GLfloat mat_ambient[4]    = { 0.7f, 0.7f, 0.7f, 1.0f };
         const GLfloat mat_diffuse[4]    = { 0.8f, 0.8f, 0.8f, 1.0f };
         const GLfloat mat_specular[4]   = { 1.0f, 1.0f, 1.0f, 1.0f };
         const GLfloat high_shininess[1] = { 100.0f };
 
+        GLvoid setLight(GLenum);
 
-
-    GLvoid setLight(GLenum);
     protected:
 
     private:
-
 };
 
 #endif // _LIGHTSETTING_H

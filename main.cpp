@@ -1,4 +1,3 @@
-
 #pragma once
 
 #ifdef _WIN32
@@ -10,10 +9,8 @@
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 
-#include<_common.h>
+#include<_common.h>	// Header File For Windows
 #include<_scene.h>
-
-
 
 using namespace std;
 
@@ -130,7 +127,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 		dwExStyle=WS_EX_APPWINDOW;								// Window Extended Style
 		dwStyle= WS_POPUP;			// must handle Gsync situations: Windows Style
-		ShowCursor(FALSE);									// Hide Mouse Pointer
+		ShowCursor(TRUE);									// Hide Mouse Pointer
 	}
 	else
 	{
@@ -219,16 +216,15 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 	ShowWindow(hWnd,SW_SHOW);						// Show The Window
 	SetForegroundWindow(hWnd);						// Slightly Higher Priority
-	SetFocus(hWnd);	// Sets Keyboard Focus To The Window
+	SetFocus(hWnd);// Sets Keyboard Focus To The Window
 
-	Scene->reSize(width,height);
-
+    Scene->reSize(width,height);
 	if(!Scene->initGL())
-	{
-	    KillGLWindow();
-	    MessageBox(NULL, "GLInit failed", "ERROR", MB_OK|MB_ICONEXCLAMATION);
-	    return FALSE;
-	}
+    {
+        KillGLWindow();								// Reset The Display
+		MessageBox(NULL,"InitGL fail.","ERROR",MB_OK|MB_ICONEXCLAMATION);
+		return FALSE;
+    }
 
 	return TRUE;									// Success
 }
@@ -278,11 +274,13 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 		case WM_KEYDOWN:							// Is A Key Being Held Down?
 		{
 			keys[wParam] = TRUE;					// If So, Mark It As TRUE
+			Scene->winMsg(hWnd,	uMsg,wParam,lParam);
 			return 0;								// Jump Back
 		}
 
 		case WM_KEYUP:								// Has A Key Been Released?
 		{
+		    Scene->winMsg(hWnd,	uMsg,wParam,lParam);
 			keys[wParam] = FALSE;					// If So, Mark It As FALSE
 
 			return 0;								// Jump Back
@@ -293,6 +291,18 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
             Scene->reSize(LOWORD(lParam),HIWORD(lParam));                                        // LoWord=Width, HiWord=Heigh
 			return 0;								// Jump Back
 		}
+
+		case WM_LBUTTONDOWN:
+        case WM_RBUTTONDOWN:
+        case WM_MBUTTONDOWN:
+        case WM_LBUTTONUP:
+        case WM_RBUTTONUP:
+        case WM_MBUTTONUP:
+        case WM_MOUSEMOVE:
+        case WM_MOUSEWHEEL:
+            Scene->winMsg(hWnd,	uMsg,wParam,lParam);
+            break;
+
 	}
 
 	// Pass All Unhandled Messages To DefWindowProc

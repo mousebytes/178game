@@ -4,6 +4,7 @@
 #include<_inputs.h>
 #include<_player.h>
 #include<_camera.h>
+#include<_background.h>
 
 
 _lightSetting *myLight = new _lightSetting();
@@ -11,6 +12,7 @@ _model *myModel = new _model();    // creating instance for model
 _inputs *input = new _inputs();
 _player *player = new _player();
 _camera *camera = new _camera();
+_background *background = new _background();
 
 _scene::_scene()
 {
@@ -41,6 +43,10 @@ GLint _scene::initGL()
    //myModel->initModel("images/skin.jpg");
     player->initPlayer(1,1,"images/wall.png");
 
+    dim.x = GetSystemMetrics(SM_CXSCREEN);
+    dim.y = GetSystemMetrics(SM_CYSCREEN);
+
+    background->initBG("images/marce.png");
 
    return true;
 }
@@ -55,6 +61,9 @@ void _scene::reSize(GLint width, GLint height)
     gluPerspective(45,aspectRatio,0.1,100.0); // projection settings
     glMatrixMode(GL_MODELVIEW);   // camera and model settings
     glLoadIdentity();             // identity matrix
+
+    dim.x = GetSystemMetrics(SM_CXSCREEN);
+    dim.y = GetSystemMetrics(SM_CYSCREEN);
 }
 
 void _scene::drawScene()
@@ -62,17 +71,19 @@ void _scene::drawScene()
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    gluLookAt(0,0,1,0,0,0,0,1,0);
+    //gluLookAt(0,0,1,0,0,0,0,1,0);
 
     //myModel->drawModel();
 
 
-    //TODO: FIX CAMERA
-    //camera->followPlayer(player);
-    //camera->updateCamPos();
+    //TODO: FIX CAMERA // might be fixed idk
+    camera->followPlayer(player);
+    camera->updateCamPos();
 
     player->updatePlayer();
     player->drawPlayer();
+
+    background->drawBackground(dim.x,dim.y);
 
 
 

@@ -17,6 +17,8 @@ class _scene
                   UINT	uMsg,			// Message For This Window
                   WPARAM	wParam,			// Additional Message Information
                   LPARAM	lParam);
+
+    vec2 dim;
     protected:
 
     private:

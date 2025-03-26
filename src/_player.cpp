@@ -21,7 +21,10 @@ void _player::initPlayer(int xfrm, int yfrm, char* fileName)
 
 
     //init player pos
-    plPos.x=0; plPos.y = -0.55; plPos.z = -2;
+    plPos.x=0;
+    //plPos.y = -0.55;
+    plPos.y = 3.0;
+    plPos.z = -2;
 
     // init player size
     plScl.x=plScl.y=plScl.z=0.5;

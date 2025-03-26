@@ -27,7 +27,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1742983055 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1743026069 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_model.h>
@@ -35,6 +35,7 @@
 	<_player.h>
 	<_camera.h>
 	<_background.h>
+	<_collisionCheck.h>
 
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
 	<_common.h>
@@ -54,30 +55,30 @@
 	<_model.h>
 	<_player.h>
 
-1742981528 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+1743022239 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
 	"_inputs.h"
 
 1742896416 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
 	"_textureloader.h"
 
-1742981304 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+1743020517 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
 	<_textureLoader.h>
 
-1742980929 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1743025609 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
 	<_common.h>
 	<_player.h>
 
-1742976875 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
+1743025271 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
 	"_camera.h"
 
 1742982914 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_background.h
 	<_common.h>
 	<_textureLoader.h>
 
-1742983015 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
+1743020517 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
 1742987613 source:d:\codeblocks stuff\178game\main.cpp
@@ -160,4 +161,10 @@
 	<GL/glu.h>
 
 1742988165 d:\codeblocks stuff\common\include\soil.h
+
+1743025794 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1743021265 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collisioncheck.h
+	<_common.h>
 

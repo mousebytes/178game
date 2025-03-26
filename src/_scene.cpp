@@ -5,6 +5,7 @@
 #include<_player.h>
 #include<_camera.h>
 #include<_background.h>
+#include<_collisionCheck.h>
 
 
 _lightSetting *myLight = new _lightSetting();
@@ -13,6 +14,7 @@ _inputs *input = new _inputs();
 _player *player = new _player();
 _camera *camera = new _camera();
 _background *background = new _background();
+_collisionCheck *collision = new _collisionCheck();
 
 _scene::_scene()
 {
@@ -84,6 +86,26 @@ void _scene::drawScene()
 
     player->updatePlayer();
     player->drawPlayer();
+
+    if(!collision->isPlayerOnGround({player->plPos.x, player->plPos.y}, {0,0.0}))
+        {
+
+            /*
+            plPos.y = 3.0 -- groundPos.y = 0.0
+            not (F) -> True -> start conditional
+            */
+            //player->plPos.y -=GRAVITY; // legacy
+            player->applyVelocity(0,-1); // TODO: create a separate function to apply gravity
+            cout << "player y pos " << player->plPos.y << endl;
+        }
+        else
+        {
+            player->applyVelocity(0,0);
+        }
+    /*else
+    {
+        player->plPos.y = 0;
+    }*/
 
 
 

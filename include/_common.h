@@ -10,6 +10,7 @@
 
 
 #define PI 3.14159
+#define GRAVITY 9.81
 
 using namespace std;
 

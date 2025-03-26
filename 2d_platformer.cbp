@@ -46,6 +46,7 @@
 			<Add library="../common/lib/libirrKlang.a" />
 			<Add directory="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/lib" />
 		</Linker>
+		<Unit filename="include/_camera.h" />
 		<Unit filename="include/_common.h" />
 		<Unit filename="include/_inputs.h" />
 		<Unit filename="include/_lightSetting.h" />
@@ -54,6 +55,7 @@
 		<Unit filename="include/_scene.h" />
 		<Unit filename="include/_textureLoader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/_camera.cpp" />
 		<Unit filename="src/_inputs.cpp" />
 		<Unit filename="src/_lightSetting.cpp" />
 		<Unit filename="src/_model.cpp" />

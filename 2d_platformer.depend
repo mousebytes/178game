@@ -4,7 +4,7 @@
 	<_common.h>
 	<_scene.h>
 
-1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
+1742969765 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
 	<windows.h>
 	<iostream>
 	<gl/gl.h>
@@ -27,12 +27,13 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1742896239 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1742981496 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_model.h>
 	<_inputs.h>
 	<_player.h>
+	<_camera.h>
 
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
 	<_common.h>
@@ -47,19 +48,27 @@
 
 1668646408 c:\users\thinkpadx1\desktop\csci 178\common\include\soil.h
 
-1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
+1742981545 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
 	<_common.h>
 	<_model.h>
+	<_player.h>
 
-1740013861 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+1742981528 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
 	"_inputs.h"
 
-1740013862 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
+1742896416 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
 	"_textureloader.h"
 
-1742889702 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+1742981304 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
 	<_textureLoader.h>
 
-1742889716 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1742980929 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
+
+1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1742976875 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
+	"_camera.h"
 

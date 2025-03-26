@@ -66,3 +66,21 @@ void _player::playerActions()
 {
 
 }
+
+void _player::applyVelocity(float xVel, float yVel)
+{
+    velocity.x = xVel*speed;
+    velocity.y=yVel*speed;
+}
+
+void _player::updatePlayer()
+{
+    plPos.x +=velocity.x;
+    plPos.y +=velocity.y;
+
+    // can add friction like this ij think:
+    //velocity.x*=0.9;
+    //velocity.y*=0.9;
+
+}
+

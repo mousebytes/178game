@@ -3,6 +3,7 @@
 
 #include<_common.h>
 #include<_model.h>
+#include<_player.h>
 
 class _inputs
 {
@@ -11,7 +12,8 @@ class _inputs
         virtual ~_inputs();
 
         void keyPressed(_model *); // handling given model by key strokes
-        void keyUP();
+        void keyPressed(_player *);
+        void keyUP(_player*);
 
         void mouseEventDown(_model *, double, double);
         void mouseEventUp();

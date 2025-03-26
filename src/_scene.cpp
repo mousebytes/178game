@@ -3,12 +3,14 @@
 #include<_model.h>
 #include<_inputs.h>
 #include<_player.h>
+#include<_camera.h>
 
 
 _lightSetting *myLight = new _lightSetting();
 _model *myModel = new _model();    // creating instance for model
 _inputs *input = new _inputs();
 _player *player = new _player();
+_camera *camera = new _camera();
 
 _scene::_scene()
 {
@@ -63,7 +65,18 @@ void _scene::drawScene()
     gluLookAt(0,0,1,0,0,0,0,1,0);
 
     //myModel->drawModel();
+
+
+    //TODO: FIX CAMERA
+    //camera->followPlayer(player);
+    //camera->updateCamPos();
+
+    player->updatePlayer();
     player->drawPlayer();
+
+
+
+
 }
 int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -72,10 +85,13 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
            input->wParam = wParam;
            input->keyPressed(myModel);
+           input->keyPressed(player);
         break;
 
 
-    case WM_KEYUP: break;
+    case WM_KEYUP:
+        input->keyUP(player);
+        break;
 
     case WM_LBUTTONDOWN:
     case WM_RBUTTONDOWN:

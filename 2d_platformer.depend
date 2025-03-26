@@ -80,3 +80,84 @@
 1742983015 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
+1742987613 source:d:\codeblocks stuff\178game\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1742987613 d:\codeblocks stuff\178game\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+
+1742987613 d:\codeblocks stuff\178game\include\_scene.h
+	<_common.h>
+
+1742988880 source:d:\codeblocks stuff\178game\src\_background.cpp
+	"_background.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_background.h
+	<_common.h>
+	<_textureLoader.h>
+
+1742987613 d:\codeblocks stuff\178game\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1742988232 source:d:\codeblocks stuff\178game\src\_camera.cpp
+	"_camera.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1742988914 d:\codeblocks stuff\178game\include\_player.h
+	<_textureLoader.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_inputs.cpp
+	"_inputs.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_inputs.h
+	<_common.h>
+	<_model.h>
+	<_player.h>
+
+1742987613 d:\codeblocks stuff\178game\include\_model.h
+	<_common.h>
+	<_textureloader.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_lightsetting.cpp
+	"_lightsetting.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_lightsetting.h
+	<_common.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_model.cpp
+	"_model.h"
+
+1742987613 source:d:\codeblocks stuff\178game\src\_player.cpp
+	"_player.h"
+
+1742988442 source:d:\codeblocks stuff\178game\src\_scene.cpp
+	"_scene.h"
+	<_lightsetting.h>
+	<_model.h>
+	<_inputs.h>
+	<_player.h>
+	<_camera.h>
+	<_background.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
+	"_textureloader.h"
+
+1742988165 d:\codeblocks stuff\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1742988165 d:\codeblocks stuff\common\include\soil.h
+

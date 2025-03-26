@@ -25,7 +25,7 @@ class _player
         float xMax,yMax,xMin,yMin;
         vec3 vert[4];
         vec3 velocity = {0,0,0};
-        float speed =0.005; // change velocity factor here
+        float speed;
 
 
 

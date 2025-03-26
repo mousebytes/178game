@@ -3,6 +3,7 @@
 _player::_player()
 {
     //ctor
+    speed =0.0005; // change velocity factor here
 }
 
 _player::~_player()

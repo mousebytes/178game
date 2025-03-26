@@ -80,10 +80,12 @@ void _scene::drawScene()
     camera->followPlayer(player);
     camera->updateCamPos();
 
+    background->drawBackground(dim.x,dim.y);
+
     player->updatePlayer();
     player->drawPlayer();
 
-    background->drawBackground(dim.x,dim.y);
+
 
 
 

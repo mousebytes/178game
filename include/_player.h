@@ -2,6 +2,8 @@
 #define _PLAYER_H
 #include<_textureLoader.h>
 
+#include<_timer.h>
+
 class _player
 {
     public:
@@ -15,6 +17,7 @@ class _player
         void playerActions();
         void applyVelocity(float,float);
         void updatePlayer();
+        void applyGravity();
 
         vec3 plPos;
         vec3 plScl;
@@ -26,7 +29,11 @@ class _player
         vec3 vert[4];
         vec3 velocity = {0,0,0};
         float speed;
+        float jumpVelocity;
 
+        bool isJumping;
+
+        _timer *timer = new _timer();
 
 
     protected:

@@ -87,25 +87,21 @@ void _scene::drawScene()
     player->updatePlayer();
     player->drawPlayer();
 
-    if(!collision->isPlayerOnGround({player->plPos.x, player->plPos.y}, {0,0.0}))
+    /*if(!collision->isPlayerOnGround({player->plPos.x, player->plPos.y}, {0,0.0}) )//&& !player->isJumping)
         {
 
-            /*
-            plPos.y = 3.0 -- groundPos.y = 0.0
-            not (F) -> True -> start conditional
-            */
+
+            //plPos.y = 3.0 -- groundPos.y = 0.0
+            //not (F) -> True -> start conditional
+
             //player->plPos.y -=GRAVITY; // legacy
             player->applyVelocity(0,-1); // TODO: create a separate function to apply gravity
-            cout << "player y pos " << player->plPos.y << endl;
+            //cout << "player y pos " << player->plPos.y << endl; // debugging
         }
         else
         {
-            player->applyVelocity(0,0);
-        }
-    /*else
-    {
-        player->plPos.y = 0;
-    }*/
+            player->applyVelocity(player->velocity.x,0);
+        }*/
 
 
 

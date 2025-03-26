@@ -4,6 +4,8 @@ _player::_player()
 {
     //ctor
     speed =0.0005; // change velocity factor here
+    jumpVelocity = 0.3;
+    isJumping = false;
 }
 
 _player::~_player()
@@ -77,10 +79,27 @@ void _player::applyVelocity(float xVel, float yVel)
     velocity.y=yVel*speed;
 }
 
+void _player::applyGravity()
+{
+    if(plPos.y >= 0.0)
+    {
+        applyVelocity(0, -1);
+    }
+    if(plPos.y <= 0.0)
+        applyVelocity(velocity.x,0);
+}
+
+
+
+
 void _player::updatePlayer()
 {
     plPos.x +=velocity.x;
     plPos.y +=velocity.y;
+
+    applyGravity();
+
+
 
     // can add friction like this ij think:
     //velocity.x*=0.9;

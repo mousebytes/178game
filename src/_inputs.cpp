@@ -48,12 +48,14 @@ void _inputs::keyPressed(_player* player)
         break;
     case VK_UP:
         //player->plPos.y += 0.05; //legacy
-        //player->applyVelocity(0,1);
-        player->plPos.y += 4.0;
+        player->applyVelocity(0,1);
         break;
     case VK_DOWN:
         //player->plPos.y -=0.05; //legacy
         player->applyVelocity(0,-1);
+        break;
+    case VK_SPACE:
+        player->plPos.y += 4.0;
         break;
 
     }

@@ -3,7 +3,7 @@
 _player::_player()
 {
     //ctor
-    speed =0.0005; // change velocity factor here
+    speed =0.001; // change velocity factor here
     jumpVelocity = 0.3;
     isJumping = false;
 }
@@ -83,10 +83,12 @@ void _player::applyGravity()
 {
     if(plPos.y >= 0.0)
     {
-        applyVelocity(0, -1);
+        //applyVelocity(velocity.x, -1);
+        velocity.y=-speed;
     }
     if(plPos.y <= 0.0)
-        applyVelocity(velocity.x,0);
+        //applyVelocity(velocity.x,0);
+        velocity.y=0;
 }
 
 

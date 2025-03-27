@@ -55,7 +55,7 @@
 	<_model.h>
 	<_player.h>
 
-1743030094 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+1743036573 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
 	"_inputs.h"
 
 1742896416 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
@@ -65,14 +65,14 @@
 	<_textureLoader.h>
 	<_timer.h>
 
-1743030060 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1743036461 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
 	<_common.h>
 	<_player.h>
 
-1743025271 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
+1743036517 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
 	"_camera.h"
 
 1742982914 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_background.h

@@ -68,7 +68,7 @@ void _inputs::keyUP(_player *player)
     {
     case VK_LEFT:
         player->velocity.x = 0;
-        cout << "\nLEFT RELEASED"; // debugging
+        //cout << "\nLEFT RELEASED"; // debugging
         break;
     case VK_RIGHT:
         player->velocity.x = 0;

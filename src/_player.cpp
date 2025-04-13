@@ -3,9 +3,10 @@
 _player::_player()
 {
     //ctor
-    speed =0.001; // change velocity factor here
-    jumpVelocity = 0.3;
+    speed =0.07; // change velocity factor here
     isJumping = false;
+    action_trigger = 0;
+    timer->reset();
 }
 
 _player::~_player()
@@ -25,7 +26,7 @@ void _player::initPlayer(int xfrm, int yfrm, char* fileName)
     //init player pos
     plPos.x=0;
     //plPos.y = -0.55;
-    plPos.y = 3.0;
+    plPos.y = 0.0;
     plPos.z = -2;
 
     // init player size
@@ -70,42 +71,31 @@ void _player::drawPlayer()
 
 void _player::playerActions()
 {
-
-}
-
-void _player::applyVelocity(float xVel, float yVel)
-{
-    velocity.x = xVel*speed;
-    velocity.y=yVel*speed;
-}
-
-void _player::applyGravity()
-{
-    if(plPos.y >= 0.0)
+    switch(action_trigger)
     {
-        //applyVelocity(velocity.x, -1);
-        velocity.y=-speed;
+    case STANDING:
+
+        break;
+
+    case WALKLEFT:
+        if(timer->getTicks() > 40)
+        {
+            plPos.x -= speed;
+            timer->reset();
+        }
+
+        break;
+
+    case WALKRIGHT:
+        if(timer->getTicks() > 40)
+        {
+            plPos.x += speed;
+            timer->reset();
+        }
+
+        break;
+
     }
-    if(plPos.y <= 0.0)
-        //applyVelocity(velocity.x,0);
-        velocity.y=0;
 }
 
-
-
-
-void _player::updatePlayer()
-{
-    plPos.x +=velocity.x;
-    plPos.y +=velocity.y;
-
-    applyGravity();
-
-
-
-    // can add friction like this ij think:
-    //velocity.x*=0.9;
-    //velocity.y*=0.9;
-
-}
 

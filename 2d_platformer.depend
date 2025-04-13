@@ -87,7 +87,7 @@
 	<_common.h>
 	<_scene.h>
 
-1742987613 d:\codeblocks stuff\178game\include\_common.h
+1743938911 d:\codeblocks stuff\178game\include\_common.h
 	<windows.h>
 	<iostream>
 	<gl/gl.h>
@@ -109,17 +109,18 @@
 	<_common.h>
 	<SOIL.h>
 
-1742988232 source:d:\codeblocks stuff\178game\src\_camera.cpp
+1744555944 source:d:\codeblocks stuff\178game\src\_camera.cpp
 	"_camera.h"
 
 1742987613 d:\codeblocks stuff\178game\include\_camera.h
 	<_common.h>
 	<_player.h>
 
-1742988914 d:\codeblocks stuff\178game\include\_player.h
+1744553638 d:\codeblocks stuff\178game\include\_player.h
 	<_textureLoader.h>
+	<_timer.h>
 
-1742987613 source:d:\codeblocks stuff\178game\src\_inputs.cpp
+1744553767 source:d:\codeblocks stuff\178game\src\_inputs.cpp
 	"_inputs.h"
 
 1742987613 d:\codeblocks stuff\178game\include\_inputs.h
@@ -140,10 +141,10 @@
 1742987613 source:d:\codeblocks stuff\178game\src\_model.cpp
 	"_model.h"
 
-1742987613 source:d:\codeblocks stuff\178game\src\_player.cpp
+1744554493 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1742988442 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1744556120 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_model.h>
@@ -151,8 +152,9 @@
 	<_player.h>
 	<_camera.h>
 	<_background.h>
+	<_collisionCheck.h>
 
-1742987613 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
+1744554806 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
 
 1742988165 d:\codeblocks stuff\common\include\gl\glut.h
@@ -173,5 +175,17 @@
 	<_common.h>
 
 1743027941 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_timer.cpp
+	"_timer.h"
+
+1743938911 d:\codeblocks stuff\178game\include\_timer.h
+	<_common.h>
+
+1743931102 source:d:\codeblocks stuff\178game\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1743931102 d:\codeblocks stuff\178game\include\_collisioncheck.h
+	<_common.h>
+
+1743938911 source:d:\codeblocks stuff\178game\src\_timer.cpp
 	"_timer.h"
 

@@ -15,9 +15,9 @@ class _player
         void initPlayer(int, int, char*); // x frames, y frames, file name
         void drawPlayer();
         void playerActions();
-        void applyVelocity(float,float);
-        void updatePlayer();
-        void applyGravity();
+
+        enum{STANDING,WALKLEFT,WALKRIGHT,JUMP};
+        int action_trigger;
 
         vec3 plPos;
         vec3 plScl;
@@ -27,10 +27,8 @@ class _player
 
         float xMax,yMax,xMin,yMin;
         vec3 vert[4];
-        vec3 velocity = {0,0,0};
-        float speed;
-        float jumpVelocity;
 
+        float speed;
         bool isJumping;
 
         _timer *timer = new _timer();

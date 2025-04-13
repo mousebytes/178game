@@ -45,6 +45,7 @@ GLint _scene::initGL()
    //myModel->initModel("images/skin.jpg");
     player->initPlayer(1,1,"images/wall.png");
 
+
     dim.x = GetSystemMetrics(SM_CXSCREEN);
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
@@ -75,17 +76,18 @@ void _scene::drawScene()
 
     //gluLookAt(0,0,1,0,0,0,0,1,0);
 
-    //myModel->drawModel();
-
+    player->playerActions();
 
     //TODO: FIX CAMERA // might be fixed idk
     camera->followPlayer(player);
     camera->updateCamPos();
 
+    player->drawPlayer();
+
     background->drawBackground(dim.x,dim.y);
 
-    player->updatePlayer();
-    player->drawPlayer();
+
+
 
     /*if(!collision->isPlayerOnGround({player->plPos.x, player->plPos.y}, {0,0.0}) )//&& !player->isJumping)
         {
@@ -115,7 +117,6 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
     case WM_KEYDOWN:
            input->wParam = wParam;
-           input->keyPressed(myModel);
            input->keyPressed(player);
         break;
 

@@ -20,10 +20,13 @@ _camera::~_camera()
 
 void _camera::followPlayer(_player* player)
 {
-    float lerp = 0.3; // camera smoothing :) -- closer to 1 means follows more quickly
+    //float lerp = 0.3; // camera smoothing :) -- closer to 1 means follows more quickly
 
-    camPos.x += (player->plPos.x - camPos.x)*lerp;
-    camPos.y += (player->plPos.y - camPos.y);//*lerp;
+
+        camPos.x += (player->plPos.x - camPos.x);//*lerp;
+        camPos.y += (player->plPos.y - camPos.y);//*lerp;
+
+
     camPos.z = 4.0;
 
     targetPos = player->plPos;

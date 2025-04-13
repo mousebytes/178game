@@ -34,7 +34,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/include" />
+			<Add directory="../common/include" />
 		</Compiler>
 		<Linker>
 			<Add library="../common/lib/libSOIL.a" />
@@ -44,7 +44,7 @@
 			<Add library="winmm" />
 			<Add library="gdi32" />
 			<Add library="../common/lib/libirrKlang.a" />
-			<Add directory="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/lib" />
+			<Add directory="../common/lib" />
 		</Linker>
 		<Unit filename="include/_background.h" />
 		<Unit filename="include/_camera.h" />

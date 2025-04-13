@@ -39,20 +39,18 @@ void _inputs::keyPressed(_player* player)
     switch(wParam)
     {
     case VK_LEFT:
-        //player->plPos.x -= 0.05; //legacy
-        player->applyVelocity(-1,0);
+        player->action_trigger = player->WALKLEFT;
+        //player->plPos.x -= 0.05;
         break;
     case VK_RIGHT:
-        //player->plPos.x += 0.05; //legacy
-        player->applyVelocity(1,0);
+        player->action_trigger = player->WALKRIGHT;
+        //player->plPos.x += 0.05;
         break;
     case VK_UP:
-        //player->plPos.y += 0.05; //legacy
-        player->applyVelocity(0,1);
+        //player->plPos.y += 0.05;
         break;
     case VK_DOWN:
-        //player->plPos.y -=0.05; //legacy
-        player->applyVelocity(0,-1);
+        //player->plPos.y -=0.05;
         break;
     case VK_SPACE:
         player->plPos.y += 4.0;
@@ -67,20 +65,11 @@ void _inputs::keyUP(_player *player)
     switch(wParam)
     {
     case VK_LEFT:
-        player->velocity.x = 0;
-        //cout << "\nLEFT RELEASED"; // debugging
-        break;
     case VK_RIGHT:
-        player->velocity.x = 0;
-        break;
     case VK_UP:
-        //player->velocity.y = 0;
-        //player->velocity.y = 0; // TODO: reapply this later
-        break;
     case VK_DOWN:
-        player->velocity.y = 0;
+        player->action_trigger = player->STANDING;
         break;
-        //default: break;
     }
 
 }

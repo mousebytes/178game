@@ -1,5 +1,5 @@
 #include "_player.h"
-#define TIMER_LIMIT 30
+#define TIMER_LIMIT 15
 
 
 _player::_player()
@@ -9,9 +9,9 @@ _player::_player()
     isJumping = false;
     action_trigger = 0;
     timer->reset();
-    max_jump_height = 1.0;
+    max_jump_height = 2.7;
     jump_timer->reset();
-    jumping_speed = speed;
+    jumping_speed = 0.07;
     is_grounded = true;
     left_timer_bypass = right_timer_bypass = false;
 }

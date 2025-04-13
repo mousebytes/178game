@@ -93,6 +93,7 @@ void _inputs::keyUP(_player *player)
 
     case VK_SPACE:
         wParam = temp_wParam;
+        player->isJumping = false;
         break;
     }
 

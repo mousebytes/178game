@@ -42,7 +42,6 @@ GLint _scene::initGL()
   // glEnable(GL_COLOR_MATERIAL);
    myLight->setLight(GL_LIGHT0);
 
-   //myModel->initModel("images/skin.jpg");
     player->initPlayer(1,1,"images/wall.png");
 
 
@@ -76,41 +75,19 @@ void _scene::drawScene()
 
     //gluLookAt(0,0,1,0,0,0,0,1,0);
 
+    // don't change the order of these 4 functions -- player texture breaks otherwise
     player->playerActions();
-
-    //TODO: FIX CAMERA // might be fixed idk
     camera->followPlayer(player);
     camera->updateCamPos();
-
     player->drawPlayer();
+
+    player->handle_vertical();
 
     background->drawBackground(dim.x,dim.y);
 
-
-
-
-    /*if(!collision->isPlayerOnGround({player->plPos.x, player->plPos.y}, {0,0.0}) )//&& !player->isJumping)
-        {
-
-
-            //plPos.y = 3.0 -- groundPos.y = 0.0
-            //not (F) -> True -> start conditional
-
-            //player->plPos.y -=GRAVITY; // legacy
-            player->applyVelocity(0,-1); // TODO: create a separate function to apply gravity
-            //cout << "player y pos " << player->plPos.y << endl; // debugging
-        }
-        else
-        {
-            player->applyVelocity(player->velocity.x,0);
-        }*/
-
-
-
-
-
-
+    cout << "\nLEFT AND RIGHT: " << input->key_left_down << " " << input->key_right_down;
 }
+
 int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch(uMsg)
@@ -122,6 +99,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 
     case WM_KEYUP:
+        input->wParam = wParam;
         input->keyUP(player);
         break;
 

@@ -1,4 +1,6 @@
 #include "_player.h"
+#define TIMER_LIMIT 30
+
 
 _player::_player()
 {
@@ -7,6 +9,11 @@ _player::_player()
     isJumping = false;
     action_trigger = 0;
     timer->reset();
+    max_jump_height = 1.0;
+    jump_timer->reset();
+    jumping_speed = speed;
+    is_grounded = true;
+    left_timer_bypass = right_timer_bypass = false;
 }
 
 _player::~_player()
@@ -71,31 +78,73 @@ void _player::drawPlayer()
 
 void _player::playerActions()
 {
-    switch(action_trigger)
+    if(timer->getTicks() > TIMER_LIMIT)
     {
-    case STANDING:
-
+        switch(action_trigger)
+        {
+        case STANDING:
         break;
 
-    case WALKLEFT:
-        if(timer->getTicks() > 40)
-        {
+        case WALKLEFT:
             plPos.x -= speed;
             timer->reset();
-        }
-
         break;
 
     case WALKRIGHT:
-        if(timer->getTicks() > 40)
-        {
             plPos.x += speed;
             timer->reset();
-        }
-
         break;
+        }
+    }
+    else if (right_timer_bypass && action_trigger == WALKRIGHT)
+    {
+        plPos.x += speed;
+        //timer->reset();
+        right_timer_bypass = false;
+    }
+    else if(left_timer_bypass && action_trigger == WALKLEFT)
+    {
+        plPos.x -= speed;
+        //timer->reset();
+        left_timer_bypass = false;
+    }
+
+}
+
+// TODO: allow the player to cancel the rest of a jump & make the jump reset when the player touches the ground
+void _player::handle_vertical()
+{
+    if(isJumping)
+    {
+
+        // TODO: maybe add an OR condition where if the player releases space bar it kills the upward momentum
+        if(plPos.y < (height_before_jump + max_jump_height))
+        {
+            if(jump_timer->getTicks() > TIMER_LIMIT)
+            {
+                plPos.y += jumping_speed; // TODO: change speed to jump speed later
+                jump_timer->reset();
+            }
+        }
+        else
+            isJumping = false;
+    }
+
+    if(!isJumping && !is_grounded)
+    {
+        if(plPos.y > 0.0)
+        {
+            if(jump_timer->getTicks() > TIMER_LIMIT)
+            {
+                plPos.y -=jumping_speed;
+                jump_timer->reset();
+            }
+        }
+        else
+        {
+            is_grounded = true;
+            plPos.y = 0.0;
+        }
 
     }
 }
-
-

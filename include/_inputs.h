@@ -25,8 +25,10 @@ class _inputs
 
         bool isMsTranslate;
         bool isMsRotation;
+        bool key_left_down, key_right_down;
 
         WPARAM wParam;
+        WPARAM temp_wParam;
 
     protected:
 

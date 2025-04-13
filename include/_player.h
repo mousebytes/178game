@@ -15,6 +15,8 @@ class _player
         void initPlayer(int, int, char*); // x frames, y frames, file name
         void drawPlayer();
         void playerActions();
+        //void handle_jumping();
+        void handle_vertical();
 
         enum{STANDING,WALKLEFT,WALKRIGHT,JUMP};
         int action_trigger;
@@ -29,9 +31,13 @@ class _player
         vec3 vert[4];
 
         float speed;
-        bool isJumping;
+        bool isJumping, is_grounded;
+        float height_before_jump, max_jump_height;
+        float jumping_speed;
 
         _timer *timer = new _timer();
+        _timer *jump_timer = new _timer();
+        bool left_timer_bypass, right_timer_bypass;
 
 
     protected:

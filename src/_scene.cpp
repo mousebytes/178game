@@ -6,6 +6,7 @@
 #include<_camera.h>
 #include<_background.h>
 #include<_collisionCheck.h>
+#include<_platform.h>
 
 
 _lightSetting *myLight = new _lightSetting();
@@ -15,6 +16,7 @@ _player *player = new _player();
 _camera *camera = new _camera();
 _background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
+_platform *level1_floor = new _platform();
 
 _scene::_scene()
 {
@@ -49,6 +51,7 @@ GLint _scene::initGL()
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
     background->initBG("images/marce.png");
+    level1_floor->initPlat("images/wall.png",0,-2,-3,5.0,1.0,1.0,1,1);
 
    return true;
 }
@@ -83,7 +86,14 @@ void _scene::drawScene()
 
     player->handle_vertical();
 
+    if(player->plPos.y < -4.0)
+        player->initPlayer(1,1,"images/wall.png");
+
     background->drawBackground(dim.x,dim.y);
+
+    level1_floor->drawPlat();
+
+    check_platform_collisions();
 
 }
 
@@ -119,4 +129,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         input->mouseWheel(myModel,(double)GET_WHEEL_DELTA_WPARAM(wParam));
         break;
     }
+}
+
+void _scene::check_platform_collisions()
+{
+    collision->isPlayerOnGround(player,level1_floor);
+
 }

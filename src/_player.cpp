@@ -120,19 +120,11 @@ void _player::handle_vertical()
 
     if(!isJumping && !is_grounded)
     {
-        if(plPos.y > 0.0)
-        {
-            if(jump_timer->getTicks() > TIMER_LIMIT)
+        if(jump_timer->getTicks() > TIMER_LIMIT)
             {
                 plPos.y -=jumping_speed;
                 jump_timer->reset();
             }
-        }
-        else
-        {
-            is_grounded = true;
-            plPos.y = 0.0;
-        }
 
     }
 }

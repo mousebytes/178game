@@ -18,6 +18,7 @@ class _scene
                   WPARAM	wParam,			// Additional Message Information
                   LPARAM	lParam);
 
+        void check_platform_collisions();
     vec2 dim;
     protected:
 

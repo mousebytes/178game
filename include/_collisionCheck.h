@@ -2,6 +2,8 @@
 #define _COLLISIONCHECK_H
 
 #include<_common.h>
+#include<_player.h>
+#include<_platform.h>
 
 
 class _collisionCheck
@@ -10,8 +12,8 @@ class _collisionCheck
         _collisionCheck();
         virtual ~_collisionCheck();
 
-        bool isPlayerOnGround(vec2,vec2);
-
+        void isPlayerOnGround(_player*,_platform *ground);
+        bool is_grounded;
     protected:
 
     private:

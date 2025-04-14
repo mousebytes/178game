@@ -26,17 +26,17 @@ void _background::drawBackground(float width, float height)
     glBegin(GL_POLYGON);
         glTexCoord2f(xMin,yMax);
       //glVertex3f(-width/height,-1,-3);
-        glVertex3f(-1.0, -1.0, -3);
+        glVertex3f(-1.0, -1.0, -5);
 
       glTexCoord2f(xMax,yMax);
       //glVertex3f(width/height,-1,-3);
-        glVertex3f(1.0, -1.0, -3);
+        glVertex3f(1.0, -1.0, -5);
       glTexCoord2f(xMax,yMin);
       //glVertex3f(width/height,1,-3);
-         glVertex3f(1.0, 1.0, -3);
+         glVertex3f(1.0, 1.0, -5);
       glTexCoord2f(xMin,yMin);
       //glVertex3f(-width/height,1,-3);
-        glVertex3f(-1.0, 1.0, -3);
+        glVertex3f(-1.0, 1.0, -5);
     glEnd();
 
     glPopMatrix();

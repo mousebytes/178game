@@ -3,6 +3,7 @@
 _collisionCheck::_collisionCheck()
 {
     //ctor
+    is_grounded = false;
 }
 
 _collisionCheck::~_collisionCheck()
@@ -10,13 +11,25 @@ _collisionCheck::~_collisionCheck()
     //dtor
 }
 
-bool _collisionCheck::isPlayerOnGround(vec2 playerPos, vec2 groundPos)
+void _collisionCheck::isPlayerOnGround(_player* plyr, _platform *ground)
 {
-    return playerPos.y<=groundPos.y; // check if the player is on the ground (T if player on ground)
-    /*
-    playerPos.y = 3.0;
-    groundPos.y = 0.0;
+    float player_bottom = (plyr->plPos.y - plyr->plScl.y*0.5);
+    float ground_top = (ground->pos.y + ground->scale.y)*0.61;
 
-    3.0 <= 0.0 -> F -> player not on ground
-    */
+    float player_left  = plyr->plPos.x - plyr->plScl.x * 1.0; //* 0.5f;
+    float player_right = plyr->plPos.x + plyr->plScl.x * 1.0; //* 0.5f;
+    float ground_left  = ground->pos.x - ground->scale.x;
+    float ground_right = ground->pos.x + ground->scale.x;
+
+    bool horizontally_aligned = player_right > ground_left && player_left < ground_right;
+
+
+    if(player_bottom<=ground_top && horizontally_aligned)
+    {
+        plyr->is_grounded = true;
+    }
+    else
+    {
+        plyr->is_grounded = false;
+    }
 }

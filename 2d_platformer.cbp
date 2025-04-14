@@ -53,6 +53,7 @@
 		<Unit filename="include/_inputs.h" />
 		<Unit filename="include/_lightSetting.h" />
 		<Unit filename="include/_model.h" />
+		<Unit filename="include/_platform.h" />
 		<Unit filename="include/_player.h" />
 		<Unit filename="include/_scene.h" />
 		<Unit filename="include/_textureLoader.h" />
@@ -64,6 +65,7 @@
 		<Unit filename="src/_inputs.cpp" />
 		<Unit filename="src/_lightSetting.cpp" />
 		<Unit filename="src/_model.cpp" />
+		<Unit filename="src/_platform.cpp" />
 		<Unit filename="src/_player.cpp" />
 		<Unit filename="src/_scene.cpp" />
 		<Unit filename="src/_textureLoader.cpp" />

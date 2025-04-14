@@ -4,6 +4,7 @@
 #include<_common.h>
 #include<_player.h>
 #include<_platform.h>
+#include<_enemies.h>
 
 
 class _collisionCheck
@@ -13,7 +14,7 @@ class _collisionCheck
         virtual ~_collisionCheck();
 
         bool isPlayerOnGround(_player*,_platform *ground);
-        bool is_grounded;
+        bool isEnemyOnGround(_enemies*,_platform*);
     protected:
 
     private:

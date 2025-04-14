@@ -7,6 +7,7 @@
 #include<_background.h>
 #include<_collisionCheck.h>
 #include<_platform.h>
+#include<_enemies.h>
 
 
 _lightSetting *myLight = new _lightSetting();
@@ -18,6 +19,7 @@ _background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
 _platform *level1_floor = new _platform();
 _platform *test_plat = new _platform();
+_enemies *test_enemy = new _enemies();
 
 _scene::_scene()
 {
@@ -53,8 +55,13 @@ GLint _scene::initGL()
 
     background->initBG("images/marce.png");
 
-    level1_floor->initPlat("images/wall.png",0,-2,-3,5.0,1.0,1.0,1,1);
-    test_plat->initPlat("images/wall.png",5,-1,-3,3.0,1.0,1.0,1,1);
+    level1_floor->initPlat("images/wall.png",0,-2,-2,5.0,1.0,1.0,1,1);
+    test_plat->initPlat("images/wall.png",9.0,-1,-2,3.0,1.0,1.0,1,1);
+
+    test_enemy->initEnms("images/wall.png");
+    test_enemy->placeEnms({0,1,-3});
+    test_enemy->isEnmsLive = true;
+    test_enemy->action_trigger = test_enemy->WALKRIGHT;
 
    return true;
 }
@@ -98,6 +105,11 @@ void _scene::drawScene()
     test_plat->drawPlat();
 
     check_platform_collisions();
+
+    test_enemy->drawEnms(test_enemy->tex->tex);
+    test_enemy->actions();
+
+    //TODO: Knock the player back when they collide with enemies
 
 }
 
@@ -143,4 +155,11 @@ void _scene::check_platform_collisions()
     if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
 
     player->is_grounded = on_any_plat;
+
+    // can change this to a for loop for all enemies in the future
+    bool enemy_on_ground = false;
+    if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
+    if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
+
+    test_enemy->is_grounded = enemy_on_ground;
 }

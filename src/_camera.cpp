@@ -24,12 +24,13 @@ void _camera::followPlayer(_player* player)
 
 
         camPos.x += (player->plPos.x - camPos.x);//*lerp;
-        camPos.y += (player->plPos.y - camPos.y);//*lerp;
+        //camPos.y += (player->plPos.y - camPos.y);//*lerp;
+        camPos.y = 0;
 
-
-    camPos.z = 4.0;
+    camPos.z = 6.0;
 
     targetPos = player->plPos;
+    targetPos.y = 0;
     targetPos.z = -2.0;
 }
 

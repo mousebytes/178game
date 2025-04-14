@@ -12,7 +12,7 @@ class _collisionCheck
         _collisionCheck();
         virtual ~_collisionCheck();
 
-        void isPlayerOnGround(_player*,_platform *ground);
+        bool isPlayerOnGround(_player*,_platform *ground);
         bool is_grounded;
     protected:
 

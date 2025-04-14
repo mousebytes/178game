@@ -17,6 +17,7 @@ _camera *camera = new _camera();
 _background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
 _platform *level1_floor = new _platform();
+_platform *test_plat = new _platform();
 
 _scene::_scene()
 {
@@ -51,7 +52,9 @@ GLint _scene::initGL()
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
     background->initBG("images/marce.png");
+
     level1_floor->initPlat("images/wall.png",0,-2,-3,5.0,1.0,1.0,1,1);
+    test_plat->initPlat("images/wall.png",5,-1,-3,3.0,1.0,1.0,1,1);
 
    return true;
 }
@@ -92,6 +95,7 @@ void _scene::drawScene()
     background->drawBackground(dim.x,dim.y);
 
     level1_floor->drawPlat();
+    test_plat->drawPlat();
 
     check_platform_collisions();
 
@@ -133,6 +137,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void _scene::check_platform_collisions()
 {
-    collision->isPlayerOnGround(player,level1_floor);
+    bool on_any_plat = false;
 
+    if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
+    if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
+
+    player->is_grounded = on_any_plat;
 }

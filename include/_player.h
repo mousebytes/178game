@@ -15,7 +15,6 @@ class _player
         void initPlayer(int, int, char*); // x frames, y frames, file name
         void drawPlayer();
         void playerActions();
-        //void handle_jumping();
         void handle_vertical();
 
         enum{STANDING,WALKLEFT,WALKRIGHT,JUMP};
@@ -37,8 +36,6 @@ class _player
 
         _timer *timer = new _timer();
         _timer *jump_timer = new _timer();
-        bool left_timer_bypass, right_timer_bypass;
-
 
     protected:
 

@@ -85,7 +85,6 @@ void _scene::drawScene()
 
     background->drawBackground(dim.x,dim.y);
 
-    cout << "\nLEFT AND RIGHT: " << input->key_left_down << " " << input->key_right_down;
 }
 
 int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

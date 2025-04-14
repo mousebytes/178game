@@ -11,9 +11,8 @@ _player::_player()
     timer->reset();
     max_jump_height = 2.7;
     jump_timer->reset();
-    jumping_speed = 0.07;
+    jumping_speed = 0.09;
     is_grounded = true;
-    left_timer_bypass = right_timer_bypass = false;
 }
 
 _player::~_player()
@@ -96,18 +95,7 @@ void _player::playerActions()
         break;
         }
     }
-    else if (right_timer_bypass && action_trigger == WALKRIGHT)
-    {
-        plPos.x += speed;
-        //timer->reset();
-        right_timer_bypass = false;
-    }
-    else if(left_timer_bypass && action_trigger == WALKLEFT)
-    {
-        plPos.x -= speed;
-        //timer->reset();
-        left_timer_bypass = false;
-    }
+
 
 }
 

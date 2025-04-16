@@ -43,6 +43,8 @@ class _player
 
         void handle_player_damage_timer();
 
+        int coins;
+
     protected:
 
     private:

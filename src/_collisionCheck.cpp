@@ -70,4 +70,16 @@ bool _collisionCheck::isPlayerTouchingEnemy(_player* plyr, _enemies* enm)
     return vertical_overlap && horizontal_overlap && !fell_on_enemy;
 }
 
+bool _collisionCheck::isPlayerTouchingCollectible(_player* plyr, _collectible* c)
+{
+     if (c->isCollected) return false;
+
+    float dx = plyr->plPos.x - c->pos.x;
+    float dy = plyr->plPos.y - c->pos.y;
+    float dist = sqrt(dx * dx + dy * dy);
+
+    return dist < (plyr->plScl.x + c->radius); // circular collision
+
+}
+
 

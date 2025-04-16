@@ -100,6 +100,7 @@ void _enemies::actions()
         else if(respawn_timer->getTicks() > 6000)
         {
             isEnmsLive = true;
+            respawn_timer->reset();
         }
     }
 

@@ -5,7 +5,7 @@
 #include<_player.h>
 #include<_platform.h>
 #include<_enemies.h>
-
+#include<_collectible.h>
 
 class _collisionCheck
 {
@@ -16,6 +16,7 @@ class _collisionCheck
         bool isPlayerOnGround(_player*,_platform *ground);
         bool isEnemyOnGround(_enemies*,_platform*);
         bool isPlayerTouchingEnemy(_player*,_enemies*);
+        bool isPlayerTouchingCollectible(_player* plyr, _collectible* c);
 
     protected:
 

@@ -15,3 +15,6 @@ ENEMY images/wall.png 18 2 -3 0.6
 # type : 0 -> STATIC || 1 -> HORIZONTAL || 2 -> VERTICAL
 # range & speed : float
 MOVING_PLATFORM images/wall.png -8 0 -2 5 1 1 1 1 2 1.0 0.01
+
+#Collectible format: COLLECTIBLE image x y z radius framex framey
+COLLECTIBLE images/coin.png 3 0 -2 0.3 1 1

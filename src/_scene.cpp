@@ -24,6 +24,8 @@ _hud *hud = new _hud();
 
 vector<_platform*> platforms;
 vector<_enemies*> enemies;
+vector<_collectible*> collectibles;
+
 
 _scene::_scene()
 {
@@ -130,8 +132,12 @@ void _scene::drawScene()
         e->actions();
     }
 
+    for(auto c : collectibles)
+        c->drawColl();
+
     check_platform_collisions();
     check_enemy_collisions();
+    checkCollectibles();
 
     hud->drawHearts(player->health,camera->camPos);
 }
@@ -299,7 +305,33 @@ void _scene::load_level_file(const char* file_name)
 
             platforms.push_back(plat);
         }
+        else if(type == "COLLECTIBLE")
+        {
+            string img;
+            float x,y,z,r;
+            int framex,framey;
+
+            ss >> img >> x >> y >> z >> r >> framex >> framey;
+
+            _collectible* c = new _collectible();
+            c->initColl(img.data(), x, y, z, r, framex, framey);
+            collectibles.push_back(c);
+        }
     }
 }
 
+void _scene::checkCollectibles()
+{
+    for(auto c : collectibles)
+    {
+        if(c->isCollected) continue;
+
+        if(collision->isPlayerTouchingCollectible(player, c))
+        {
+            c->isCollected = true;
+            player->coins++;
+            cout << "Coins: " << player->coins << endl;
+        }
+    }
+}
 

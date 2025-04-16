@@ -17,6 +17,7 @@ _player::_player()
     damage_timer->reset();
     player_can_be_damaged = true;
     blink = false;
+    coins = 0;
 }
 
 _player::~_player()

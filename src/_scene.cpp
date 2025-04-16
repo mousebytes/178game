@@ -16,10 +16,6 @@ _player *player = new _player();
 _camera *camera = new _camera();
 _background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
-_platform *level1_floor = new _platform();
-_platform *test_plat = new _platform();
-_platform *test_plat2 = new _platform();
-_enemies *test_enemy = new _enemies();
 _hud *hud = new _hud();
 _goal *goal = new _goal();
 
@@ -88,64 +84,34 @@ void _scene::reSize(GLint width, GLint height)
 
 void _scene::drawScene()
 {
+
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // don't change the order of these 4 functions -- player texture breaks otherwise
-    player->playerActions();
-    camera->followPlayer(player);
-    camera->updateCamPos();
+    glDisable(GL_DEPTH_TEST);
 
-    if(!player->blink)
+    background->drawBackground(dim.x, dim.y);
+    glEnable(GL_DEPTH_TEST);
+
+
+    switch(gs)
     {
-        player->drawPlayer();
-    }
-    if(!player->player_can_be_damaged)
-    {
-        player->blink = !player->blink;
-    }
-    else
-        player->blink = false;
-
-    player->handle_vertical();
-    player->handle_player_damage_timer();
-
-
-    //TODO: add a way for the player's health to matter
-    if(player->plPos.y < -4.0)
-    {
-        player->initPlayer(1,1,"images/wall.png");
-        player->health--;
-        if(player->health < 1)
-            player->health = 3;
-        cout << "\n" << player->health;
+    case MAINMENU:
+        drawMenu();
+        break;
+    case PLAYING:
+        runGame();
+        break;
+    case GAMEOVER:
+        drawGameOver();
+        break;
     }
 
-    background->drawBackground(dim.x,dim.y);
 
-    for(auto plat: platforms)
-    {
-        plat->drawPlat();
-        plat->updatePlat();
-    }
 
-    for(auto e : enemies)
-    {
-        e->drawEnms(enemies[0]->tex->tex);
-        e->actions();
-    }
 
-    for(auto c : collectibles)
-        c->drawColl();
 
-    check_platform_collisions();
-    check_enemy_collisions();
-    checkCollectibles();
 
-    goal->drawGoal();
-    checkGoal();
-
-    hud->drawHearts(player->health,camera->camPos);
 }
 
 int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -154,7 +120,20 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
     case WM_KEYDOWN:
            input->wParam = wParam;
-           input->keyPressed(player);
+
+           if(gs == MAINMENU && wParam == VK_RETURN)
+                gs = PLAYING;
+           else if (gs == GAMEOVER && wParam == 'R')
+           {
+               gs = MAINMENU;
+               player->health = 3;
+               player->initPlayer(1,1,"images/wall.png");
+               load_level_file("levels/testLevel.txt");
+           }
+           else if(gs == PLAYING)
+           {
+                input->keyPressed(player);
+           }
         break;
 
 
@@ -232,12 +211,6 @@ void _scene::check_enemy_collisions()
             player->damage_timer->reset();
             player->player_can_be_damaged = false;
             player->blink = true;
-
-            if(player->health < 1)
-            {
-                player->initPlayer(1,1,"images/wall.png");
-                player->health = 3;
-            }
 
             float pushback_strength = 0.6;
             if(player->plPos.x < e->pos.x)
@@ -367,4 +340,81 @@ void _scene::checkGoal()
         playerWon = true;
         cout << "player won";
     }
+}
+
+
+void _scene::drawMenu()
+{
+    glLoadIdentity();
+    glColor3f(1, 0, 0);
+}
+
+void _scene::runGame()
+{
+    // don't change the order of these 4 functions -- player texture breaks otherwise
+    player->playerActions();
+    camera->followPlayer(player);
+    camera->updateCamPos();
+
+    if(player->health < 1)
+        {
+            gs = GAMEOVER;
+            player->health = 3;
+        }
+
+    if(!player->blink)
+    {
+        player->drawPlayer();
+    }
+    if(!player->player_can_be_damaged)
+    {
+        player->blink = !player->blink;
+    }
+    else
+        player->blink = false;
+
+    player->handle_vertical();
+    player->handle_player_damage_timer();
+
+
+    //TODO: add a way for the player's health to matter
+    if(player->plPos.y < -4.0)
+    {
+        //player->initPlayer(1,1,"images/wall.png");
+        player->health--;
+        player->plPos = {0,0,-3};
+
+        cout << "\n" << player->health;
+    }
+
+
+
+    for(auto plat: platforms)
+    {
+        plat->drawPlat();
+        plat->updatePlat();
+    }
+
+    for(auto e : enemies)
+    {
+        e->drawEnms(enemies[0]->tex->tex);
+        e->actions();
+    }
+
+    for(auto c : collectibles)
+        c->drawColl();
+
+    check_platform_collisions();
+    check_enemy_collisions();
+    checkCollectibles();
+
+    goal->drawGoal();
+    checkGoal();
+
+    hud->drawHearts(player->health,camera->camPos);
+}
+
+void _scene::drawGameOver()
+{
+
 }

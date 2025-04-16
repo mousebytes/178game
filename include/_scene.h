@@ -25,7 +25,16 @@ class _scene
         void checkCollectibles();
         void checkGoal();
 
+        enum GameState {MAINMENU,PLAYING,GAMEOVER};
+
+        GameState gs = MAINMENU;
+
     vec2 dim;
+
+        void drawMenu();
+        void runGame();
+        void drawGameOver();
+
     protected:
 
     private:

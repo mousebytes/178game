@@ -34,6 +34,8 @@ class _enemies
 
         // for patrol routes
         float patrol_range, init_x_pos;
+        bool start_respawn_timer;
+        _timer *respawn_timer = new _timer();
 
     protected:
 

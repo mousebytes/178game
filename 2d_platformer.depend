@@ -124,12 +124,11 @@
 	<_textureLoader.h>
 	<_timer.h>
 
-1744803207 source:d:\codeblocks stuff\178game\src\_inputs.cpp
+1744818591 source:d:\codeblocks stuff\178game\src\_inputs.cpp
 	"_inputs.h"
 
-1744562193 d:\codeblocks stuff\178game\include\_inputs.h
+1744818575 d:\codeblocks stuff\178game\include\_inputs.h
 	<_common.h>
-	<_model.h>
 	<_player.h>
 
 1742987613 d:\codeblocks stuff\178game\include\_model.h
@@ -148,10 +147,9 @@
 1744808972 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1744816220 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1744823304 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
-	<_model.h>
 	<_inputs.h>
 	<_player.h>
 	<_camera.h>
@@ -187,7 +185,7 @@
 1743938911 d:\codeblocks stuff\178game\include\_timer.h
 	<_common.h>
 
-1744812255 source:d:\codeblocks stuff\178game\src\_collisioncheck.cpp
+1744816752 source:d:\codeblocks stuff\178game\src\_collisioncheck.cpp
 	"_collisionCheck.h"
 
 1744808362 d:\codeblocks stuff\178game\include\_collisioncheck.h
@@ -199,16 +197,17 @@
 1743938911 source:d:\codeblocks stuff\178game\src\_timer.cpp
 	"_timer.h"
 
-1744814604 d:\codeblocks stuff\178game\include\_platform.h
+1744821138 d:\codeblocks stuff\178game\include\_platform.h
 	<_textureLoader.h>
+	<_timer.h>
 
-1744814604 source:d:\codeblocks stuff\178game\src\_platform.cpp
+1744821627 source:d:\codeblocks stuff\178game\src\_platform.cpp
 	"_platform.h"
 
-1744814581 source:d:\codeblocks stuff\178game\src\_enemies.cpp
+1744823206 source:d:\codeblocks stuff\178game\src\_enemies.cpp
 	"_enemies.h"
 
-1744814601 d:\codeblocks stuff\178game\include\_enemies.h
+1744823637 d:\codeblocks stuff\178game\include\_enemies.h
 	<_common.h>
 	<_timer.h>
 	<_textureLoader.h>

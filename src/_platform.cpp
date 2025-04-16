@@ -3,6 +3,8 @@
 _platform::_platform()
 {
     //ctor
+    timer->reset();
+
 }
 
 _platform::~_platform()
@@ -10,17 +12,33 @@ _platform::~_platform()
     //dtor
 }
 
-void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm)
+void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm, int t, float s, float p_r)
 {
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
     vert[1].x =  1.0; vert[1].y = -1.0; vert[1].z = -1.0;
     vert[2].x =  1.0; vert[2].y =  1.0; vert[2].z = -1.0;
     vert[3].x = -1.0; vert[3].y =  1.0; vert[3].z = -1.0;
 
-
     pos.x=xCoord;
     pos.y = yCoord;
     pos.z = zCoord;
+
+    switch (t)
+    {
+case 0:
+    type = STATIC;
+    break;
+case 1:
+    type = HORIZONTAL; start_pos = xCoord;
+    break;
+case 2:
+    type = VERTICAL; start_pos = yCoord;
+    break;
+}
+
+    speed = s;
+    patrol_range = p_r;
+    moving_forward = true;
 
     scale.x = xScl;
     scale.y = yScl;
@@ -62,3 +80,46 @@ void _platform::drawPlat()
         glEnd();
     glPopMatrix();
 }
+
+void _platform::updatePlat()
+{
+    if(timer->getTicks() > 70)
+    {
+        switch(type)
+    {
+        case HORIZONTAL:
+        if(moving_forward)
+        {
+            pos.x += speed;
+            if(pos.x > start_pos+patrol_range)
+                moving_forward = false;
+        }
+        else
+        {
+            pos.x -=speed;
+            if(pos.x < start_pos-patrol_range)
+                moving_forward = true;
+        }
+        break;
+        case VERTICAL:
+            if(moving_forward)
+            {
+                pos.y += speed;
+                if(pos.y > start_pos + patrol_range)
+                {
+                    moving_forward = false;
+                }
+            }
+            else
+            {
+                pos.y -=speed;
+                if(pos.y<start_pos-patrol_range)
+                moving_forward=true;
+            }
+            break;
+        }
+        timer->reset();
+    }
+
+}
+

@@ -2,7 +2,6 @@
 #define _INPUTS_H
 
 #include<_common.h>
-#include<_model.h>
 #include<_player.h>
 
 class _inputs
@@ -11,14 +10,10 @@ class _inputs
         _inputs();
         virtual ~_inputs();
 
-        void keyPressed(_model *); // handling given model by key strokes
         void keyPressed(_player *);
         void keyUP(_player*);
 
-        void mouseEventDown(_model *, double, double);
         void mouseEventUp();
-        void mouseMove(_model*, double,double);
-        void mouseWheel(_model *, double);
 
         double prev_msX;
         double prev_msY;

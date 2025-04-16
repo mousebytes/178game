@@ -1,6 +1,5 @@
 #include "_scene.h"
 #include<_lightsetting.h>
-#include<_model.h>
 #include<_inputs.h>
 #include<_player.h>
 #include<_camera.h>
@@ -12,7 +11,6 @@
 
 
 _lightSetting *myLight = new _lightSetting();
-_model *myModel = new _model();    // creating instance for model
 _inputs *input = new _inputs();
 _player *player = new _player();
 _camera *camera = new _camera();
@@ -121,7 +119,10 @@ void _scene::drawScene()
     background->drawBackground(dim.x,dim.y);
 
     for(auto plat: platforms)
+    {
         plat->drawPlat();
+        plat->updatePlat();
+    }
 
     for(auto e : enemies)
     {
@@ -133,7 +134,6 @@ void _scene::drawScene()
     check_enemy_collisions();
 
     hud->drawHearts(player->health,camera->camPos);
-
 }
 
 int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -154,7 +154,6 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_LBUTTONDOWN:
     case WM_RBUTTONDOWN:
         input->wParam = wParam;
-        input->mouseEventDown(myModel,LOWORD(lParam),HIWORD(lParam));
         break;
     case WM_LBUTTONUP:
     case WM_RBUTTONUP:
@@ -162,10 +161,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         input->mouseEventUp();
         break;
     case WM_MOUSEMOVE:
-        input->mouseMove(myModel,LOWORD(lParam),HIWORD(lParam));
         break;
     case WM_MOUSEWHEEL:
-        input->mouseWheel(myModel,(double)GET_WHEEL_DELTA_WPARAM(wParam));
         break;
     }
 }
@@ -175,8 +172,11 @@ void _scene::check_platform_collisions()
     bool on_any_plat = false;
 
     for(auto p : platforms)
+    {
         if(collision->isPlayerOnGround(player,p)) on_any_plat = true;
+    }
     player->is_grounded=on_any_plat;
+
 
 
     for(auto e : enemies)
@@ -208,6 +208,7 @@ void _scene::check_enemy_collisions()
         if(isTouching && isAbove)
         {
             e->isEnmsLive=false;
+            e->start_respawn_timer = true;
 
             player->isJumping = true;
             player->is_grounded = false;
@@ -255,16 +256,18 @@ void _scene::load_level_file(const char* file_name)
         string type;
         ss>>type;
 
+
+
         if(type == "PLATFORM")
         {
             string img;
             float x,y,z,sx,sy,sz;
-            int fx,fy;
+            int fx,fy, t;
 
-            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy;
+            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t;
 
             _platform* plat = new _platform();
-            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy);
+            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy,t,0,0);
             platforms.push_back(plat);
         }
         else if(type == "ENEMY")
@@ -279,6 +282,22 @@ void _scene::load_level_file(const char* file_name)
             enemy->isEnmsLive = true;
             enemy->action_trigger = enemy->WALKLEFT;
             enemies.push_back(enemy);
+        }
+        else if(type == "MOVING_PLATFORM")
+        {
+            string img;
+            float x,y,z,sx,sy,sz,range,speed;
+            int fx,fy, t;
+
+            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t>>speed>>range;
+
+            _platform* plat = new _platform();
+            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy, t,range,speed);
+
+            //if(direction == 1) plat->type = plat->HORIZONTAL;
+            //else if (direction==2) plat->type=plat->VERTICAL;
+
+            platforms.push_back(plat);
         }
     }
 }

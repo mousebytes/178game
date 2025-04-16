@@ -25,6 +25,8 @@ _enemies::_enemies()
 
     patrol_range = 1.0;
 
+    start_respawn_timer = false;
+
 }
 
 _enemies::~_enemies()
@@ -88,6 +90,19 @@ void _enemies::placeEnms(vec3 p, float scl)
 
 void _enemies::actions()
 {
+    if(!isEnmsLive)
+    {
+        if(start_respawn_timer)
+        {
+            respawn_timer->reset();
+            start_respawn_timer = false;
+        }
+        else if(respawn_timer->getTicks() > 6000)
+        {
+            isEnmsLive = true;
+        }
+    }
+
 
     if (!is_grounded)
     {

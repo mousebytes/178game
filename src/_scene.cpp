@@ -63,7 +63,7 @@ GLint _scene::initGL()
     test_plat2->initPlat("images/wall.png",18,-1,-2,4.0,1.0,1.0,1,1);
 
     test_enemy->initEnms("images/wall.png");
-    test_enemy->placeEnms({18,4,-3}, 1.3);
+    test_enemy->placeEnms({18,2,-3}, .6);
     test_enemy->isEnmsLive = true;
     test_enemy->action_trigger = test_enemy->WALKRIGHT;
 
@@ -233,6 +233,18 @@ void _scene::check_enemy_collisions()
                 // maybe create a reset player function later
                 player->initPlayer(1,1,"images/wall.png");
                 player->health = 3;
+            }
+
+            float pushback_strength = 0.6;
+
+            if (player->plPos.x < test_enemy->pos.x)
+            {
+                player->plPos.x -= pushback_strength;
+            }
+            // If player is on the right side of the enemy, push right
+            else
+            {
+                player->plPos.x += pushback_strength;
             }
 
             std::cout << "Player hit! Health: " << player->health << std::endl;

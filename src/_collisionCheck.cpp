@@ -63,7 +63,7 @@ bool _collisionCheck::isPlayerTouchingEnemy(_player* plyr, _enemies* enm)
     bool horizontal_overlap = player_right > enemy_left && player_left < enemy_right;
     bool vertical_overlap = player_bottom < enemy_top && player_top > enemy_bottom;
 
-    bool is_above_enemy = player_bottom >= enemy_top - 0.1f; // slight forgiveness for contact
+    bool is_above_enemy = player_bottom >= enemy_top - 0.1;
     bool fell_on_enemy = horizontal_overlap && is_above_enemy;
 
 

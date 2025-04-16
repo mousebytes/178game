@@ -61,16 +61,6 @@ GLint _scene::initGL()
 
     background->initBG("images/marce.png");
 
-    //level1_floor->initPlat("images/wall.png",0,-2,-2,5.0,1.0,1.0,1,1);
-    //test_plat->initPlat("images/wall.png",9.0,-1,-2,3.0,1.0,1.0,1,1);
-    //test_plat2->initPlat("images/wall.png",18,-1,-2,4.0,1.0,1.0,1,1);
-
-
-    //test_enemy->initEnms("images/wall.png");
-    //test_enemy->placeEnms({18,2,-3}, .6);
-    //test_enemy->isEnmsLive = true;
-    //test_enemy->action_trigger = test_enemy->WALKRIGHT;
-
     load_level_file("levels/testLevel.txt");
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
@@ -97,8 +87,6 @@ void _scene::drawScene()
 {
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-
-    //gluLookAt(0,0,1,0,0,0,0,1,0);
 
     // don't change the order of these 4 functions -- player texture breaks otherwise
     player->playerActions();
@@ -132,29 +120,19 @@ void _scene::drawScene()
 
     background->drawBackground(dim.x,dim.y);
 
-    //level1_floor->drawPlat();
-    //test_plat->drawPlat();
-    //test_plat2->drawPlat();
-
     for(auto plat: platforms)
         plat->drawPlat();
 
-    check_platform_collisions();
-
-    //test_enemy->drawEnms(test_enemy->tex->tex);
-    //test_enemy->actions();
     for(auto e : enemies)
     {
         e->drawEnms(enemies[0]->tex->tex);
         e->actions();
     }
 
-
+    check_platform_collisions();
     check_enemy_collisions();
 
     hud->drawHearts(player->health,camera->camPos);
-
-    //TODO: Knock the player back when they collide with enemies
 
 }
 
@@ -196,22 +174,10 @@ void _scene::check_platform_collisions()
 {
     bool on_any_plat = false;
 
-    // TODO: change this to for loop for all plats
-    //if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
-    //if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
-    //if(collision->isPlayerOnGround(player,test_plat2)) on_any_plat = true;
-
-    //player->is_grounded = on_any_plat;
-
     for(auto p : platforms)
         if(collision->isPlayerOnGround(player,p)) on_any_plat = true;
     player->is_grounded=on_any_plat;
 
-    // can change this to a for loop for all enemies and plats in the future
-    //bool enemy_on_ground = false;
-    //if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
-    //if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
-    //if(collision->isEnemyOnGround(test_enemy,test_plat2)) enemy_on_ground = true;
 
     for(auto e : enemies)
     {
@@ -227,63 +193,10 @@ void _scene::check_platform_collisions()
         e->is_grounded = enemy_on_ground;
     }
 
-    //test_enemy->is_grounded = enemy_on_ground;
 }
 
 void _scene::check_enemy_collisions()
 {
-    // TODO: change this to a for loop for all enemies later
-    /*
-    if(test_enemy->isEnmsLive)
-    {
-        // is the player overlapping the enemy in both axes?
-        bool isTouching = collision->isPlayerTouchingEnemy(player, test_enemy);
-
-        // ss player falling downward and above enemys head?
-        bool isAbove = player->plPos.y > test_enemy->pos.y + test_enemy->scale.y;
-
-        if (isTouching && isAbove)
-        {
-            // kill the enemy
-            test_enemy->isEnmsLive = false;
-
-            // bounce player upward
-            player->isJumping = true;
-            player->is_grounded = false;
-            player->height_before_jump = player->plPos.y;
-
-            std::cout << "Enemy stomped!\n";
-        }
-        else if (isTouching && player->player_can_be_damaged)
-        {
-            // damage player
-            player->health--;
-            player->damage_timer->reset();
-            player->player_can_be_damaged = false;
-            player->blink = true;
-
-            if(player->health < 1)
-            {
-                // maybe create a reset player function later
-                player->initPlayer(1,1,"images/wall.png");
-                player->health = 3;
-            }
-
-            float pushback_strength = 0.6;
-
-            if (player->plPos.x < test_enemy->pos.x)
-            {
-                player->plPos.x -= pushback_strength;
-            }
-            // If player is on the right side of the enemy, push right
-            else
-            {
-                player->plPos.x += pushback_strength;
-            }
-
-            std::cout << "Player hit! Health: " << player->health << std::endl;
-        }
-    }*/
 
     for(auto e : enemies)
     {

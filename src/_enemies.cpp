@@ -108,7 +108,6 @@ void _enemies::actions()
             if(patrol_range + init_x_pos <= pos.x)
             {
                 action_trigger = WALKLEFT;
-                //init_x_pos = pos.x;
             }
             else
             {
@@ -120,7 +119,6 @@ void _enemies::actions()
             if(init_x_pos - patrol_range>= pos.x)
             {
                 action_trigger = WALKRIGHT;
-                //init_x_pos = pos.x;
             }
             else
             {

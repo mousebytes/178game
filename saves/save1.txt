@@ -1,0 +1,3 @@
+level=1
+health=2
+coins=1

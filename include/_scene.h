@@ -24,6 +24,8 @@ class _scene
         void load_level_file(const char*);
         void checkCollectibles();
         void checkGoal();
+        void saveGame();
+        void loadGame();
 
         enum GameState {MAINMENU,PLAYING,GAMEOVER};
 

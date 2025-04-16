@@ -24,6 +24,7 @@ vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
 
 bool playerWon = false;
+int currLevel = 1;
 
 
 _scene::_scene()
@@ -60,7 +61,7 @@ GLint _scene::initGL()
 
     background->initBG("images/marce.png");
 
-    load_level_file("levels/testLevel.txt");
+    load_level_file("levels/level1.txt");
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
 
@@ -122,15 +123,31 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            input->wParam = wParam;
 
            if(gs == MAINMENU && wParam == VK_RETURN)
+           {
+                currLevel = 1;
+                load_level_file("levels/level1.txt");
+                player->initPlayer(1,1,"images/wall.png");
                 gs = PLAYING;
-           else if (gs == GAMEOVER && wParam == 'R')
+           }
+            else if (gs == GAMEOVER && wParam == 'R')
            {
                gs = MAINMENU;
                player->health = 3;
+               player->coins = 0;
                player->initPlayer(1,1,"images/wall.png");
-               load_level_file("levels/testLevel.txt");
+               load_level_file("levels/level1.txt");
+               currLevel = 1;
            }
-           else if(gs == PLAYING)
+            else if(gs == PLAYING && wParam == 'K') // press K to save
+            {
+                saveGame();
+            }
+            else if(gs == MAINMENU && wParam == 'L') // Press L to load
+                {
+                    loadGame();
+                    gs = PLAYING;
+                }
+            else if(gs == PLAYING)
            {
                 input->keyPressed(player);
            }
@@ -418,3 +435,48 @@ void _scene::drawGameOver()
 {
 
 }
+
+void _scene::saveGame()
+{
+    ofstream file("saves/save1.txt");
+    if(!file.is_open()) return;
+
+    file << "level="<<currLevel << endl;
+    file << "health="<<player->health<<endl;
+    file<<"coins="<<player->coins<<endl;
+
+    file.close();
+
+    cout <<"\nsaved" << endl;
+}
+
+void _scene::loadGame()
+{
+    ifstream file("saves/save1.txt");
+    if(!file.is_open())return;
+
+    string line;
+
+    while(getline(file,line))
+    {
+        stringstream ss(line);
+        string key;
+        getline(ss,key,'=');
+
+        if(key=="level") ss >>currLevel;
+        else if(key=="health") ss >> player->health;
+        else if (key=="coins")ss >> player->coins;
+    }
+
+    file.close();
+
+    stringstream ss;
+    ss<<"levels/level"<<currLevel<<".txt";
+    load_level_file(ss.str().c_str());
+
+    player->initPlayer(1,1,"images/wall.png");
+    player->plPos = {0,0,-3};
+
+    cout << "\nloaded";
+}
+

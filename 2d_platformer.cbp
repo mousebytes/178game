@@ -51,6 +51,7 @@
 		<Unit filename="include/_collisionCheck.h" />
 		<Unit filename="include/_common.h" />
 		<Unit filename="include/_enemies.h" />
+		<Unit filename="include/_hud.h" />
 		<Unit filename="include/_inputs.h" />
 		<Unit filename="include/_lightSetting.h" />
 		<Unit filename="include/_model.h" />
@@ -64,6 +65,7 @@
 		<Unit filename="src/_camera.cpp" />
 		<Unit filename="src/_collisionCheck.cpp" />
 		<Unit filename="src/_enemies.cpp" />
+		<Unit filename="src/_hud.cpp" />
 		<Unit filename="src/_inputs.cpp" />
 		<Unit filename="src/_lightSetting.cpp" />
 		<Unit filename="src/_model.cpp" />

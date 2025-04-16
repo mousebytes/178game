@@ -8,6 +8,7 @@
 #include<_collisionCheck.h>
 #include<_platform.h>
 #include<_enemies.h>
+#include<_hud.h>
 
 
 _lightSetting *myLight = new _lightSetting();
@@ -21,6 +22,7 @@ _platform *level1_floor = new _platform();
 _platform *test_plat = new _platform();
 _platform *test_plat2 = new _platform();
 _enemies *test_enemy = new _enemies();
+_hud *hud = new _hud();
 
 _scene::_scene()
 {
@@ -64,6 +66,8 @@ GLint _scene::initGL()
     test_enemy->placeEnms({18,4,-3}, 1.3);
     test_enemy->isEnmsLive = true;
     test_enemy->action_trigger = test_enemy->WALKRIGHT;
+
+    hud->initHud("images/heart.png",1,1,camera->camPos);
 
    return true;
 }
@@ -133,6 +137,8 @@ void _scene::drawScene()
 
     check_enemy_collisions();
 
+    hud->drawHearts(player->health,camera->camPos);
+
     //TODO: Knock the player back when they collide with enemies
 
 }
@@ -175,13 +181,14 @@ void _scene::check_platform_collisions()
 {
     bool on_any_plat = false;
 
+    // TODO: change this to for loop for all plats
     if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
     if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
     if(collision->isPlayerOnGround(player,test_plat2)) on_any_plat = true;
 
     player->is_grounded = on_any_plat;
 
-    // can change this to a for loop for all enemies in the future
+    // can change this to a for loop for all enemies and plats in the future
     bool enemy_on_ground = false;
     if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
     if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
@@ -192,7 +199,7 @@ void _scene::check_platform_collisions()
 
 void _scene::check_enemy_collisions()
 {
-
+    // TODO: change this to a for loop for all enemies later
     if(test_enemy->isEnmsLive)
     {
         // is the player overlapping the enemy in both axes?

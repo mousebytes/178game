@@ -103,13 +103,11 @@ void _player::playerActions()
 
 }
 
-// TODO: allow the player to cancel the rest of a jump & make the jump reset when the player touches the ground
 void _player::handle_vertical()
 {
     if(isJumping)
     {
 
-        // TODO: maybe add an OR condition where if the player releases space bar it kills the upward momentum
         if(plPos.y < (height_before_jump + max_jump_height))
         {
             if(jump_timer->getTicks() > TIMER_LIMIT)

@@ -76,12 +76,14 @@ void _enemies::drawEnms(GLuint tx)
    }
 }
 
-void _enemies::placeEnms(vec3 p)
+void _enemies::placeEnms(vec3 p, float scl)
 {
     pos.x = p.x;
     pos.y = p.y;
     pos.z = p.z;
     init_x_pos = p.x;
+
+    scale.x = scale.y = scl;
 }
 
 void _enemies::actions()

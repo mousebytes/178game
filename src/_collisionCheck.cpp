@@ -43,3 +43,28 @@ bool _collisionCheck::isEnemyOnGround(_enemies*e , _platform* plat)
     return (enemy_bottom <= plat_top && horizontally_aligned && !(plat->pos.y + 0.1 > e->pos.y));
 
 }
+
+bool _collisionCheck::isPlayerTouchingEnemy(_player* plyr, _enemies* enm)
+{
+    // we want the player to be able to jump on top of enemies but not run into enemies
+    // this function checks if the player is running into the enemy from the side but not from above
+
+    float player_bottom = plyr->plPos.y - plyr->plScl.y;
+    float player_top = plyr->plPos.y + plyr->plScl.y;
+    float player_left = plyr->plPos.x - plyr->plScl.x;
+    float player_right = plyr->plPos.x + plyr->plScl.x;
+
+    float enemy_bottom = enm->pos.y - enm->scale.y;
+    float enemy_top = enm->pos.y + enm->scale.y;
+    float enemy_left = enm->pos.x - enm->scale.x;
+    float enemy_right = enm->pos.x + enm->scale.x;
+
+    bool horizontal_overlap = player_right > enemy_left && player_left < enemy_right;
+    bool vertical_overlap = player_bottom < enemy_top && player_top > enemy_bottom;
+
+    bool is_above_enemy = player_bottom >= enemy_top - 0.1f; // slight forgiveness for contact
+    bool fell_on_enemy = horizontal_overlap && is_above_enemy;
+
+    return vertical_overlap && horizontal_overlap && !fell_on_enemy;
+}
+

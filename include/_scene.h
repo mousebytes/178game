@@ -2,6 +2,7 @@
 #define _SCENE_
 
 #include<_common.h>
+#include<_timer.h>
 
 class _scene
 {
@@ -19,6 +20,8 @@ class _scene
                   LPARAM	lParam);
 
         void check_platform_collisions();
+        void check_enemy_collisions();
+
     vec2 dim;
     protected:
 

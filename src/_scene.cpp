@@ -19,6 +19,7 @@ _background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
 _platform *level1_floor = new _platform();
 _platform *test_plat = new _platform();
+_platform *test_plat2 = new _platform();
 _enemies *test_enemy = new _enemies();
 
 _scene::_scene()
@@ -57,9 +58,10 @@ GLint _scene::initGL()
 
     level1_floor->initPlat("images/wall.png",0,-2,-2,5.0,1.0,1.0,1,1);
     test_plat->initPlat("images/wall.png",9.0,-1,-2,3.0,1.0,1.0,1,1);
+    test_plat2->initPlat("images/wall.png",18,-1,-2,4.0,1.0,1.0,1,1);
 
     test_enemy->initEnms("images/wall.png");
-    test_enemy->placeEnms({0,1,-3});
+    test_enemy->placeEnms({18,4,-3}, 1.3);
     test_enemy->isEnmsLive = true;
     test_enemy->action_trigger = test_enemy->WALKRIGHT;
 
@@ -92,22 +94,44 @@ void _scene::drawScene()
     player->playerActions();
     camera->followPlayer(player);
     camera->updateCamPos();
-    player->drawPlayer();
+
+    if(!player->blink)
+    {
+        player->drawPlayer();
+    }
+    if(!player->player_can_be_damaged)
+    {
+        player->blink = !player->blink;
+    }
+    else
+        player->blink = false;
 
     player->handle_vertical();
+    player->handle_player_damage_timer();
 
+
+    //TODO: add a way for the player's health to matter
     if(player->plPos.y < -4.0)
+    {
         player->initPlayer(1,1,"images/wall.png");
+        player->health--;
+        if(player->health < 1)
+            player->health = 3;
+        cout << "\n" << player->health;
+    }
 
     background->drawBackground(dim.x,dim.y);
 
     level1_floor->drawPlat();
     test_plat->drawPlat();
+    test_plat2->drawPlat();
 
     check_platform_collisions();
 
     test_enemy->drawEnms(test_enemy->tex->tex);
     test_enemy->actions();
+
+    check_enemy_collisions();
 
     //TODO: Knock the player back when they collide with enemies
 
@@ -153,6 +177,7 @@ void _scene::check_platform_collisions()
 
     if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
     if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
+    if(collision->isPlayerOnGround(player,test_plat2)) on_any_plat = true;
 
     player->is_grounded = on_any_plat;
 
@@ -160,6 +185,54 @@ void _scene::check_platform_collisions()
     bool enemy_on_ground = false;
     if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
     if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
+    if(collision->isEnemyOnGround(test_enemy,test_plat2)) enemy_on_ground = true;
 
     test_enemy->is_grounded = enemy_on_ground;
 }
+
+void _scene::check_enemy_collisions()
+{
+
+    if(test_enemy->isEnmsLive)
+    {
+        // is the player overlapping the enemy in both axes?
+        bool isTouching = collision->isPlayerTouchingEnemy(player, test_enemy);
+
+        // ss player falling downward and above enemys head?
+        bool isAbove = player->plPos.y > test_enemy->pos.y + test_enemy->scale.y;
+
+        if (isTouching && isAbove)
+        {
+            // kill the enemy
+            test_enemy->isEnmsLive = false;
+
+            // bounce player upward
+            player->isJumping = true;
+            player->is_grounded = false;
+            player->height_before_jump = player->plPos.y;
+
+            std::cout << "Enemy stomped!\n";
+        }
+        else if (isTouching && player->player_can_be_damaged)
+        {
+            // damage player
+            player->health--;
+            player->damage_timer->reset();
+            player->player_can_be_damaged = false;
+            player->blink = true;
+
+            if(player->health < 1)
+            {
+                // maybe create a reset player function later
+                player->initPlayer(1,1,"images/wall.png");
+                player->health = 3;
+            }
+
+            std::cout << "Player hit! Health: " << player->health << std::endl;
+        }
+    }
+
+
+
+}
+

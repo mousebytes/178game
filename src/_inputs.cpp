@@ -13,28 +13,6 @@ _inputs::~_inputs()
     //dtor
 }
 
-void _inputs::keyPressed(_model* mdl)
-{
-    switch(wParam)
-    {
-    case VK_LEFT:
-        mdl->rotation.y +=1.0;
-        break;
-
-    case VK_RIGHT:
-        mdl->rotation.y -=1.0;
-        break;
-
-    case VK_UP:
-        mdl->rotation.x +=1.0;
-        break;
-
-    case VK_DOWN:
-        mdl->rotation.x -=1.0;
-        break;
-    }
-}
-
 void _inputs::keyPressed(_player* player)
 {
     switch(wParam)

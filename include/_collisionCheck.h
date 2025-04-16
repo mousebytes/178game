@@ -15,6 +15,7 @@ class _collisionCheck
 
         bool isPlayerOnGround(_player*,_platform *ground);
         bool isEnemyOnGround(_enemies*,_platform*);
+        bool isPlayerTouchingEnemy(_player*,_enemies*);
     protected:
 
     private:

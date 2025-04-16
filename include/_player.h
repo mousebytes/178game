@@ -19,6 +19,7 @@ class _player
 
         enum{STANDING,WALKLEFT,WALKRIGHT,JUMP};
         int action_trigger;
+        int health;
 
         vec3 plPos;
         vec3 plScl;
@@ -36,6 +37,11 @@ class _player
 
         _timer *timer = new _timer();
         _timer *jump_timer = new _timer();
+        _timer *damage_timer = new _timer();
+        bool player_can_be_damaged;
+        bool blink;
+
+        void handle_player_damage_timer();
 
     protected:
 

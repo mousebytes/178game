@@ -28,7 +28,7 @@ class _enemies
 
         void initEnms(char*);
         void drawEnms(GLuint);
-        void placeEnms(vec3);
+        void placeEnms(vec3,float);
         void actions();
         bool isEnmsLive = true;
 

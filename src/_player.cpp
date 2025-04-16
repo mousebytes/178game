@@ -13,6 +13,10 @@ _player::_player()
     jump_timer->reset();
     jumping_speed = 0.09;
     is_grounded = true;
+    health = 3;
+    damage_timer->reset();
+    player_can_be_damaged = true;
+    blink = false;
 }
 
 _player::~_player()
@@ -125,6 +129,13 @@ void _player::handle_vertical()
                 plPos.y -=jumping_speed;
                 jump_timer->reset();
             }
-
     }
 }
+
+void _player::handle_player_damage_timer()
+{
+    // i think this is 1 second
+    if(damage_timer->getTicks() > 1000 && !player_can_be_damaged)
+        player_can_be_damaged = true;
+}
+

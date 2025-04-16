@@ -23,6 +23,7 @@ class _scene
         void check_enemy_collisions();
         void load_level_file(const char*);
         void checkCollectibles();
+        void checkGoal();
 
     vec2 dim;
     protected:

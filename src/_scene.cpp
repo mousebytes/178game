@@ -8,7 +8,7 @@
 #include<_platform.h>
 #include<_enemies.h>
 #include<_hud.h>
-
+#include<_goal.h>
 
 _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
@@ -21,10 +21,13 @@ _platform *test_plat = new _platform();
 _platform *test_plat2 = new _platform();
 _enemies *test_enemy = new _enemies();
 _hud *hud = new _hud();
+_goal *goal = new _goal();
 
 vector<_platform*> platforms;
 vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
+
+bool playerWon = false;
 
 
 _scene::_scene()
@@ -138,6 +141,9 @@ void _scene::drawScene()
     check_platform_collisions();
     check_enemy_collisions();
     checkCollectibles();
+
+    goal->drawGoal();
+    checkGoal();
 
     hud->drawHearts(player->health,camera->camPos);
 }
@@ -317,6 +323,19 @@ void _scene::load_level_file(const char* file_name)
             c->initColl(img.data(), x, y, z, r, framex, framey);
             collectibles.push_back(c);
         }
+        else if(type == "GOAL")
+        {
+            string img;
+            float x,y,z,r;
+            int fx,fy;
+
+            ss>>img>>x>>y>>z>>r>>fx>>fy;
+
+            if(goal) delete goal;
+            goal = new _goal();
+            goal->initGoal(img.data(),x,y,z,r,fx,fy);
+
+        }
     }
 }
 
@@ -335,3 +354,17 @@ void _scene::checkCollectibles()
     }
 }
 
+void _scene::checkGoal()
+{
+    if(playerWon) return;
+
+    float dx = player->plPos.x - goal->pos.x;
+    float dy = player->plPos.y - goal->pos.y;
+    float dist = sqrt(dx * dx + dy * dy);
+
+    if(dist < (player->plScl.x + goal->scl.x))
+    {
+        playerWon = true;
+        cout << "player won";
+    }
+}

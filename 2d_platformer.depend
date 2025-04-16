@@ -98,7 +98,7 @@
 	<sstream>
 	<vector>
 
-1744824742 d:\codeblocks stuff\178game\include\_scene.h
+1744830148 d:\codeblocks stuff\178game\include\_scene.h
 	<_common.h>
 	<_timer.h>
 
@@ -147,7 +147,7 @@
 1744824827 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1744825044 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1744830490 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -158,6 +158,7 @@
 	<_platform.h>
 	<_enemies.h>
 	<_hud.h>
+	<_goal.h>
 
 1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
@@ -224,5 +225,12 @@
 	"_collectible.h"
 
 1744824334 d:\codeblocks stuff\178game\include\_collectible.h
+	<_textureLoader.h>
+
+1744829878 source:d:\codeblocks stuff\178game\src\_goal.cpp
+	"_goal.h"
+
+1744829800 d:\codeblocks stuff\178game\include\_goal.h
+	<_common.h>
 	<_textureLoader.h>
 

@@ -32,7 +32,7 @@ _enemies::~_enemies()
     //dtor
 }
 
-void _enemies::initEnms(char* file_name)
+void _enemies::initEnms(const char* file_name)
 {
     tex->loadTexture(file_name);
 }

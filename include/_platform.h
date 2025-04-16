@@ -16,7 +16,7 @@ class _platform
     vec3 vert[4];
     int framesX, framesY;
 
-    void initPlat(char*,float,float,float,float,float,float,int,int);
+    void initPlat(const char*,float,float,float,float,float,float,int,int);
     void drawPlat();
 
     protected:

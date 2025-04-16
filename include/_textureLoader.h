@@ -14,7 +14,7 @@ class _textureLoader
         unsigned char* image; // read image to temp location
         GLuint tex;         // Texture buffer handler
 
-        void loadTexture(char *);
+        void loadTexture(const char *);
         void textureBinder();
 
     protected:

@@ -1,0 +1,10 @@
+# can use pound symbols as the comment symbol due to how it's written in scene.cpp
+
+#platform format: PLATFORM image x y z sx sy sz fx fy
+PLATFORM images/wall.png 0 -2 -2 5 1 1 1 1
+PLATFORM images/wall.png 9 -1 -2 3 1 1 1 1
+PLATFORM images/wall.png 18 -1 -2 4 1 1 1 1
+
+
+# enemy format: ENEMY image x y z scale
+ENEMY images/wall.png 18 2 -3 0.6

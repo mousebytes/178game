@@ -21,6 +21,7 @@ class _scene
 
         void check_platform_collisions();
         void check_enemy_collisions();
+        void load_level_file(const char*);
 
     vec2 dim;
     protected:

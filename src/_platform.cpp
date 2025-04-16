@@ -10,7 +10,7 @@ _platform::~_platform()
     //dtor
 }
 
-void _platform::initPlat(char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm)
+void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm)
 {
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
     vert[1].x =  1.0; vert[1].y = -1.0; vert[1].z = -1.0;

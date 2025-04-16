@@ -7,6 +7,9 @@
 #include<GL/glut.h>
 #include<time.h>
 #include<math.h>
+#include<fstream>
+#include<sstream>
+#include<vector>
 
 
 #define PI 3.14159

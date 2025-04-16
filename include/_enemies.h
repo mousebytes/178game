@@ -26,7 +26,7 @@ class _enemies
 
         enum{STANDING,WALKLEFT,WALKRIGHT};
 
-        void initEnms(char*);
+        void initEnms(const char*);
         void drawEnms(GLuint);
         void placeEnms(vec3,float);
         void actions();

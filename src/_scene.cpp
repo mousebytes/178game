@@ -24,6 +24,9 @@ _platform *test_plat2 = new _platform();
 _enemies *test_enemy = new _enemies();
 _hud *hud = new _hud();
 
+vector<_platform*> platforms;
+vector<_enemies*> enemies;
+
 _scene::_scene()
 {
     //ctor
@@ -58,14 +61,17 @@ GLint _scene::initGL()
 
     background->initBG("images/marce.png");
 
-    level1_floor->initPlat("images/wall.png",0,-2,-2,5.0,1.0,1.0,1,1);
-    test_plat->initPlat("images/wall.png",9.0,-1,-2,3.0,1.0,1.0,1,1);
-    test_plat2->initPlat("images/wall.png",18,-1,-2,4.0,1.0,1.0,1,1);
+    //level1_floor->initPlat("images/wall.png",0,-2,-2,5.0,1.0,1.0,1,1);
+    //test_plat->initPlat("images/wall.png",9.0,-1,-2,3.0,1.0,1.0,1,1);
+    //test_plat2->initPlat("images/wall.png",18,-1,-2,4.0,1.0,1.0,1,1);
 
-    test_enemy->initEnms("images/wall.png");
-    test_enemy->placeEnms({18,2,-3}, .6);
-    test_enemy->isEnmsLive = true;
-    test_enemy->action_trigger = test_enemy->WALKRIGHT;
+
+    //test_enemy->initEnms("images/wall.png");
+    //test_enemy->placeEnms({18,2,-3}, .6);
+    //test_enemy->isEnmsLive = true;
+    //test_enemy->action_trigger = test_enemy->WALKRIGHT;
+
+    load_level_file("levels/testLevel.txt");
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
 
@@ -126,14 +132,23 @@ void _scene::drawScene()
 
     background->drawBackground(dim.x,dim.y);
 
-    level1_floor->drawPlat();
-    test_plat->drawPlat();
-    test_plat2->drawPlat();
+    //level1_floor->drawPlat();
+    //test_plat->drawPlat();
+    //test_plat2->drawPlat();
+
+    for(auto plat: platforms)
+        plat->drawPlat();
 
     check_platform_collisions();
 
-    test_enemy->drawEnms(test_enemy->tex->tex);
-    test_enemy->actions();
+    //test_enemy->drawEnms(test_enemy->tex->tex);
+    //test_enemy->actions();
+    for(auto e : enemies)
+    {
+        e->drawEnms(enemies[0]->tex->tex);
+        e->actions();
+    }
+
 
     check_enemy_collisions();
 
@@ -182,24 +197,43 @@ void _scene::check_platform_collisions()
     bool on_any_plat = false;
 
     // TODO: change this to for loop for all plats
-    if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
-    if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
-    if(collision->isPlayerOnGround(player,test_plat2)) on_any_plat = true;
+    //if(collision->isPlayerOnGround(player,level1_floor)) on_any_plat = true;
+    //if(collision->isPlayerOnGround(player,test_plat)) on_any_plat = true;
+    //if(collision->isPlayerOnGround(player,test_plat2)) on_any_plat = true;
 
-    player->is_grounded = on_any_plat;
+    //player->is_grounded = on_any_plat;
+
+    for(auto p : platforms)
+        if(collision->isPlayerOnGround(player,p)) on_any_plat = true;
+    player->is_grounded=on_any_plat;
 
     // can change this to a for loop for all enemies and plats in the future
-    bool enemy_on_ground = false;
-    if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
-    if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
-    if(collision->isEnemyOnGround(test_enemy,test_plat2)) enemy_on_ground = true;
+    //bool enemy_on_ground = false;
+    //if (collision->isEnemyOnGround(test_enemy, level1_floor)) enemy_on_ground = true;
+    //if (collision->isEnemyOnGround(test_enemy, test_plat)) enemy_on_ground = true;
+    //if(collision->isEnemyOnGround(test_enemy,test_plat2)) enemy_on_ground = true;
 
-    test_enemy->is_grounded = enemy_on_ground;
+    for(auto e : enemies)
+    {
+        bool enemy_on_ground = false;
+        for(auto p : platforms)
+        {
+            if(collision->isEnemyOnGround(e,p))
+            {
+                enemy_on_ground = true;
+                break;
+            }
+        }
+        e->is_grounded = enemy_on_ground;
+    }
+
+    //test_enemy->is_grounded = enemy_on_ground;
 }
 
 void _scene::check_enemy_collisions()
 {
     // TODO: change this to a for loop for all enemies later
+    /*
     if(test_enemy->isEnmsLive)
     {
         // is the player overlapping the enemy in both axes?
@@ -249,9 +283,91 @@ void _scene::check_enemy_collisions()
 
             std::cout << "Player hit! Health: " << player->health << std::endl;
         }
+    }*/
+
+    for(auto e : enemies)
+    {
+        if(!e->isEnmsLive) continue;
+
+        bool isTouching = collision->isPlayerTouchingEnemy(player,e);
+        bool isAbove = player->plPos.y > e->pos.y + e->scale.y;
+
+        if(isTouching && isAbove)
+        {
+            e->isEnmsLive=false;
+
+            player->isJumping = true;
+            player->is_grounded = false;
+            player->height_before_jump = player->plPos.y;
+        }
+        else if (isTouching && player->player_can_be_damaged)
+        {
+            player->health--;
+            player->damage_timer->reset();
+            player->player_can_be_damaged = false;
+            player->blink = true;
+
+            if(player->health < 1)
+            {
+                player->initPlayer(1,1,"images/wall.png");
+                player->health = 3;
+            }
+
+            float pushback_strength = 0.6;
+            if(player->plPos.x < e->pos.x)
+                player->plPos.x -=pushback_strength;
+            else
+                player->plPos.x += pushback_strength;
+        }
     }
 
-
-
 }
+
+void _scene::load_level_file(const char* file_name)
+{
+    for(auto p : platforms) delete p;
+    for (auto e : enemies) delete e;
+    platforms.clear();
+    enemies.clear();
+
+    ifstream file(file_name);
+    string line;
+
+    while(getline(file,line))
+    {
+        // check for empty lines and our self asserted comment symbol
+        if(line.empty() || line[0] == '#') continue;
+
+        stringstream ss(line);
+        string type;
+        ss>>type;
+
+        if(type == "PLATFORM")
+        {
+            string img;
+            float x,y,z,sx,sy,sz;
+            int fx,fy;
+
+            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy;
+
+            _platform* plat = new _platform();
+            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy);
+            platforms.push_back(plat);
+        }
+        else if(type == "ENEMY")
+        {
+            string img;
+            float x,y,z,scl;
+            ss>>img>>x>>y>>z>>scl;
+
+            _enemies* enemy = new _enemies();
+            enemy->initEnms(img.data());
+            enemy->placeEnms({x,y,z},scl);
+            enemy->isEnmsLive = true;
+            enemy->action_trigger = enemy->WALKLEFT;
+            enemies.push_back(enemy);
+        }
+    }
+}
+
 

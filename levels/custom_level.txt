@@ -1,16 +1,12 @@
-PLATFORM images/wall.png -1.69137 -2.28508 -3 1 1 1 1 1 0
-PLATFORM images/wall.png 1.22883 -2.35411 -3 1 1 1 1 1 0
-PLATFORM images/wall.png 3.23777 -2.05036 -3 1 1 1 1 1 0
-PLATFORM images/wall.png -3.75554 -2.29889 -3 1 1 1 1 1 0
-PLATFORM images/wall.png -5.84041 -2.29198 -3 1 1 1 1 1 0
-ENEMY images/wall.png -1.71208 -0.276142 -3 0.25
-ENEMY images/wall.png 1.22193 -0.110457 -3 0.25
-ENEMY images/wall.png 3.21706 0.0690356 -3 0.25
-ENEMY images/wall.png 2.05726 0.697259 -3 0.25
-ENEMY images/wall.png -0.987209 0.531574 -3 0.25
-ENEMY images/wall.png 0.517767 1.00102 -3 0.25
-ENEMY images/wall.png 0.566092 -0.483249 -3 0.25
-ENEMY images/wall.png -0.60061 -0.331371 -3 0.25
-COLLECTIBLE images/coin.png -1.11838 -0.787006 -3 0.1 1 1
-COLLECTIBLE images/coin.png 0.994113 -0.842234 -3 0.1 1 1
-COLLECTIBLE images/coin.png 2.73381 -0.572995 -3 0.1 1 1
+PLATFORM images/wall.png -2.58193 -2.11939 -3 1 1 1 1 1 0
+PLATFORM images/wall.png -0.303757 -2.1401 -3 1 1 1 1 1 0
+PLATFORM images/wall.png 2.1401 -2.1401 -3 1 1 1 1 1 0
+PLATFORM images/wall.png 4.31472 -2.01584 -3 1 1 1 1 1 0
+ENEMY images/wall.png 3.54153 -0.289949 -3 0.25
+ENEMY images/wall.png 1.70518 -0.538478 -3 0.25
+ENEMY images/wall.png -0.752488 -0.476346 -3 0.25
+ENEMY images/wall.png -2.20914 -0.421117 -3 0.25
+COLLECTIBLE images/coin.png 0.0690356 -0.690356 -3 0.1 1 1
+COLLECTIBLE images/coin.png -1.933 -0.766295 -3 0.1 1 1
+COLLECTIBLE images/coin.png 2.58883 -0.883656 -3 0.1 1 1
+GOAL images/goal.png 5.27432 -0.766295 -3 0.2 1 1

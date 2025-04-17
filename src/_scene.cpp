@@ -23,6 +23,7 @@ _goal *goal = new _goal();
 _platform* previewPlat = nullptr;
 _enemies* previewEnemy = nullptr;
 _collectible* previewCoin = nullptr;
+_goal* previewGoal = nullptr;
 
 vector<_platform*> platforms;
 vector<_enemies*> enemies;
@@ -172,6 +173,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '1': placeObj = PLAT; break;
                    case '2': placeObj = ENEMY; break;
                    case '3': placeObj = COLLECTIBLE; break;
+                   case '4': placeObj = GOAL; break;
                    case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
                    case 'S': saveCustomLevel();break;
                }
@@ -233,6 +235,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 c->initColl("images/coin.png",mouseX,mouseY,-3,0.1,1,1);
                 collectibles.push_back(c);
             }
+            else if(placeObj == GOAL)
+            {
+                if(goal) delete goal;
+                goal = new _goal();
+                goal->initGoal("images/goal.png",mouseX,mouseY,-3,0.2,1,1);
+            }
         }
         break;
     case WM_RBUTTONDOWN:
@@ -269,6 +277,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             case COLLECTIBLE:
                 if (!previewCoin) previewCoin = new _collectible();
                 previewCoin->initColl("images/coin.png", mouseX, mouseY, -3, 0.1, 1, 1);
+                break;
+            case GOAL:
+                if(!previewGoal) previewGoal = new _goal();
+                previewGoal->initGoal("images/goal.png",mouseX,mouseY,-3,0.2,1,1);
                 break;
         }
     }
@@ -680,6 +692,9 @@ void _scene::saveCustomLevel()
         file << "COLLECTIBLE images/coin.png "<< c->pos.x << " " << c->pos.y << " " << c->pos.z << " "<< c->radius << " " << c->framesX << " " << c->framesY << endl;
     }
 
+    file << "GOAL images/goal.png " << goal->pos.x << " " << goal->pos.y << " " << goal->pos.z
+     << " " << goal->scl.x << " " << goal->framesX << " " << goal->framesY << endl;
+
     file.close();
     cout << "saved to levels/custom_level.txt"<<endl;
 }
@@ -700,7 +715,7 @@ void _scene::drawEditor()
 
     for(auto c : collectibles)
         c->drawColl();
-
+    goal->drawGoal();
 
         //todo: check this
         glDisable(GL_DEPTH_TEST); // ensure ghost is always on top
@@ -712,6 +727,8 @@ void _scene::drawEditor()
             previewEnemy->drawEnms(previewEnemy->tex->tex);
         if(previewCoin && placeObj == COLLECTIBLE)
             previewCoin->drawColl();
+        if(previewGoal && placeObj == GOAL)
+            previewGoal->drawGoal();
 
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color

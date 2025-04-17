@@ -45,6 +45,8 @@ class _scene
         void saveCustomLevel();
         void drawEditor();
 
+        void deleteObjectAtMouseInEditor();
+
     protected:
 
     private:

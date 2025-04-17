@@ -237,6 +237,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         break;
     case WM_RBUTTONDOWN:
         input->wParam = wParam;
+        if (gs == LEVELEDITOR)
+            {
+                mouseMapping(LOWORD(lParam), HIWORD(lParam));
+                deleteObjectAtMouseInEditor();
+            }
+    break;
         break;
     case WM_LBUTTONUP:
     case WM_RBUTTONUP:
@@ -710,3 +716,55 @@ void _scene::drawEditor()
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
 }
+
+void _scene::deleteObjectAtMouseInEditor()
+{
+    // platform check
+    for (int i = 0; i < platforms.size(); i++)
+    {
+        _platform* p = platforms[i];
+        if (mouseX > p->pos.x - p->scale.x &&
+            mouseX < p->pos.x + p->scale.x &&
+            mouseY > p->pos.y - p->scale.y &&
+            mouseY < p->pos.y + p->scale.y)
+        {
+            delete p;
+            platforms.erase(platforms.begin() + i);
+            cout << "Deleted platform.\n";
+            return;
+        }
+    }
+
+    // ENEMY check
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        _enemies* e = enemies[i];
+        if (mouseX > e->pos.x - e->scale.x &&
+            mouseX < e->pos.x + e->scale.x &&
+            mouseY > e->pos.y - e->scale.y &&
+            mouseY < e->pos.y + e->scale.y)
+        {
+            delete e;
+            enemies.erase(enemies.begin() + i);
+            cout << "Deleted enemy.\n";
+            return;
+        }
+    }
+
+    // COLLECTIBLE check
+    for (int i = 0; i < collectibles.size(); i++)
+    {
+        _collectible* c = collectibles[i];
+        if (mouseX > c->pos.x - c->radius &&
+            mouseX < c->pos.x + c->radius &&
+            mouseY > c->pos.y - c->radius &&
+            mouseY < c->pos.y + c->radius)
+        {
+            delete c;
+            collectibles.erase(collectibles.begin() + i);
+            cout << "Deleted coin.\n";
+            return;
+        }
+    }
+}
+

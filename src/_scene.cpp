@@ -176,6 +176,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '4': placeObj = GOAL; break;
                    case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
                    case 'S': saveCustomLevel();break;
+                   case 'A': player->plPos.x -=0.5; break;
+                   case 'D': player->plPos.x +=0.5; break;
                }
            }
            else if(gs == MAINMENU && wParam == 'E')
@@ -703,6 +705,7 @@ void _scene::saveCustomLevel()
 void _scene::drawEditor()
 {
     glLoadIdentity();
+
 
     camera->followPlayer(player);  // optional, keeps player centered
     camera->updateCamPos();

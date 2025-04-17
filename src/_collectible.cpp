@@ -3,6 +3,7 @@
 _collectible::_collectible()
 {
     //ctor
+    isCollected = false;
 
 }
 

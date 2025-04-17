@@ -59,7 +59,7 @@ GLint _scene::initGL()
     dim.x = GetSystemMetrics(SM_CXSCREEN);
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
-    background->initBG("images/marce.png");
+    background->initBG("images/temp_mainmenu.png");
 
     load_level_file("levels/level1.txt");
 
@@ -124,19 +124,25 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
            if(gs == MAINMENU && wParam == VK_RETURN)
            {
+                background->initBG("images/marce.png");
                 currLevel = 1;
                 load_level_file("levels/level1.txt");
                 player->initPlayer(1,1,"images/wall.png");
                 gs = PLAYING;
+                playerWon= false;
            }
             else if (gs == GAMEOVER && wParam == 'R')
            {
+               background->initBG("images/temp_mainmenu.png");
                gs = MAINMENU;
-               player->health = 3;
-               player->coins = 0;
+
                player->initPlayer(1,1,"images/wall.png");
                load_level_file("levels/level1.txt");
                currLevel = 1;
+               playerWon = false;
+
+               player->health = 3;
+               player->coins = 0;
            }
             else if(gs == PLAYING && wParam == 'K') // press K to save
             {
@@ -144,6 +150,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             }
             else if(gs == MAINMENU && wParam == 'L') // Press L to load
                 {
+                    background->initBG("images/marce.png");
                     loadGame();
                     gs = PLAYING;
                 }
@@ -241,10 +248,13 @@ void _scene::check_enemy_collisions()
 
 void _scene::load_level_file(const char* file_name)
 {
+
     for(auto p : platforms) delete p;
     for (auto e : enemies) delete e;
+    for(auto c : collectibles) delete c;
     platforms.clear();
     enemies.clear();
+    collectibles.clear();
 
     ifstream file(file_name);
     string line;
@@ -356,6 +366,26 @@ void _scene::checkGoal()
     {
         playerWon = true;
         cout << "player won";
+
+        currLevel++;
+
+        stringstream ss;
+
+        ss << "levels/level"<<currLevel<<".txt";
+        ifstream test(ss.str().c_str());
+        if(!test.good())
+        {
+            background->initBG("images/temp_reset.png");
+            gs = GAMEOVER;
+            currLevel=1;
+            player->health = 3;
+            return ;
+        }
+
+        load_level_file(ss.str().c_str());
+        player->initPlayer(1,1,"images/wall.png");
+        player->plPos={0,0,-3};
+        playerWon=false;
     }
 }
 
@@ -377,6 +407,7 @@ void _scene::runGame()
         {
             gs = GAMEOVER;
             player->health = 3;
+            background->initBG("images/temp_reset.png");
         }
 
     if(!player->blink)

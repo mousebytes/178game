@@ -21,7 +21,7 @@ void _background::drawBackground(float width, float height)
     background->textureBinder();
 
     glPushMatrix();
-    glScalef(2.3,2.3,1.0);
+    glScalef(1.0,1.0,1.0);
 
     glBegin(GL_POLYGON);
         glTexCoord2f(xMin,yMax);

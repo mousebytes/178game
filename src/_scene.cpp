@@ -19,6 +19,11 @@ _collisionCheck *collision = new _collisionCheck();
 _hud *hud = new _hud();
 _goal *goal = new _goal();
 
+
+_platform* previewPlat = nullptr;
+_enemies* previewEnemy = nullptr;
+_collectible* previewCoin = nullptr;
+
 vector<_platform*> platforms;
 vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
@@ -106,6 +111,8 @@ void _scene::drawScene()
     case GAMEOVER:
         drawGameOver();
         break;
+    case LEVELEDITOR:
+        drawEditor();
     }
 
 
@@ -158,6 +165,38 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            {
                 input->keyPressed(player);
            }
+           else if(gs==LEVELEDITOR)
+           {
+               switch(wParam)
+               {
+                   case '1': placeObj = PLAT; break;
+                   case '2': placeObj = ENEMY; break;
+                   case '3': placeObj = COLLECTIBLE; break;
+                   case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
+                   case 'S': saveCustomLevel();break;
+               }
+           }
+           else if(gs == MAINMENU && wParam == 'E')
+           {
+               background->initBG("images/marce.png");
+               platforms.clear();
+               enemies.clear();
+               collectibles.clear();
+               player->initPlayer(1,1,"images/wall.png");
+               gs = LEVELEDITOR;
+           }
+           else if(gs == MAINMENU && wParam == 'C')
+            {
+                background->initBG("images/marce.png");
+                load_level_file("levels/custom_level.txt");
+                player->initPlayer(1,1,"images/wall.png");
+                player->plPos = {0, 0, -3};
+                player->health = 3;
+                player->coins = 0;
+                playerWon = false;
+                gs = PLAYING;
+                cout << "Loaded custom_level.txt and started game" << endl;
+            }
         break;
 
 
@@ -167,6 +206,35 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_LBUTTONDOWN:
+
+        if(gs==LEVELEDITOR)
+        {
+            // send mouse coords when in level editor
+            mouseMapping(LOWORD(lParam),HIWORD(lParam));
+
+            if(placeObj == PLAT)
+            {
+                _platform *plat = new _platform();
+                plat->initPlat("images/wall.png",mouseX,mouseY,-3.0,1,1,1,1,1,1,0,0);
+                platforms.push_back(plat);
+            }
+            else if(placeObj == ENEMY)
+            {
+                _enemies* enemy = new _enemies();
+                enemy->initEnms("images/wall.png");
+                enemy->placeEnms({mouseX,mouseY,-3},0.25);
+                enemy->isEnmsLive = true;
+                enemy->action_trigger = enemy->WALKLEFT;
+                enemies.push_back(enemy);
+            }
+            else if (placeObj == COLLECTIBLE)
+            {
+                _collectible *c = new _collectible();
+                c->initColl("images/coin.png",mouseX,mouseY,-3,0.1,1,1);
+                collectibles.push_back(c);
+            }
+        }
+        break;
     case WM_RBUTTONDOWN:
         input->wParam = wParam;
         break;
@@ -176,6 +244,29 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         input->mouseEventUp();
         break;
     case WM_MOUSEMOVE:
+
+        //todo: check this
+        if(gs == LEVELEDITOR)
+    {
+        mouseMapping(LOWORD(lParam), HIWORD(lParam));
+        switch(placeObj)
+        {
+            case PLAT:
+                if (!previewPlat) previewPlat = new _platform();
+                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -3.0, 1, 1, 1, 1, 1, 1, 0, 0);
+                break;
+            case ENEMY:
+                if (!previewEnemy) previewEnemy = new _enemies();
+                previewEnemy->placeEnms({mouseX, mouseY, -3}, 0.25);
+                previewEnemy->initEnms("images/wall.png");
+                break;
+            case COLLECTIBLE:
+                if (!previewCoin) previewCoin = new _collectible();
+                previewCoin->initColl("images/coin.png", mouseX, mouseY, -3, 0.1, 1, 1);
+                break;
+        }
+    }
+    break;
         break;
     case WM_MOUSEWHEEL:
         break;
@@ -511,3 +602,111 @@ void _scene::loadGame()
     cout << "\nloaded";
 }
 
+
+void _scene::mouseMapping(int x, int y)
+{
+    dim.x = GetSystemMetrics(SM_CXSCREEN);  // only for windows
+    dim.y = GetSystemMetrics(SM_CYSCREEN);  // only for windows
+
+    GLint viewPort[4];       // store window coord
+    GLdouble modelViewM[16]; // model and cam
+    GLdouble projectionM[16];// projection
+    GLfloat winX,winY,winZ;  // for mapping x,y,z
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,modelViewM);
+    glGetDoublev(GL_PROJECTION_MATRIX,projectionM);
+    glGetIntegerv(GL_VIEWPORT, viewPort);
+
+    winX = (GLfloat)x;
+    winY = (GLfloat)(viewPort[3]-y);
+
+    //glReadPixels(x,(int)winY,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&winZ);
+
+    //if(winZ == 1.0)
+        //winZ = 0.5;
+
+    //gluUnProject(winX,winY,winZ,
+                 //modelViewM,projectionM,viewPort,&mouseX,&mouseY,&mouseZ);
+                 //mouseZ = -3.0;
+
+        //veryyy hacky fix
+        GLdouble nearX, nearY, nearZ;
+        GLdouble farX, farY, farZ;
+
+        gluUnProject(winX, winY, 0.0, modelViewM, projectionM, viewPort, &nearX, &nearY, &nearZ);
+        gluUnProject(winX, winY, 1.0, modelViewM, projectionM, viewPort, &farX, &farY, &farZ);
+
+    // ray direction
+    float dirX = farX - nearX;
+    float dirY = farY - nearY;
+    float dirZ = farZ - nearZ;
+
+    // find t where z = -3.0 (our depth at which we place everything
+    float t = (-3.0 - nearZ) / dirZ;
+
+    mouseX = nearX + t * dirX;
+    mouseY = nearY + t * dirY;
+    mouseZ = -3.0f;
+}
+
+
+void _scene::saveCustomLevel()
+{
+    ofstream file("levels/custom_level.txt");
+
+    if(!file.is_open())
+    {
+        cout << "\ncustom level file not loaded";
+    }
+
+    for(auto plat:platforms)
+    {
+        file<<"PLATFORM images/wall.png " << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "<< plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " " << plat->framesX << " " << plat->framesY << " 0" << endl;
+    }
+
+    for(auto e:enemies)
+    {
+        file<<"ENEMY images/wall.png " << e->pos.x<< " " << e->pos.y << " " << e->pos.z << " " << e->scale.x << endl;
+    }
+
+    for(auto c : collectibles)
+    {
+        file << "COLLECTIBLE images/coin.png "<< c->pos.x << " " << c->pos.y << " " << c->pos.z << " "<< c->radius << " " << c->framesX << " " << c->framesY << endl;
+    }
+
+    file.close();
+    cout << "saved to levels/custom_level.txt"<<endl;
+}
+
+
+void _scene::drawEditor()
+{
+    glLoadIdentity();
+
+    camera->followPlayer(player);  // optional, keeps player centered
+    camera->updateCamPos();
+
+    for(auto plat : platforms)
+        plat->drawPlat();
+
+    for(auto e : enemies)
+        e->drawEnms(e->tex->tex);
+
+    for(auto c : collectibles)
+        c->drawColl();
+
+
+        //todo: check this
+        glDisable(GL_DEPTH_TEST); // ensure ghost is always on top
+        glColor4f(1.0, 1.0, 1.0, 0.5); // semi transparent
+
+        if(previewPlat && placeObj == PLAT)
+            previewPlat->drawPlat();
+        if(previewEnemy && placeObj == ENEMY)
+            previewEnemy->drawEnms(previewEnemy->tex->tex);
+        if(previewCoin && placeObj == COLLECTIBLE)
+            previewCoin->drawColl();
+
+        glEnable(GL_DEPTH_TEST);
+        glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
+}

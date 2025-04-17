@@ -26,16 +26,24 @@ class _scene
         void checkGoal();
         void saveGame();
         void loadGame();
+        void mouseMapping(int x, int y);
 
-        enum GameState {MAINMENU,PLAYING,GAMEOVER};
+        enum GameState {MAINMENU,PLAYING,GAMEOVER,LEVELEDITOR};
 
         GameState gs = MAINMENU;
+
+        double mouseX, mouseY, mouseZ;
+
+        enum PlaceObjs{PLAT,ENEMY,COLLECTIBLE};
+        PlaceObjs placeObj = PLAT;
 
     vec2 dim;
 
         void drawMenu();
         void runGame();
         void drawGameOver();
+        void saveCustomLevel();
+        void drawEditor();
 
     protected:
 

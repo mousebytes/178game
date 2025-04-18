@@ -54,6 +54,8 @@ class _player
 
         _timer *horzDisTimer = new _timer();
 
+        bool inBarrel;
+
     protected:
 
     private:

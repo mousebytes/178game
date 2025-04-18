@@ -18,6 +18,7 @@ class _barrelCannon
         bool playerInside;
         float fireDelay;
         _timer* fireTimer;
+        _timer* manualDelay;
 
         _textureLoader* tex;
 

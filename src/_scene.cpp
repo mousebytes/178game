@@ -701,10 +701,20 @@ void _scene::runGame()
     {
         b->drawBarrel();
 
-        if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}))
-            b->playerInside = true;
+        if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}) && !player->isBeingDisplacedHorz)
+            {
+                b->playerInside = true;
+                player->inBarrel = true;
+            }
         else
             b->playerInside = false;
+
+        if(!player->inBarrel)
+        {
+            b->manualDelay->reset();
+        }
+
+
 
         b->updateB(player);
     }

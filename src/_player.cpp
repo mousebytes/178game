@@ -21,6 +21,7 @@ _player::_player()
     isBeingDisplacedHorz = false;
     horzDisTimer->reset();
     maxHorzDisplacement = 2.7;
+    inBarrel = false;
 }
 
 _player::~_player()
@@ -62,6 +63,8 @@ void _player::initPlayer(int xfrm, int yfrm, char* fileName)
 
 void _player::drawPlayer()
 {
+    if(inBarrel) return;
+
     glPushMatrix();
         glTranslatef(plPos.x,plPos.y,plPos.z);
         glScalef(plScl.x,plScl.y,plScl.z);
@@ -87,6 +90,7 @@ void _player::drawPlayer()
 
 void _player::playerActions()
 {
+    if(inBarrel) return;
     if(!isBeingDisplacedHorz)
     if(timer->getTicks() > TIMER_LIMIT)
     {
@@ -112,6 +116,7 @@ void _player::playerActions()
 
 void _player::handle_vertical()
 {
+    if(inBarrel) return;
 
     if(isJumping)
     {

@@ -8,8 +8,10 @@ _barrelCannon::_barrelCannon()
     playerInside = false;
     isAuto = false;
     fireDelay = 1.0;
+    manualDelay = new _timer();
 
     framesX=framesY = 1;
+
 }
 
 _barrelCannon::~_barrelCannon()
@@ -29,6 +31,7 @@ void _barrelCannon::initBarrel(const char* fileName, vec3 p, float rotDeg, bool 
     rotation = rotDeg;
     isAuto = autoF;
     fireDelay = delay;
+    manualDelay->reset();
     tex->loadTexture(fileName);
     fireTimer->reset();
 
@@ -81,5 +84,24 @@ void _barrelCannon::updateB(_player* player)
 
         player->xBeforeHorzDisplacement = player->plPos.x;
         player->isBeingDisplacedHorz = true;
+    }
+
+    if(!isAuto)
+    {
+        if(GetAsyncKeyState(VK_SPACE) & 0x8000 && manualDelay->getTicks() > 300)
+        {
+            player->height_before_jump = pos.y;
+            player->isJumping = true;
+
+            player->xBeforeHorzDisplacement = pos.x;
+            player->isBeingDisplacedHorz = true;
+
+            player->inBarrel = false;
+            playerInside = false;
+            fireTimer->reset();
+
+            player->plPos.x = pos.x;
+            player->plPos.y = pos.y;
+        }
     }
 }

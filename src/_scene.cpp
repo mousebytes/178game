@@ -178,6 +178,43 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; break;
                    case 'D': player->plPos.x +=0.5; break;
+                   case VK_LEFT:  // Decrease platform X scale
+                    if (previewPlat && placeObj == PLAT)
+                        previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
+                    break;
+
+                    case VK_RIGHT: // Increase platform X scale
+                    if (previewPlat && placeObj == PLAT)
+                        previewPlat->scale.x += 0.1f;
+                    break;
+                    case VK_DOWN: // Decrease Y
+                    if (previewPlat && placeObj == PLAT)
+                        previewPlat->scale.y = max(0.1f, previewPlat->scale.y - 0.1f);
+                    break;
+                    case VK_UP:   // Increase Y
+                    if (previewPlat && placeObj == PLAT)
+                        previewPlat->scale.y += 0.1f;
+                        break;
+
+                    case VK_OEM_4: // '[' — shrink enemy
+                    if (previewEnemy && placeObj == ENEMY)
+                    previewEnemy->scale.x = previewEnemy->scale.y = max(0.05f, previewEnemy->scale.x - 0.05f);
+                    break;
+                    case VK_OEM_6: // ']' — enlarge enemy
+                    if (previewEnemy && placeObj == ENEMY)
+                    previewEnemy->scale.x = previewEnemy->scale.y += 0.05f;
+                    break;
+                    case VK_BACK:
+                        if (placeObj == PLAT && previewPlat)
+                        {
+                            previewPlat->scale.x = 1.0f;
+                            previewPlat->scale.y = 1.0f;
+                        }
+                        else if (placeObj == ENEMY && previewEnemy)
+                        {
+                            previewEnemy->scale.x = previewEnemy->scale.y = 0.25f;
+                        }
+                    break;
                }
            }
            else if(gs == MAINMENU && wParam == 'E')
@@ -219,14 +256,19 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             if(placeObj == PLAT)
             {
                 _platform *plat = new _platform();
-                plat->initPlat("images/wall.png",mouseX,mouseY,-3.0,1,1,1,1,1,1,0,0);
+                //plat->initPlat("images/wall.png",mouseX,mouseY,-3.0,1,1,1,1,1,1,0,0);
+                plat->initPlat("images/wall.png", mouseX, mouseY, -2.0,
+                    previewPlat ? previewPlat->scale.x : 1.0f,
+                    previewPlat ? previewPlat->scale.y : 1.0f,
+               1, 1, 1, 0, 0, 0);
                 platforms.push_back(plat);
             }
             else if(placeObj == ENEMY)
             {
                 _enemies* enemy = new _enemies();
                 enemy->initEnms("images/wall.png");
-                enemy->placeEnms({mouseX,mouseY,-3},0.25);
+                //enemy->placeEnms({mouseX,mouseY,-3},0.25);
+                enemy->placeEnms({mouseX,mouseY,-3}, previewEnemy ? previewEnemy->scale.x : 0.25f);
                 enemy->isEnmsLive = true;
                 enemy->action_trigger = enemy->WALKLEFT;
                 enemies.push_back(enemy);
@@ -234,14 +276,14 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             else if (placeObj == COLLECTIBLE)
             {
                 _collectible *c = new _collectible();
-                c->initColl("images/coin.png",mouseX,mouseY,-3,0.1,1,1);
+                c->initColl("images/coin.png",mouseX,mouseY,-2,0.1,1,1);
                 collectibles.push_back(c);
             }
             else if(placeObj == GOAL)
             {
                 if(goal) delete goal;
                 goal = new _goal();
-                goal->initGoal("images/goal.png",mouseX,mouseY,-3,0.2,1,1);
+                goal->initGoal("images/goal.png",mouseX,mouseY,-2,0.2,1,1);
             }
         }
         break;
@@ -268,21 +310,41 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         switch(placeObj)
         {
             case PLAT:
-                if (!previewPlat) previewPlat = new _platform();
-                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -3.0, 1, 1, 1, 1, 1, 1, 0, 0);
+                {
+
+
+                //if (!previewPlat) previewPlat = new _platform();
+                //previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0, 1, 1, 1, 1, 1, 1, 0, 0);
+                if (!previewPlat)
+                    previewPlat = new _platform();
+
+                float scaleX = previewPlat->scale.x;
+                float scaleY = previewPlat->scale.y;
+
+                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0);
                 break;
+                }
             case ENEMY:
-                if (!previewEnemy) previewEnemy = new _enemies();
-                previewEnemy->placeEnms({mouseX, mouseY, -3}, 0.25);
+                {
+
+
+                //if (!previewEnemy) previewEnemy = new _enemies();
+                //previewEnemy->placeEnms({mouseX, mouseY, -3}, 0.25);
+                //previewEnemy->initEnms("images/wall.png");
+                if(!previewEnemy)
+                    previewEnemy= new _enemies();
+                float scale = previewEnemy->scale.x;
+                previewEnemy->placeEnms({mouseX,mouseY,-2},scale);
                 previewEnemy->initEnms("images/wall.png");
                 break;
+                }
             case COLLECTIBLE:
                 if (!previewCoin) previewCoin = new _collectible();
-                previewCoin->initColl("images/coin.png", mouseX, mouseY, -3, 0.1, 1, 1);
+                previewCoin->initColl("images/coin.png", mouseX, mouseY, -2, 0.1, 1, 1);
                 break;
             case GOAL:
                 if(!previewGoal) previewGoal = new _goal();
-                previewGoal->initGoal("images/goal.png",mouseX,mouseY,-3,0.2,1,1);
+                previewGoal->initGoal("images/goal.png",mouseX,mouseY,-2,0.2,1,1);
                 break;
         }
     }
@@ -662,11 +724,11 @@ void _scene::mouseMapping(int x, int y)
     float dirZ = farZ - nearZ;
 
     // find t where z = -3.0 (our depth at which we place everything
-    float t = (-3.0 - nearZ) / dirZ;
+    float t = (-2.0 - nearZ) / dirZ;
 
     mouseX = nearX + t * dirX;
     mouseY = nearY + t * dirY;
-    mouseZ = -3.0f;
+    mouseZ = -2.0;
 }
 
 

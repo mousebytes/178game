@@ -3,7 +3,7 @@
 _enemies::_enemies()
 {
     //ctor
-    pos.x =0.0; pos.y =-0.65; pos.z = -5;
+    pos.x =0.0; pos.y =-0.65; pos.z = -3;
     scale.x =0.25;
     scale.y =0.25;
 
@@ -82,7 +82,8 @@ void _enemies::placeEnms(vec3 p, float scl)
 {
     pos.x = p.x;
     pos.y = p.y;
-    pos.z = p.z;
+    //pos.z = p.z;
+    pos.z = -3.0;
     init_x_pos = p.x;
 
     scale.x = scale.y = scl;

@@ -27,6 +27,9 @@ _enemies::_enemies()
 
     start_respawn_timer = false;
 
+    //eT = WALKER;
+
+    jumpT->reset();
 }
 
 _enemies::~_enemies()
@@ -34,9 +37,19 @@ _enemies::~_enemies()
     //dtor
 }
 
-void _enemies::initEnms(const char* file_name)
+void _enemies::initEnms()
 {
-    tex->loadTexture(file_name);
+    //tex->loadTexture(file_name);
+    switch (eT)
+    {
+        case WALKER: tex->loadTexture("images/wall.png"); break;
+        case JUMPER: tex->loadTexture("images/wall.png"); break;
+        case FLYER:  tex->loadTexture("images/temp_flyer.png"); frames = 4; break;
+    }
+    xMin = 0;
+    xMax = 1.0/frames;
+    yMin = 0;
+    yMax = 1.0;
 }
 
 void _enemies::drawEnms(GLuint tx)
@@ -105,7 +118,27 @@ void _enemies::actions()
         }
     }
 
+    switch(eT)
+    {
+    case WALKER:
+        handleWalker();
+        break;
 
+    case JUMPER:
+        handleJumper();
+        break;
+
+    case FLYER:
+        handleFlyer();
+        break;
+    }
+
+
+}
+
+
+void _enemies::handleWalker()
+{
     if (!is_grounded)
     {
         if (fall_timer->getTicks() > 15)
@@ -146,5 +179,52 @@ void _enemies::actions()
         }
         timer->reset();
     }
-
 }
+
+void _enemies::handleJumper()
+{
+    if(is_grounded && jumpT->getTicks() > 3000)
+    {
+        pos.y += 0.7;
+        is_grounded = false;
+        jumpT->reset();
+    }
+
+    //keep patrol same as walker
+    handleWalker();
+}
+
+void _enemies::handleFlyer()
+{
+    if (timer->getTicks() > 20)
+    {
+        switch(action_trigger)
+        {
+        case STANDING:
+            break;
+        case WALKRIGHT:
+            if (patrol_range + init_x_pos <= pos.x)
+                action_trigger = WALKLEFT;
+            else
+            {
+                pos.x += speed;
+                xMin +=1.0/frames;
+                xMax +=1.0/frames;
+            }
+
+            break;
+        case WALKLEFT:
+            if (init_x_pos - patrol_range >= pos.x)
+                action_trigger = WALKRIGHT;
+            else
+                {
+                    pos.x -= speed;
+                    xMin +=1.0/frames;
+                    xMax +=1.0/frames;
+                }
+            break;
+        }
+        timer->reset();
+    }
+}
+

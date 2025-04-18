@@ -26,16 +26,31 @@ class _enemies
 
         enum{STANDING,WALKLEFT,WALKRIGHT};
 
-        void initEnms(const char*);
+        void initEnms();
         void drawEnms(GLuint);
         void placeEnms(vec3,float);
         void actions();
         bool isEnmsLive = true;
 
+        void handleWalker();
+        void handleJumper();
+        void handleFlyer();
+
         // for patrol routes
         float patrol_range, init_x_pos;
         bool start_respawn_timer;
         _timer *respawn_timer = new _timer();
+
+
+        // walker does typical patrol
+        // jumper jumps every once in a while
+        // flyer is unaffected by gravity but has the same patrol route as walker
+        enum EnemyType {WALKER, JUMPER, FLYER};
+
+        // default to walker in const
+        EnemyType eT;
+
+        _timer *jumpT = new _timer();
 
     protected:
 

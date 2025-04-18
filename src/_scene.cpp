@@ -174,6 +174,9 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '2': placeObj = ENEMY; break;
                    case '3': placeObj = COLLECTIBLE; break;
                    case '4': placeObj = GOAL; break;
+                   case '5': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
+                   case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
+                   case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
                    case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
                    case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; break;
@@ -224,6 +227,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                enemies.clear();
                collectibles.clear();
                player->initPlayer(1,1,"images/wall.png");
+               load_level_file("levels/custom_level.txt");
                gs = LEVELEDITOR;
            }
            else if(gs == MAINMENU && wParam == 'C')
@@ -267,7 +271,9 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             else if(placeObj == ENEMY)
             {
                 _enemies* enemy = new _enemies();
-                enemy->initEnms("images/wall.png");
+                //enemy->initEnms("images/wall.png");
+                enemy->eT = previewEnemy->eT;
+                enemy->initEnms();
                 //enemy->placeEnms({mouseX,mouseY,-3},0.25);
                 enemy->placeEnms({mouseX,mouseY,-3}, previewEnemy ? previewEnemy->scale.x : 0.25f);
                 enemy->isEnmsLive = true;
@@ -336,7 +342,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     previewEnemy= new _enemies();
                 float scale = previewEnemy->scale.x;
                 previewEnemy->placeEnms({mouseX,mouseY,-2},scale);
-                previewEnemy->initEnms("images/wall.png");
+                //previewEnemy->initEnms("images/wall.png");
+                previewEnemy->initEnms();
                 break;
                 }
             case COLLECTIBLE:
@@ -458,15 +465,37 @@ void _scene::load_level_file(const char* file_name)
         }
         else if(type == "ENEMY")
         {
-            string img;
+            //string img;
             float x,y,z,scl;
-            ss>>img>>x>>y>>z>>scl;
+            int eType = 0;
+            ss>>x>>y>>z>>scl>>eType;
 
             _enemies* enemy = new _enemies();
-            enemy->initEnms(img.data());
+
+
+            switch(eType)
+            {
+            case 0:
+                enemy->eT = enemy->WALKER;
+                break;
+            case 1:
+                enemy->eT = enemy->JUMPER;
+                break;
+            case 2:
+                enemy->eT = enemy->FLYER;
+                //enemy->frames = 4;
+                //enemy->xMax = 1.0 / enemy->frames;
+                //enemy->xMin = 0;
+                break;
+            }
+
+
+            enemy->initEnms();
             enemy->placeEnms({x,y,z},scl);
             enemy->isEnmsLive = true;
             enemy->action_trigger = enemy->WALKLEFT;
+
+
             enemies.push_back(enemy);
         }
         else if(type == "MOVING_PLATFORM")
@@ -628,7 +657,7 @@ void _scene::runGame()
 
     for(auto e : enemies)
     {
-        e->drawEnms(enemies[0]->tex->tex);
+        e->drawEnms(e->tex->tex);
         e->actions();
     }
 
@@ -734,11 +763,11 @@ void _scene::mouseMapping(int x, int y)
     float dirZ = farZ - nearZ;
 
     // find t where z = -3.0 (our depth at which we place everything
-    float t = (-2.0 - nearZ) / dirZ;
+    float t = (-3.0 - nearZ) / dirZ;
 
     mouseX = nearX + t * dirX;
     mouseY = nearY + t * dirY;
-    mouseZ = -2.0;
+    mouseZ = -3.0;
 }
 
 
@@ -758,7 +787,7 @@ void _scene::saveCustomLevel()
 
     for(auto e:enemies)
     {
-        file<<"ENEMY images/wall.png " << e->pos.x<< " " << e->pos.y << " " << e->pos.z << " " << e->scale.x << endl;
+        file<<"ENEMY " << e->pos.x<< " " << e->pos.y << " " << e->pos.z << " " << e->scale.x << " " << (int)e->eT << endl;
     }
 
     for(auto c : collectibles)

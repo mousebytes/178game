@@ -9,6 +9,7 @@
 #include<_enemies.h>
 #include<_hud.h>
 #include<_goal.h>
+#include<_barrelCannon.h>
 
 _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
@@ -24,10 +25,12 @@ _platform* previewPlat = nullptr;
 _enemies* previewEnemy = nullptr;
 _collectible* previewCoin = nullptr;
 _goal* previewGoal = nullptr;
+_barrelCannon* previewBarrel = nullptr;
 
 vector<_platform*> platforms;
 vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
+vector<_barrelCannon*> barrels;
 
 bool playerWon = false;
 int currLevel = 1;
@@ -177,6 +180,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '5': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
                    case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
                    case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
+                   case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
                    case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; break;
@@ -184,6 +188,15 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
+                    break;
+                    case 'R':
+                    if (previewBarrel && placeObj == BARREL)
+                        previewBarrel->rotation += 5;
+                    break;
+
+                    case 'E':
+                    if (previewBarrel && placeObj == BARREL)
+                        previewBarrel->rotation -= 5;
                     break;
 
                     case VK_RIGHT: // Increase platform X scale
@@ -292,6 +305,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 goal = new _goal();
                 goal->initGoal("images/goal.png",mouseX,mouseY,-2,0.2,1,1);
             }
+            else if(placeObj == BARREL)
+            {
+                _barrelCannon* b = new _barrelCannon();
+                b->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, previewBarrel->isAuto, previewBarrel->fireDelay);
+                barrels.push_back(b);
+            }
         }
         break;
     case WM_RBUTTONDOWN:
@@ -353,6 +372,11 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             case GOAL:
                 if(!previewGoal) previewGoal = new _goal();
                 previewGoal->initGoal("images/goal.png",mouseX,mouseY,-2,0.2,1,1);
+                break;
+            case BARREL:
+                if(!previewBarrel)
+                    previewBarrel = new _barrelCannon();
+                previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, previewBarrel->isAuto, previewBarrel->fireDelay);
                 break;
         }
     }
@@ -539,6 +563,16 @@ void _scene::load_level_file(const char* file_name)
             goal->initGoal(img.data(),x,y,z,r,fx,fy);
 
         }
+        else if (type == "BARREL")
+        {
+            float x,y,z,rotation;
+            int isAuto,fireDelay;
+            ss>>x>>y>>z>>rotation>>isAuto>>fireDelay;
+
+            _barrelCannon* b = new _barrelCannon();
+            b->initBarrel("images/barrel.png",{x,y,z},rotation,(bool)isAuto,fireDelay);
+            barrels.push_back(b);
+        }
     }
 }
 
@@ -653,6 +687,18 @@ void _scene::runGame()
     {
         plat->drawPlat();
         plat->updatePlat();
+    }
+
+    for(auto b : barrels)
+    {
+        b->drawBarrel();
+
+        if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}))
+            b->playerInside = true;
+        else
+            b->playerInside = false;
+
+        b->updateB(player->plPos, player->velocity, player->isJumping);
     }
 
     for(auto e : enemies)
@@ -795,6 +841,11 @@ void _scene::saveCustomLevel()
         file << "COLLECTIBLE images/coin.png "<< c->pos.x << " " << c->pos.y << " " << c->pos.z << " "<< c->radius << " " << c->framesX << " " << c->framesY << endl;
     }
 
+    for(auto b : barrels)
+    {
+        file << b->pos.x << " " << b->pos.y << " " << b->pos.z << " " << b->rotation << " " << (int)b->isAuto << " " << b->fireDelay << endl;
+    }
+
     file << "GOAL images/goal.png " << goal->pos.x << " " << goal->pos.y << " " << goal->pos.z
      << " " << goal->scl.x << " " << goal->framesX << " " << goal->framesY << endl;
 
@@ -817,6 +868,9 @@ void _scene::drawEditor()
     for(auto e : enemies)
         e->drawEnms(e->tex->tex);
 
+    for(auto b : barrels)
+        b->drawBarrel();
+
     for(auto c : collectibles)
         c->drawColl();
     goal->drawGoal();
@@ -833,6 +887,8 @@ void _scene::drawEditor()
             previewCoin->drawColl();
         if(previewGoal && placeObj == GOAL)
             previewGoal->drawGoal();
+        if(previewBarrel && placeObj == BARREL)
+            previewBarrel->drawBarrel();
 
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color

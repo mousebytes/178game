@@ -43,6 +43,8 @@ void _player::initPlayer(int xfrm, int yfrm, char* fileName)
     // init player size
     plScl.x=plScl.y=plScl.z=0.5;
 
+    velocity = {0,0,0};
+
     //get frame count
     framesX=xfrm;
     framesY=yfrm;

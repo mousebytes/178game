@@ -98,7 +98,7 @@
 	<sstream>
 	<vector>
 
-1744905934 d:\codeblocks stuff\178game\include\_scene.h
+1744999152 d:\codeblocks stuff\178game\include\_scene.h
 	<_common.h>
 	<_timer.h>
 
@@ -120,7 +120,7 @@
 	<_common.h>
 	<_player.h>
 
-1744824821 d:\codeblocks stuff\178game\include\_player.h
+1745000790 d:\codeblocks stuff\178game\include\_player.h
 	<_textureLoader.h>
 	<_timer.h>
 
@@ -232,5 +232,12 @@
 
 1744829800 d:\codeblocks stuff\178game\include\_goal.h
 	<_common.h>
+	<_textureLoader.h>
+
+1745000549 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1744998113 d:\codeblocks stuff\178game\include\_barrelcannon.h
+	<_timer.h>
 	<_textureLoader.h>
 

@@ -47,6 +47,7 @@
 			<Add directory="../common/lib" />
 		</Linker>
 		<Unit filename="include/_background.h" />
+		<Unit filename="include/_barrelCannon.h" />
 		<Unit filename="include/_camera.h" />
 		<Unit filename="include/_collectible.h" />
 		<Unit filename="include/_collisionCheck.h" />
@@ -63,6 +64,7 @@
 		<Unit filename="include/_timer.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/_background.cpp" />
+		<Unit filename="src/_barrelCannon.cpp" />
 		<Unit filename="src/_camera.cpp" />
 		<Unit filename="src/_collectible.cpp" />
 		<Unit filename="src/_collisionCheck.cpp" />

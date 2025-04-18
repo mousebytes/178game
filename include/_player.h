@@ -45,6 +45,8 @@ class _player
 
         int coins;
 
+        vec3 velocity;
+
     protected:
 
     private:

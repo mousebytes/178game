@@ -34,7 +34,7 @@ class _scene
 
         double mouseX, mouseY, mouseZ;
 
-        enum PlaceObjs{PLAT,ENEMY,COLLECTIBLE, GOAL};
+        enum PlaceObjs{PLAT,ENEMY,COLLECTIBLE, GOAL, BARREL};
         PlaceObjs placeObj = PLAT;
 
     vec2 dim;

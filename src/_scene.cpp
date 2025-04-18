@@ -236,6 +236,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 player->coins = 0;
                 playerWon = false;
                 gs = PLAYING;
+                currLevel = 0;
                 cout << "Loaded custom_level.txt and started game" << endl;
             }
         break;
@@ -540,7 +541,16 @@ void _scene::checkGoal()
         playerWon = true;
         cout << "player won";
 
+        if(currLevel == 0)
+        {
+            gs = MAINMENU;
+            background->initBG("images/temp_mainmenu.png");
+            return;
+        }
+
         currLevel++;
+
+
 
         stringstream ss;
 

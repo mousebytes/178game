@@ -25,6 +25,7 @@ class _inputs
         WPARAM wParam;
         WPARAM temp_wParam;
 
+
     protected:
 
     private:

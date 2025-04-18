@@ -15,6 +15,9 @@ _inputs::~_inputs()
 
 void _inputs::keyPressed(_player* player)
 {
+
+
+
     switch(wParam)
     {
     case VK_LEFT:
@@ -47,33 +50,38 @@ void _inputs::keyPressed(_player* player)
             player->height_before_jump = player->plPos.y;
         }
         break;
-
     }
+
+
+
+
 }
-
-
 void _inputs::keyUP(_player *player)
 {
-    switch(wParam)
-    {
-    case VK_LEFT:
-    case 'A':
-        key_left_down = false;
-        if(!key_right_down)
-            player->action_trigger = player->STANDING;
-        break;
-    case VK_RIGHT:
-    case 'D':
-        key_right_down = false;
-        if(!key_left_down)
-            player->action_trigger = player->STANDING;
-        break;
 
-    case VK_SPACE:
-        wParam = temp_wParam;
-        player->isJumping = false;
-        break;
+        switch(wParam)
+        {
+        case VK_LEFT:
+        case 'A':
+            key_left_down = false;
+            if(!key_right_down)
+                player->action_trigger = player->STANDING;
+            break;
+        case VK_RIGHT:
+        case 'D':
+            key_right_down = false;
+            if(!key_left_down)
+                player->action_trigger = player->STANDING;
+            break;
+
+        case VK_SPACE:
+            wParam = temp_wParam;
+            if(!player->isBeingDisplacedHorz)
+                player->isJumping = false;
+            break;
+
     }
+
 
 }
 
@@ -82,5 +90,6 @@ void _inputs::mouseEventUp()
    isMsRotation = false;
    isMsTranslate = false;
 }
+
 
 

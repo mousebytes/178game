@@ -47,6 +47,13 @@ class _player
 
         vec3 velocity;
 
+        void handleHorizontalDisplacement();
+        bool isBeingDisplacedHorz;
+        float xBeforeHorzDisplacement;
+        float maxHorzDisplacement;
+
+        _timer *horzDisTimer = new _timer();
+
     protected:
 
     private:

@@ -70,26 +70,16 @@ bool _barrelCannon::isPlayerInside(vec3 pPos, vec2 pScl)
             pPos.y - pScl.y < pos.y + scale.y;
 }
 
-void _barrelCannon::updateB(vec3& pPos, vec3& playerVel, bool& isJumping)
+void _barrelCannon::updateB(_player* player)
 {
     if(!playerInside) return;
 
-    if(isAuto && fireTimer->getTicks() > fireDelay * 1000)
+    if(isAuto && fireTimer->getTicks()>fireDelay * 1000)
     {
-        float radians = rotation * 3.14159 / 180.0;
+        player->height_before_jump = player->plPos.y;
+        player->isJumping = true;
 
-        playerVel.x = cos(radians) * 0.4;
-        playerVel.y = sin(radians)*0.4;
-        isJumping = true;
-        playerInside = false;
-    }
-
-    if (!isAuto && GetAsyncKeyState(VK_SPACE) & 0x8000)
-    {
-        float radians = rotation * 3.14159f / 180.0f;
-        playerVel.x = cos(radians) * 0.4f;
-        playerVel.y = sin(radians) * 0.4f;
-        isJumping = true;
-        playerInside = false;
+        player->xBeforeHorzDisplacement = player->plPos.x;
+        player->isBeingDisplacedHorz = true;
     }
 }

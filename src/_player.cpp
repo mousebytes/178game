@@ -18,6 +18,9 @@ _player::_player()
     player_can_be_damaged = true;
     blink = false;
     coins = 0;
+    isBeingDisplacedHorz = false;
+    horzDisTimer->reset();
+    maxHorzDisplacement = 2.7;
 }
 
 _player::~_player()
@@ -84,6 +87,7 @@ void _player::drawPlayer()
 
 void _player::playerActions()
 {
+    if(!isBeingDisplacedHorz)
     if(timer->getTicks() > TIMER_LIMIT)
     {
         switch(action_trigger)
@@ -108,6 +112,7 @@ void _player::playerActions()
 
 void _player::handle_vertical()
 {
+
     if(isJumping)
     {
 
@@ -131,6 +136,7 @@ void _player::handle_vertical()
                 jump_timer->reset();
             }
     }
+
 }
 
 void _player::handle_player_damage_timer()
@@ -138,5 +144,24 @@ void _player::handle_player_damage_timer()
     // i think this is 1 second
     if(damage_timer->getTicks() > 1000 && !player_can_be_damaged)
         player_can_be_damaged = true;
+}
+
+
+
+void _player::handleHorizontalDisplacement()
+{
+    if(isBeingDisplacedHorz)
+    {
+        if(plPos.x < xBeforeHorzDisplacement + maxHorzDisplacement)
+        {
+            if(horzDisTimer->getTicks() > TIMER_LIMIT)
+            {
+                plPos.x += jumping_speed;
+                horzDisTimer->reset();
+            }
+        }
+        else
+            isBeingDisplacedHorz = false;
+    }
 }
 

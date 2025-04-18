@@ -2,6 +2,7 @@
 #define _BARRELCANNON_H
 #include<_timer.h>
 #include<_textureLoader.h>
+#include<_player.h>
 
 class _barrelCannon
 {
@@ -23,7 +24,7 @@ class _barrelCannon
         void initBarrel(const char* fileName, vec3 p, float rotDeg, bool autoF, float delay);
         void drawBarrel();
         bool isPlayerInside(vec3 pPos, vec2 pScl);
-        void updateB(vec3& pPos, vec3& playerVel, bool& isJumping);
+        void updateB(_player*);
 
         float xMax,yMax,xMin,yMin;
         vec3 vert[4];

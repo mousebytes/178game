@@ -74,6 +74,8 @@ GLint _scene::initGL()
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
 
+
+
    return true;
 }
 
@@ -102,6 +104,8 @@ void _scene::drawScene()
 
     background->drawBackground(dim.x, dim.y);
     glEnable(GL_DEPTH_TEST);
+
+
 
 
     switch(gs)
@@ -644,6 +648,9 @@ void _scene::drawMenu()
 
 void _scene::runGame()
 {
+    cout << "Y: " << player->plPos.y << "  velY: " << player->velocity.y << "  grounded: " << player->is_grounded << "  health: " << player->health << endl;
+
+
     // don't change the order of these 4 functions -- player texture breaks otherwise
     player->playerActions();
     camera->followPlayer(player);
@@ -669,6 +676,7 @@ void _scene::runGame()
 
     player->handle_vertical();
     player->handle_player_damage_timer();
+    player->handleHorizontalDisplacement();
 
 
     //TODO: add a way for the player's health to matter
@@ -698,7 +706,7 @@ void _scene::runGame()
         else
             b->playerInside = false;
 
-        b->updateB(player->plPos, player->velocity, player->isJumping);
+        b->updateB(player);
     }
 
     for(auto e : enemies)
@@ -718,6 +726,8 @@ void _scene::runGame()
     checkGoal();
 
     hud->drawHearts(player->health,camera->camPos);
+    //b->updateB(player->plPos, player->velocity, player->isJumping);
+
 }
 
 void _scene::drawGameOver()
@@ -843,7 +853,7 @@ void _scene::saveCustomLevel()
 
     for(auto b : barrels)
     {
-        file << b->pos.x << " " << b->pos.y << " " << b->pos.z << " " << b->rotation << " " << (int)b->isAuto << " " << b->fireDelay << endl;
+        file << "BARREL " << b->pos.x << " " << b->pos.y << " " << b->pos.z << " " << b->rotation << " " << (int)b->isAuto << " " << b->fireDelay << endl;
     }
 
     file << "GOAL images/goal.png " << goal->pos.x << " " << goal->pos.y << " " << goal->pos.z

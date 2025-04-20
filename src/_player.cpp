@@ -1,5 +1,5 @@
 #include "_player.h"
-#define TIMER_LIMIT 15
+#define TIMER_LIMIT 20
 
 
 _player::_player()
@@ -22,6 +22,9 @@ _player::_player()
     horzDisTimer->reset();
     maxHorzDisplacement = 2.7;
     inBarrel = false;
+    animationTimer->reset();
+    facingRight = true;
+
 }
 
 _player::~_player()
@@ -67,7 +70,10 @@ void _player::drawPlayer()
 
     glPushMatrix();
         glTranslatef(plPos.x,plPos.y,plPos.z);
-        glScalef(plScl.x,plScl.y,plScl.z);
+        if(facingRight)
+            glScalef(plScl.x,plScl.y,plScl.z);
+        else
+            glScalef(-plScl.x,plScl.y,plScl.z);
         glColor3f(1.0,1.0,1.0);
 
         pTex->textureBinder();
@@ -97,16 +103,40 @@ void _player::playerActions()
         switch(action_trigger)
         {
         case STANDING:
+            xMin =0;
+            xMax = 1.0/(float)framesX;
+            yMax = 1.0/(float)framesY;
+            yMin = yMax- (1.0/(float)framesY);
+            facingRight = facingRight;
         break;
 
         case WALKLEFT:
             plPos.x -= speed;
             timer->reset();
+            if(animationTimer->getTicks() > 120)
+            {
+                xMax +=1.0/(float)framesX;
+                xMin +=1.0/(float)framesX;
+                animationTimer->reset();
+                facingRight = false;
+            }
+
+
         break;
 
     case WALKRIGHT:
             plPos.x += speed;
             timer->reset();
+            if(animationTimer->getTicks() > 120)
+            {
+                xMax +=1.0/(float)framesX;
+                xMin +=1.0/(float)framesX;
+                animationTimer->reset();
+                facingRight = true;
+            }
+
+
+
         break;
         }
     }

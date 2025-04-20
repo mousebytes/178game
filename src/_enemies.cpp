@@ -13,7 +13,7 @@ _enemies::_enemies()
 
     xMin= 0;
     yMin= 0;
-    frames =1;  //depends on the file
+    frames =4;  //depends on the file
 
     xMax = 1.0/frames;
     yMax = 1.0;
@@ -30,6 +30,9 @@ _enemies::_enemies()
     //eT = WALKER;
 
     jumpT->reset();
+    pTmer->reset();
+
+    facingRight = true;
 }
 
 _enemies::~_enemies()
@@ -42,7 +45,7 @@ void _enemies::initEnms()
     //tex->loadTexture(file_name);
     switch (eT)
     {
-        case WALKER: tex->loadTexture("images/wall.png"); break;
+        case WALKER: tex->loadTexture("images/temp_enemy.png"); break;
         case JUMPER: tex->loadTexture("images/wall.png"); break;
         case FLYER:  tex->loadTexture("images/temp_flyer.png"); frames = 4; break;
     }
@@ -69,7 +72,10 @@ void _enemies::drawEnms(GLuint tx)
         glRotatef(rot.y,0,1,0);
         glRotatef(rot.z,0,0,1);
 
-        glScalef(scale.x,scale.y,1.0);
+        if(facingRight)
+            glScalef(-scale.x,scale.y,1.0);
+        else
+            glScalef(scale.x,scale.y,1.0);
 
          glBegin(GL_POLYGON);
 
@@ -153,26 +159,59 @@ void _enemies::handleWalker()
         switch(action_trigger)
         {
         case STANDING:
+            xMin =0;
+            xMax = 1.0/(float)frames;
+            yMax = 1.0;
+            yMin = yMax - 1.0;
+
             break;
         case WALKRIGHT:
+            facingRight = true;
             if(patrol_range + init_x_pos <= pos.x)
             {
                 action_trigger = WALKLEFT;
+                if(pTmer->getTicks() >70)
+                {
+                    xMax +=1.0/(float)frames;
+                    xMin +=1.0/(float)frames;
+                    pTmer->reset();
+                }
+
             }
             else
             {
                 pos.x += speed;
+                if(pTmer->getTicks() >70)
+                {
+                    xMax +=1.0/(float)frames;
+                    xMin +=1.0/(float)frames;
+                    pTmer->reset();
+                }
             }
 
             break;
         case WALKLEFT:
+            facingRight = false;
             if(init_x_pos - patrol_range>= pos.x)
             {
                 action_trigger = WALKRIGHT;
+                if(pTmer->getTicks() >70)
+                {
+                    xMax +=1.0/(float)frames;
+                    xMin +=1.0/(float)frames;
+                    pTmer->reset();
+                }
             }
             else
             {
                 pos.x -= speed;
+
+                if(pTmer->getTicks() >70)
+                {
+                    xMax +=1.0/(float)frames;
+                    xMin +=1.0/(float)frames;
+                    pTmer->reset();
+                }
             }
 
             break;

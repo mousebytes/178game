@@ -11,6 +11,8 @@
 #include<_goal.h>
 #include<_barrelCannon.h>
 
+char *playerTex = "images/temp_player.png";
+
 _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
 _player *player = new _player();
@@ -62,7 +64,7 @@ GLint _scene::initGL()
   // glEnable(GL_COLOR_MATERIAL);
    myLight->setLight(GL_LIGHT0);
 
-    player->initPlayer(1,1,"images/wall.png");
+    player->initPlayer(2,1,playerTex);
 
 
     dim.x = GetSystemMetrics(SM_CXSCREEN);
@@ -142,7 +144,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 background->initBG("images/marce.png");
                 currLevel = 1;
                 load_level_file("levels/level1.txt");
-                player->initPlayer(1,1,"images/wall.png");
+                player->initPlayer(2,1,playerTex);
                 gs = PLAYING;
                 playerWon= false;
            }
@@ -151,7 +153,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                background->initBG("images/temp_mainmenu.png");
                gs = MAINMENU;
 
-               player->initPlayer(1,1,"images/wall.png");
+               player->initPlayer(2,1,playerTex);
                load_level_file("levels/level1.txt");
                currLevel = 1;
                playerWon = false;
@@ -243,7 +245,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                platforms.clear();
                enemies.clear();
                collectibles.clear();
-               player->initPlayer(1,1,"images/wall.png");
+               player->initPlayer(2,1,playerTex);
                load_level_file("levels/custom_level.txt");
                gs = LEVELEDITOR;
            }
@@ -251,7 +253,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 background->initBG("images/marce.png");
                 load_level_file("levels/custom_level.txt");
-                player->initPlayer(1,1,"images/wall.png");
+                player->initPlayer(2,1,playerTex);
                 player->plPos = {0, 0, -3};
                 player->health = 3;
                 player->coins = 0;
@@ -633,7 +635,7 @@ void _scene::checkGoal()
         }
 
         load_level_file(ss.str().c_str());
-        player->initPlayer(1,1,"images/wall.png");
+        player->initPlayer(2,1,playerTex);
         player->plPos={0,0,-3};
         playerWon=false;
     }
@@ -783,7 +785,7 @@ void _scene::loadGame()
     ss<<"levels/level"<<currLevel<<".txt";
     load_level_file(ss.str().c_str());
 
-    player->initPlayer(1,1,"images/wall.png");
+    player->initPlayer(1,1,playerTex);
     player->plPos = {0,0,-3};
 
     cout << "\nloaded";

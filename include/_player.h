@@ -55,6 +55,9 @@ class _player
         _timer *horzDisTimer = new _timer();
 
         bool inBarrel;
+        _timer *animationTimer = new _timer();
+
+        bool facingRight;
 
     protected:
 

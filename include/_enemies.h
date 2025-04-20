@@ -52,6 +52,11 @@ class _enemies
 
         _timer *jumpT = new _timer();
 
+        bool facingRight;
+
+        //animatino timer, just lazy
+        _timer *pTmer = new _timer();
+
     protected:
 
     private:

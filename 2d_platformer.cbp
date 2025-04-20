@@ -57,6 +57,7 @@
 		<Unit filename="include/_hud.h" />
 		<Unit filename="include/_inputs.h" />
 		<Unit filename="include/_lightSetting.h" />
+		<Unit filename="include/_parallax.h" />
 		<Unit filename="include/_platform.h" />
 		<Unit filename="include/_player.h" />
 		<Unit filename="include/_scene.h" />
@@ -73,6 +74,7 @@
 		<Unit filename="src/_hud.cpp" />
 		<Unit filename="src/_inputs.cpp" />
 		<Unit filename="src/_lightSetting.cpp" />
+		<Unit filename="src/_parallax.cpp" />
 		<Unit filename="src/_platform.cpp" />
 		<Unit filename="src/_player.cpp" />
 		<Unit filename="src/_scene.cpp" />

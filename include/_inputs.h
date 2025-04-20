@@ -3,6 +3,7 @@
 
 #include<_common.h>
 #include<_player.h>
+#include<_parallax.h>
 
 class _inputs
 {
@@ -12,6 +13,7 @@ class _inputs
 
         void keyPressed(_player *);
         void keyUP(_player*);
+        void keyPressedPRLX(_parallax*);
 
         void mouseEventUp();
 

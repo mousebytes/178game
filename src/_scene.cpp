@@ -10,6 +10,7 @@
 #include<_hud.h>
 #include<_goal.h>
 #include<_barrelCannon.h>
+#include<_parallax.h>
 
 char *playerTex = "images/temp_player.png";
 
@@ -17,10 +18,15 @@ _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
 _player *player = new _player();
 _camera *camera = new _camera();
-_background *background = new _background();
+//_background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
 _hud *hud = new _hud();
 _goal *goal = new _goal();
+
+_parallax *p1 = new _parallax();
+_parallax *p2 = new _parallax();
+_parallax *p3 = new _parallax();
+_parallax *background = new _parallax();
 
 
 _platform* previewPlat = nullptr;
@@ -70,11 +76,19 @@ GLint _scene::initGL()
     dim.x = GetSystemMetrics(SM_CXSCREEN);
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
-    background->initBG("images/temp_mainmenu.png");
+    background->initPrlx("images/temp_mainmenu.png");
 
     load_level_file("levels/level1.txt");
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
+
+    p1->initPrlx("images/temp_p1.png");
+    p1->speed = 0.001;
+    p2->initPrlx("images/temp_p2.png");
+    p3->initPrlx("images/temp_p3.png");
+    p1->speed = 0.005;
+    p2->speed = 0.002;
+    p3->speed = 0.001;
 
 
 
@@ -102,10 +116,7 @@ void _scene::drawScene()
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glDisable(GL_DEPTH_TEST);
 
-    background->drawBackground(dim.x, dim.y);
-    glEnable(GL_DEPTH_TEST);
 
 
 
@@ -141,7 +152,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
            if(gs == MAINMENU && wParam == VK_RETURN)
            {
-                background->initBG("images/marce.png");
+                background->initPrlx("images/marce.png");
                 currLevel = 1;
                 load_level_file("levels/level1.txt");
                 player->initPlayer(2,1,playerTex);
@@ -150,7 +161,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
             else if (gs == GAMEOVER && wParam == 'R')
            {
-               background->initBG("images/temp_mainmenu.png");
+               background->initPrlx("images/temp_mainmenu.png");
                gs = MAINMENU;
 
                player->initPlayer(2,1,playerTex);
@@ -167,13 +178,16 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             }
             else if(gs == MAINMENU && wParam == 'L') // Press L to load
                 {
-                    background->initBG("images/marce.png");
+                    background->initPrlx("images/marce.png");
                     loadGame();
                     gs = PLAYING;
                 }
             else if(gs == PLAYING)
            {
                 input->keyPressed(player);
+                input->keyPressedPRLX(p1);
+                input->keyPressedPRLX(p2);
+                input->keyPressedPRLX(p3);
            }
            else if(gs==LEVELEDITOR)
            {
@@ -187,7 +201,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
                    case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
-                   case 'Q': gs = MAINMENU; background->initBG("images/temp_mainmenu.png"); break;
+                   case 'Q': gs = MAINMENU; background->initPrlx("images/temp_mainmenu.png"); break;
                    case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; break;
                    case 'D': player->plPos.x +=0.5; break;
@@ -241,7 +255,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
            else if(gs == MAINMENU && wParam == 'E')
            {
-               background->initBG("images/marce.png");
+               background->initPrlx("images/marce.png");
                platforms.clear();
                enemies.clear();
                collectibles.clear();
@@ -251,7 +265,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
            else if(gs == MAINMENU && wParam == 'C')
             {
-                background->initBG("images/marce.png");
+                background->initPrlx("images/marce.png");
                 load_level_file("levels/custom_level.txt");
                 player->initPlayer(2,1,playerTex);
                 player->plPos = {0, 0, -3};
@@ -268,6 +282,9 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYUP:
         input->wParam = wParam;
         input->keyUP(player);
+        input->keyPressedPRLX(p1);
+        input->keyPressedPRLX(p2);
+        input->keyPressedPRLX(p3);
         break;
 
     case WM_LBUTTONDOWN:
@@ -613,7 +630,7 @@ void _scene::checkGoal()
         if(currLevel == 0)
         {
             gs = MAINMENU;
-            background->initBG("images/temp_mainmenu.png");
+            background->initPrlx("images/temp_mainmenu.png");
             return;
         }
 
@@ -627,7 +644,7 @@ void _scene::checkGoal()
         ifstream test(ss.str().c_str());
         if(!test.good())
         {
-            background->initBG("images/temp_reset.png");
+            background->initPrlx("images/temp_reset.png");
             gs = GAMEOVER;
             currLevel=1;
             player->health = 3;
@@ -646,11 +663,19 @@ void _scene::drawMenu()
 {
     glLoadIdentity();
     glColor3f(1, 0, 0);
+    glDisable(GL_DEPTH_TEST);
+    background->drawBackground(dim.x, dim.y,-35,13);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void _scene::runGame()
 {
-    cout << "Y: " << player->plPos.y << "  velY: " << player->velocity.y << "  grounded: " << player->is_grounded << "  health: " << player->health << endl;
+    p3->drawBackground(dim.x,dim.y,-29,13);
+    p3->scroll();
+    p2->drawBackground(dim.x,dim.y,-28,13);
+    p2->scroll();
+    p1->drawBackground(dim.x,dim.y,-27,13);
+    p1->scroll();
 
 
     // don't change the order of these 4 functions -- player texture breaks otherwise
@@ -662,7 +687,7 @@ void _scene::runGame()
         {
             gs = GAMEOVER;
             player->health = 3;
-            background->initBG("images/temp_reset.png");
+            background->initPrlx("images/temp_reset.png");
         }
 
     if(!player->blink)
@@ -744,7 +769,9 @@ void _scene::runGame()
 
 void _scene::drawGameOver()
 {
-
+    glDisable(GL_DEPTH_TEST);
+    background->drawBackground(dim.x, dim.y,-35,13);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void _scene::saveGame()
@@ -880,6 +907,17 @@ void _scene::drawEditor()
 {
     glLoadIdentity();
 
+    glDisable(GL_DEPTH_TEST);
+    p3->drawBackground(dim.x,dim.y,-29,13);
+    p3->scroll();
+    p2->drawBackground(dim.x,dim.y,-28,13);
+    p2->scroll();
+    p1->drawBackground(dim.x,dim.y,-27,13);
+    p1->scroll();
+
+
+    //background->drawBackground(dim.x, dim.y,-35,13);
+    glEnable(GL_DEPTH_TEST);
 
     camera->followPlayer(player);  // optional, keeps player centered
     camera->updateCamPos();

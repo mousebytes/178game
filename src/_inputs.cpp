@@ -92,4 +92,15 @@ void _inputs::mouseEventUp()
 }
 
 
+void _inputs::keyPressedPRLX(_parallax* PLRX)
+{
+        if(key_left_down)
+            PLRX->state = PLRX->LEFT;
+        else if(key_right_down)
+            PLRX->state = PLRX->RIGHT;
+        else
+            PLRX->state = PLRX->STATIC;
+
+}
+
 

@@ -33,6 +33,12 @@ _enemies::_enemies()
     pTmer->reset();
 
     facingRight = true;
+
+    isJumping = false;
+    height_before_jump = 0;
+    max_jump_height = 1.7;
+    jumping_speed = 0.09;
+    jumpTimer->reset();
 }
 
 _enemies::~_enemies()
@@ -45,8 +51,8 @@ void _enemies::initEnms()
     //tex->loadTexture(file_name);
     switch (eT)
     {
-        case WALKER: tex->loadTexture("images/temp_enemy.png"); break;
-        case JUMPER: tex->loadTexture("images/wall.png"); break;
+        case WALKER: tex->loadTexture("images/temp_enemy.png"); frames = 4;break;
+        case JUMPER: tex->loadTexture("images/temp_jumper.png"); frames=3;break;
         case FLYER:  tex->loadTexture("images/temp_flyer.png"); frames = 4; break;
     }
     xMin = 0;
@@ -222,7 +228,7 @@ void _enemies::handleWalker()
 
 void _enemies::handleJumper()
 {
-    if(is_grounded && jumpT->getTicks() > 3000)
+    /*if(is_grounded && jumpT->getTicks() > 3000)
     {
         pos.y += 0.7;
         is_grounded = false;
@@ -231,6 +237,46 @@ void _enemies::handleJumper()
 
     //keep patrol same as walker
     handleWalker();
+    */
+
+    if(is_grounded && jumpT->getTicks() > 3000)
+    {
+        isJumping = true;
+        height_before_jump = pos.y;
+        is_grounded = false;
+        jumpTimer->reset();
+        jumpT->reset(); // delay between jumps
+    }
+
+    if(isJumping)
+    {
+        if(pos.y < (height_before_jump + max_jump_height))
+        {
+            if(jumpTimer->getTicks() > 20)
+            {
+                pos.y += jumping_speed;
+                jumpTimer->reset();
+            }
+        }
+        else
+        {
+            isJumping = false;
+        }
+    }
+
+    if(!isJumping && !is_grounded)
+    {
+        if(jumpTimer->getTicks() > 20)
+        {
+            pos.y -= jumping_speed;
+            jumpTimer->reset();
+        }
+    }
+
+
+    handleWalker();
+
+
 }
 
 void _enemies::handleFlyer()
@@ -242,6 +288,7 @@ void _enemies::handleFlyer()
         case STANDING:
             break;
         case WALKRIGHT:
+            facingRight = false;
             if (patrol_range + init_x_pos <= pos.x)
                 action_trigger = WALKLEFT;
             else
@@ -253,6 +300,7 @@ void _enemies::handleFlyer()
 
             break;
         case WALKLEFT:
+            facingRight = true;
             if (init_x_pos - patrol_range >= pos.x)
                 action_trigger = WALKRIGHT;
             else

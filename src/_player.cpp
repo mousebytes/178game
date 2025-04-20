@@ -111,6 +111,7 @@ void _player::playerActions()
         break;
 
         case WALKLEFT:
+
             plPos.x -= speed;
             timer->reset();
             if(animationTimer->getTicks() > 120)

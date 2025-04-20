@@ -56,6 +56,11 @@ class _enemies
 
         //animatino timer, just lazy
         _timer *pTmer = new _timer();
+        bool isJumping;
+        float height_before_jump;
+        float max_jump_height;
+        float jumping_speed;
+        _timer *jumpTimer = new _timer();
 
     protected:
 

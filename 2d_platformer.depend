@@ -124,12 +124,13 @@
 	<_textureLoader.h>
 	<_timer.h>
 
-1745005983 source:d:\codeblocks stuff\178game\src\_inputs.cpp
+1745172688 source:d:\codeblocks stuff\178game\src\_inputs.cpp
 	"_inputs.h"
 
-1745005360 d:\codeblocks stuff\178game\include\_inputs.h
+1745170561 d:\codeblocks stuff\178game\include\_inputs.h
 	<_common.h>
 	<_player.h>
+	<_parallax.h>
 
 1742987613 d:\codeblocks stuff\178game\include\_model.h
 	<_common.h>
@@ -144,10 +145,10 @@
 1742987613 source:d:\codeblocks stuff\178game\src\_model.cpp
 	"_model.h"
 
-1745167982 source:d:\codeblocks stuff\178game\src\_player.cpp
+1745171685 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1745167205 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1745174245 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -160,6 +161,7 @@
 	<_hud.h>
 	<_goal.h>
 	<_barrelCannon.h>
+	<_parallax.h>
 
 1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
@@ -207,10 +209,10 @@
 1744982328 source:d:\codeblocks stuff\178game\src\_platform.cpp
 	"_platform.h"
 
-1745169420 source:d:\codeblocks stuff\178game\src\_enemies.cpp
+1745175014 source:d:\codeblocks stuff\178game\src\_enemies.cpp
 	"_enemies.h"
 
-1745169097 d:\codeblocks stuff\178game\include\_enemies.h
+1745174864 d:\codeblocks stuff\178game\include\_enemies.h
 	<_common.h>
 	<_timer.h>
 	<_textureLoader.h>
@@ -242,4 +244,12 @@
 	<_timer.h>
 	<_textureLoader.h>
 	<_player.h>
+
+1745173620 d:\codeblocks stuff\178game\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745173692 source:d:\codeblocks stuff\178game\src\_parallax.cpp
+	"_parallax.h"
 

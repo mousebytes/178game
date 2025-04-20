@@ -4,13 +4,16 @@
 	<_common.h>
 	<_scene.h>
 
-1742969765 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
 	<windows.h>
 	<iostream>
 	<gl/gl.h>
 	<GL/glut.h>
 	<time.h>
 	<math.h>
+	<fstream>
+	<sstream>
+	<vector>
 
 1738028479 c:\users\thinkpadx1\desktop\csci 178\common\include\gl\glut.h
 	<windows.h>
@@ -18,8 +21,9 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1742982536 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
 	<_common.h>
+	<_timer.h>
 
 1740013861 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_lightsetting.cpp
 	"_lightsetting.h"
@@ -27,15 +31,20 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1743029932 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1745176948 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
-	<_model.h>
 	<_inputs.h>
 	<_player.h>
 	<_camera.h>
 	<_background.h>
 	<_collisionCheck.h>
+	<_platform.h>
+	<_enemies.h>
+	<_hud.h>
+	<_goal.h>
+	<_barrelCannon.h>
+	<_parallax.h>
 
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
 	<_common.h>
@@ -44,42 +53,42 @@
 1742888676 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_model.cpp
 	"_model.h"
 
-1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_textureloader.h
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_textureloader.h
 	<_common.h>
 	<SOIL.h>
 
 1668646408 c:\users\thinkpadx1\desktop\csci 178\common\include\soil.h
 
-1742981545 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
 	<_common.h>
-	<_model.h>
 	<_player.h>
+	<_parallax.h>
 
-1743036573 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
 	"_inputs.h"
 
-1742896416 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
 	"_textureloader.h"
 
-1743029759 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
 	<_textureLoader.h>
 	<_timer.h>
 
-1743036461 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
 	<_common.h>
 	<_player.h>
 
-1743036517 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
 	"_camera.h"
 
 1742982914 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_background.h
 	<_common.h>
 	<_textureLoader.h>
 
-1743020517 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
 1742987613 source:d:\codeblocks stuff\178game\main.cpp
@@ -174,11 +183,15 @@
 
 1742988165 d:\codeblocks stuff\common\include\soil.h
 
-1743025794 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
 	"_collisionCheck.h"
 
-1743021265 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collisioncheck.h
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collisioncheck.h
 	<_common.h>
+	<_player.h>
+	<_platform.h>
+	<_enemies.h>
+	<_collectible.h>
 
 1743027913 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_timer.h
 	<_common.h>
@@ -252,4 +265,55 @@
 
 1745173692 source:d:\codeblocks stuff\178game\src\_parallax.cpp
 	"_parallax.h"
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_barrelcannon.h
+	<_timer.h>
+	<_textureLoader.h>
+	<_player.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collectible.cpp
+	"_collectible.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collectible.h
+	<_textureLoader.h>
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_platform.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_enemies.h
+	<_common.h>
+	<_timer.h>
+	<_textureLoader.h>
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
+	"_enemies.h"
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_goal.cpp
+	"_goal.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_goal.h
+	<_common.h>
+	<_textureLoader.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
+	"_hud.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_hud.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
+	"_parallax.h"
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+	"_platform.h"
 

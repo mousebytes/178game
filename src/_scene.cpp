@@ -194,7 +194,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                switch(wParam)
                {
                    case '1': placeObj = PLAT; break;
-                   case '2': placeObj = ENEMY; break;
+                   case '2': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
                    case '3': placeObj = COLLECTIBLE; break;
                    case '4': placeObj = GOAL; break;
                    case '5': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
@@ -225,26 +225,38 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     break;
                     case VK_DOWN: // Decrease Y
                     if (previewPlat && placeObj == PLAT)
-                        previewPlat->scale.y = max(0.1f, previewPlat->scale.y - 0.1f);
+                        previewPlat->scale.y = max(0.1, previewPlat->scale.y - 0.1);
                     break;
                     case VK_UP:   // Increase Y
                     if (previewPlat && placeObj == PLAT)
-                        previewPlat->scale.y += 0.1f;
+                        previewPlat->scale.y += 0.1;
                         break;
 
                     case VK_OEM_4: // '[' — shrink enemy
                     if (previewEnemy && placeObj == ENEMY)
-                    previewEnemy->scale.x = previewEnemy->scale.y = max(0.05f, previewEnemy->scale.x - 0.05f);
+                    previewEnemy->scale.x = previewEnemy->scale.y = max(0.05, previewEnemy->scale.x - 0.05);
+
+                    if(previewPlat && placeObj == PLAT)
+                    {
+                        previewPlat->scale.x -= 0.1;
+                        previewPlat->scale.y -=0.1;
+                    }
                     break;
                     case VK_OEM_6: // ']' — enlarge enemy
                     if (previewEnemy && placeObj == ENEMY)
-                    previewEnemy->scale.x = previewEnemy->scale.y += 0.05f;
+                    previewEnemy->scale.x = previewEnemy->scale.y += 0.05;
+
+                    if(previewPlat && placeObj == PLAT)
+                    {
+                        previewPlat->scale.x += 0.1;
+                        previewPlat->scale.y +=0.1;
+                    }
                     break;
                     case VK_BACK:
                         if (placeObj == PLAT && previewPlat)
                         {
-                            previewPlat->scale.x = 1.0f;
-                            previewPlat->scale.y = 1.0f;
+                            previewPlat->scale.x = 1.0;
+                            previewPlat->scale.y = 1.0;
                         }
                         else if (placeObj == ENEMY && previewEnemy)
                         {

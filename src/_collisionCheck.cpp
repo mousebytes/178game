@@ -25,7 +25,7 @@ bool _collisionCheck::isPlayerOnGround(_player* plyr, _platform *ground)
 
 
     // maybe change the .1 to a function passed threshold later
-    return player_bottom <= ground_top && horizontally_aligned && !(ground->pos.y + 0.1 > plyr->plPos.y);
+    return player_bottom <= ground_top && horizontally_aligned && !(ground->pos.y + .1 > plyr->plPos.y);
 }
 
 bool _collisionCheck::isEnemyOnGround(_enemies*e , _platform* plat)

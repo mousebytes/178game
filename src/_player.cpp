@@ -25,6 +25,9 @@ _player::_player()
     animationTimer->reset();
     facingRight = true;
 
+    framesX = 2;
+    framesY = 1;
+
 }
 
 _player::~_player()
@@ -32,7 +35,7 @@ _player::~_player()
     //dtor
 }
 
-void _player::initPlayer(int xfrm, int yfrm, char* fileName)
+void _player::initPlayer(char* fileName)
 {
     // initialize quad
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
@@ -53,13 +56,16 @@ void _player::initPlayer(int xfrm, int yfrm, char* fileName)
     velocity = {0,0,0};
 
     //get frame count
-    framesX=xfrm;
-    framesY=yfrm;
+    //framesX=xfrm;
+    //framesY=yfrm;
 
     xMin=0;
     xMax=1.0/(float)framesX;
     yMax=1.0/(float)framesY;
     yMin=yMax-(1/(float)framesY);
+
+    //yMax = 3.0/framesY;
+    //yMin = yMax -(1/(float)framesY);
 
     pTex->loadTexture(fileName);
 }
@@ -116,8 +122,17 @@ void _player::playerActions()
             timer->reset();
             if(animationTimer->getTicks() > 120)
             {
-                xMax +=1.0/(float)framesX;
-                xMin +=1.0/(float)framesX;
+                if(xMax== 5.0/8.0)
+                {
+                    xMin =0;
+                    xMax = 1.0/(float)framesX;
+                }
+                else
+                {
+                    xMax +=1.0/(float)framesX;
+                    xMin +=1.0/(float)framesX;
+
+                }
                 animationTimer->reset();
                 facingRight = false;
             }
@@ -130,10 +145,26 @@ void _player::playerActions()
             timer->reset();
             if(animationTimer->getTicks() > 120)
             {
-                xMax +=1.0/(float)framesX;
+                /*xMax +=1.0/(float)framesX;
                 xMin +=1.0/(float)framesX;
                 animationTimer->reset();
+                facingRight = true;*/
+
+                if(xMax== 5.0/8.0)
+                {
+                    xMin =0;
+                    xMax = 1.0/(float)framesX;
+                    yMax = 1.0/(float)framesY;
+                    yMin = yMax- (1.0/(float)framesY);
+                }
+                else
+                {
+                    xMax +=1.0/(float)framesX;
+                    xMin +=1.0/(float)framesX;
+
+                }
                 facingRight = true;
+                animationTimer->reset();
             }
 
 

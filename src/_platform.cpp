@@ -54,7 +54,8 @@ case 2:
     yMax=1.0/(float)framesY;
     yMin=yMax-(1/(float)framesY);
 
-    tex->loadTexture(file_name);
+    //tex->loadTexture(file_name);
+    tex->loadTexture("images/temp_plat.png");
 }
 
 void _platform::drawPlat()

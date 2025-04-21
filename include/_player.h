@@ -12,7 +12,7 @@ class _player
 
         _textureLoader *pTex = new _textureLoader();
 
-        void initPlayer(int, int, char*); // x frames, y frames, file name
+        void initPlayer(char*); // x frames, y frames, file name
         void drawPlayer();
         void playerActions();
         void handle_vertical();

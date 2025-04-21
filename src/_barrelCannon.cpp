@@ -84,6 +84,14 @@ void _barrelCannon::updateB(_player* player)
 
         player->xBeforeHorzDisplacement = player->plPos.x;
         player->isBeingDisplacedHorz = true;
+
+        player->inBarrel = false;
+
+        player->damage_timer->reset();
+        player->player_can_be_damaged = false;
+        player->handle_player_damage_timer();
+
+
     }
 
     if(!isAuto)
@@ -102,6 +110,10 @@ void _barrelCannon::updateB(_player* player)
 
             player->plPos.x = pos.x;
             player->plPos.y = pos.y;
+
+            player->damage_timer->reset();
+            player->player_can_be_damaged = false;
+            player->handle_player_damage_timer();
         }
     }
 }

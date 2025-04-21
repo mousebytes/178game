@@ -1,16 +1,33 @@
-# Level 2 layout
-PLATFORM images/wall.png 0 -1 -2 1 0.5 1 1 1 0
-PLATFORM images/wall.png 2 -0.5 -2 1 0.5 1 1 1 0
-PLATFORM images/wall.png 4 0 -2 1 0.5 1 1 1 0
-
-MOVING_PLATFORM images/wall.png 6 0.5 -2 1 0.5 1 1 1 1 2.5 0.03
-MOVING_PLATFORM images/wall.png 8 1 -2 1 0.5 1 1 1 2 1.5 0.02
-
-ENEMY 2.5 -0.2 -3 0.3
-ENEMY 6.5 0.8 -3 0.3
-
-COLLECTIBLE images/coin.png 1 -0.3 -3 0.1 1 1
-COLLECTIBLE images/coin.png 4.2 0.2 -3 0.1 1 1
-COLLECTIBLE images/coin.png 7.5 1.2 -3 0.1 1 1
-
-GOAL images/goal.png 10 1.5 -3 0.4 1 1
+PLATFORM images/wall.png -3.08052 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png -1.04934 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 0.98184 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 3.00075 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 5.03806 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 1.22335 -1.3669 -2 1 0.2 1 1 1 0
+PLATFORM images/wall.png 8.58975 -2.21604 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 10.5918 -2.21604 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 12.5593 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 14.5562 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 16.5514 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 18.5258 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 20.5257 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 22.507 -2.20914 -2 1 1 1 1 1 0
+ENEMY 3.76244 -1.81564 -3 0.25 0
+ENEMY 18.0504 1.56711 -3 2.3 1
+COLLECTIBLE images/coin.png 2.07249 -1.85361 -2 0.1 1 1
+COLLECTIBLE images/coin.png -0.392083 -1.60508 -2 0.1 1 1
+COLLECTIBLE images/coin.png -2.2664 -1.78112 -2 0.1 1 1
+COLLECTIBLE images/coin.png -1.57259 -1.69828 -2 0.1 1 1
+COLLECTIBLE images/coin.png 1.19228 -1.72934 -2 0.1 1 1
+COLLECTIBLE images/coin.png 3.40833 -1.93645 -2 0.1 1 1
+COLLECTIBLE images/coin.png 4.21604 -1.89503 -2 0.1 1 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL -2.38173 -0.227817 -2 -60 0 1
+BARREL 12.4448 1.25645 -2 -65 0 1
+GOAL images/goal.png 23.432 -0.966498 -2 0.2 1 1

@@ -13,10 +13,15 @@
 #include<_parallax.h>
 
 char *playerTex = "images/temp_player.png";
+//int player xfrm = 8;
+//int player yfrm = 9;
 
 _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
 _player *player = new _player();
+
+
+
 _camera *camera = new _camera();
 //_background *background = new _background();
 _collisionCheck *collision = new _collisionCheck();
@@ -70,7 +75,7 @@ GLint _scene::initGL()
   // glEnable(GL_COLOR_MATERIAL);
    myLight->setLight(GL_LIGHT0);
 
-    player->initPlayer(2,1,playerTex);
+    player->initPlayer(playerTex);
 
 
     dim.x = GetSystemMetrics(SM_CXSCREEN);
@@ -155,7 +160,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 background->initPrlx("images/marce.png");
                 currLevel = 1;
                 load_level_file("levels/level1.txt");
-                player->initPlayer(2,1,playerTex);
+                player->initPlayer(playerTex);
                 gs = PLAYING;
                 playerWon= false;
            }
@@ -164,7 +169,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                background->initPrlx("images/temp_mainmenu.png");
                gs = MAINMENU;
 
-               player->initPlayer(2,1,playerTex);
+               player->initPlayer(playerTex);
                load_level_file("levels/level1.txt");
                currLevel = 1;
                playerWon = false;
@@ -271,7 +276,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                platforms.clear();
                enemies.clear();
                collectibles.clear();
-               player->initPlayer(2,1,playerTex);
+               player->initPlayer(playerTex);
                load_level_file("levels/custom_level.txt");
                gs = LEVELEDITOR;
            }
@@ -279,7 +284,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             {
                 background->initPrlx("images/marce.png");
                 load_level_file("levels/custom_level.txt");
-                player->initPlayer(2,1,playerTex);
+                player->initPlayer(playerTex);
                 player->plPos = {0, 0, -3};
                 player->health = 3;
                 player->coins = 0;
@@ -343,7 +348,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             else if(placeObj == BARREL)
             {
                 _barrelCannon* b = new _barrelCannon();
-                b->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, previewBarrel->isAuto, previewBarrel->fireDelay);
+                b->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, false, previewBarrel->fireDelay);
                 barrels.push_back(b);
             }
         }
@@ -664,7 +669,7 @@ void _scene::checkGoal()
         }
 
         load_level_file(ss.str().c_str());
-        player->initPlayer(2,1,playerTex);
+        player->initPlayer(playerTex);
         player->plPos={0,0,-3};
         playerWon=false;
     }
@@ -824,7 +829,7 @@ void _scene::loadGame()
     ss<<"levels/level"<<currLevel<<".txt";
     load_level_file(ss.str().c_str());
 
-    player->initPlayer(1,1,playerTex);
+    player->initPlayer(playerTex);
     player->plPos = {0,0,-3};
 
     cout << "\nloaded";
@@ -1014,6 +1019,21 @@ void _scene::deleteObjectAtMouseInEditor()
             cout << "Deleted coin.\n";
             return;
         }
+    }
+
+
+    for (int i = 0; i < barrels.size();i++)
+    {
+        _barrelCannon *b = barrels[i];
+        if (mouseX > b->pos.x - b->scale.x &&
+            mouseX < b->pos.x + b->scale.x &&
+            mouseY > b->pos.y - b->scale.y &&
+            mouseY < b->pos.y + b->scale.y)
+            {
+                delete b;
+                barrels.erase(barrels.begin() + i);
+                return;
+            }
     }
 }
 

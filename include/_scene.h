@@ -28,9 +28,10 @@ class _scene
         void loadGame();
         void mouseMapping(int x, int y);
 
-        enum GameState {MAINMENU,PLAYING,GAMEOVER,LEVELEDITOR};
+        enum GameState {MAINMENU,PLAYING,GAMEOVER,LEVELEDITOR, PAUSED};
 
         GameState gs = MAINMENU;
+        GameState previousGS;
 
         double mouseX, mouseY, mouseZ;
 
@@ -46,6 +47,12 @@ class _scene
         void drawEditor();
 
         void deleteObjectAtMouseInEditor();
+
+        void initMenuButtons();
+
+        bool SceneDone, isPaused;
+
+        void drawPausePopup();
 
     protected:
 

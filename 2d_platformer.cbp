@@ -48,6 +48,7 @@
 		</Linker>
 		<Unit filename="include/_background.h" />
 		<Unit filename="include/_barrelCannon.h" />
+		<Unit filename="include/_buttons.h" />
 		<Unit filename="include/_camera.h" />
 		<Unit filename="include/_collectible.h" />
 		<Unit filename="include/_collisionCheck.h" />
@@ -66,6 +67,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/_background.cpp" />
 		<Unit filename="src/_barrelCannon.cpp" />
+		<Unit filename="src/_buttons.cpp" />
 		<Unit filename="src/_camera.cpp" />
 		<Unit filename="src/_collectible.cpp" />
 		<Unit filename="src/_collisionCheck.cpp" />

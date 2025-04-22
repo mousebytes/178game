@@ -11,6 +11,7 @@
 #include<_goal.h>
 #include<_barrelCannon.h>
 #include<_parallax.h>
+#include<_buttons.h>
 
 char *playerTex = "images/temp_player.png";
 //int player xfrm = 8;
@@ -48,10 +49,19 @@ vector<_barrelCannon*> barrels;
 bool playerWon = false;
 int currLevel = 1;
 
+_buttons* startButton = new _buttons();
+_buttons *editorButton = new _buttons();
+_buttons *exitButton = new _buttons();
+_buttons *loadButton = new _buttons();
+
+_buttons *resumeButton = new _buttons();
+_buttons *backToMenuButton = new _buttons();
 
 _scene::_scene()
 {
     //ctor
+    SceneDone = false;
+    isPaused = false;
 }
 
 _scene::~_scene()
@@ -81,7 +91,7 @@ GLint _scene::initGL()
     dim.x = GetSystemMetrics(SM_CXSCREEN);
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
-    background->initPrlx("images/temp_mainmenu.png");
+    background->initPrlx("images/menuBG.png");
 
     load_level_file("levels/level1.txt");
 
@@ -95,7 +105,7 @@ GLint _scene::initGL()
     p2->speed = 0.002;
     p3->speed = 0.001;
 
-
+    initMenuButtons();
 
    return true;
 }
@@ -155,9 +165,17 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
            input->wParam = wParam;
 
+           if((gs == PLAYING || gs == LEVELEDITOR) && wParam == VK_ESCAPE)
+           {
+                isPaused = !isPaused;
+           }
+        if(!isPaused)
+        {
+
+
            if(gs == MAINMENU && wParam == VK_RETURN)
            {
-                background->initPrlx("images/marce.png");
+                //background->initPrlx("images/marce.png");
                 currLevel = 1;
                 load_level_file("levels/level1.txt");
                 player->initPlayer(playerTex);
@@ -166,7 +184,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
             else if (gs == GAMEOVER && wParam == 'R')
            {
-               background->initPrlx("images/temp_mainmenu.png");
+               //background->initPrlx("images/temp_mainmenu.png");
                gs = MAINMENU;
 
                player->initPlayer(playerTex);
@@ -183,7 +201,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             }
             else if(gs == MAINMENU && wParam == 'L') // Press L to load
                 {
-                    background->initPrlx("images/marce.png");
+                    //background->initPrlx("images/marce.png");
                     loadGame();
                     gs = PLAYING;
                 }
@@ -206,7 +224,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
                    case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
-                   case 'Q': gs = MAINMENU; background->initPrlx("images/temp_mainmenu.png"); break;
+                   case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; break;
                    case 'D': player->plPos.x +=0.5; break;
@@ -272,7 +290,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
            else if(gs == MAINMENU && wParam == 'E')
            {
-               background->initPrlx("images/marce.png");
+               //background->initPrlx("images/marce.png");
                platforms.clear();
                enemies.clear();
                collectibles.clear();
@@ -282,7 +300,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
            else if(gs == MAINMENU && wParam == 'C')
             {
-                background->initPrlx("images/marce.png");
+                //background->initPrlx("images/marce.png");
                 load_level_file("levels/custom_level.txt");
                 player->initPlayer(playerTex);
                 player->plPos = {0, 0, -3};
@@ -293,6 +311,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 currLevel = 0;
                 cout << "Loaded custom_level.txt and started game" << endl;
             }
+        }
         break;
 
 
@@ -305,6 +324,30 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_LBUTTONDOWN:
+
+        if(isPaused)
+        {
+        mouseMapping(LOWORD(lParam), HIWORD(lParam));
+
+         float adjustedMouseX = mouseX - camera->camPos.x;
+        float adjustedMouseY = mouseY - camera->camPos.y;
+
+        if(resumeButton->isHovered(adjustedMouseX, adjustedMouseY))
+        {
+            isPaused = false;
+        }
+        else if(backToMenuButton->isHovered(adjustedMouseX, adjustedMouseY))
+        {
+            isPaused = false;
+            gs = MAINMENU;
+        }
+        return 0;
+        }
+
+        if(!isPaused)
+        {
+
+
 
         if(gs==LEVELEDITOR)
         {
@@ -351,6 +394,43 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 b->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, false, previewBarrel->fireDelay);
                 barrels.push_back(b);
             }
+        }
+        }
+        if(gs == MAINMENU)
+        {
+
+        //mouseMapping(LOWORD(lParam), HIWORD(lParam));
+
+        if(startButton->isHovered(mouseX, mouseY))
+        {
+            //background->initPrlx("images/marce.png");
+            currLevel = 1;
+            load_level_file("levels/level1.txt");
+            player->initPlayer(playerTex);
+            gs = PLAYING;
+            playerWon = false;
+        }
+        else if(loadButton->isHovered(mouseX, mouseY))
+        {
+            //background->initPrlx("images/marce.png");
+            loadGame();
+            gs = PLAYING;
+        }
+        else if(editorButton->isHovered(mouseX, mouseY))
+        {
+            //background->initPrlx("images/marce.png");
+            platforms.clear();
+            enemies.clear();
+            collectibles.clear();
+            player->initPlayer(playerTex);
+            load_level_file("levels/custom_level.txt");
+            gs = LEVELEDITOR;
+        }
+        else if(exitButton->isHovered(mouseX, mouseY))
+        {
+            SceneDone = true;  // exit game
+        }
+
         }
         break;
     case WM_RBUTTONDOWN:
@@ -420,6 +500,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
         }
     }
+        if(gs == MAINMENU)
+            mouseMapping(LOWORD(lParam), HIWORD(lParam));
     break;
         break;
     case WM_MOUSEWHEEL:
@@ -647,7 +729,7 @@ void _scene::checkGoal()
         if(currLevel == 0)
         {
             gs = MAINMENU;
-            background->initPrlx("images/temp_mainmenu.png");
+            //background->initPrlx("images/temp_mainmenu.png");
             return;
         }
 
@@ -661,7 +743,7 @@ void _scene::checkGoal()
         ifstream test(ss.str().c_str());
         if(!test.good())
         {
-            background->initPrlx("images/temp_reset.png");
+            //background->initPrlx("images/temp_reset.png");
             gs = GAMEOVER;
             currLevel=1;
             player->health = 3;
@@ -681,30 +763,55 @@ void _scene::drawMenu()
     glLoadIdentity();
     glColor3f(1, 0, 0);
     glDisable(GL_DEPTH_TEST);
-    background->drawBackground(dim.x, dim.y,-35,13);
+    background->drawBackground(dim.x, dim.y,-35,17);
     glEnable(GL_DEPTH_TEST);
+
+
+    startButton->updateHover(mouseX, mouseY);
+    loadButton->updateHover(mouseX, mouseY);
+    editorButton->updateHover(mouseX, mouseY);
+    exitButton->updateHover(mouseX, mouseY);
+
+    startButton->drawButton();
+    loadButton->drawButton();
+    editorButton->drawButton();
+    exitButton->drawButton();
+
+
 }
 
 void _scene::runGame()
 {
-    p3->drawBackground(dim.x,dim.y,-29,13);
-    p3->scroll();
-    p2->drawBackground(dim.x,dim.y,-28,13);
-    p2->scroll();
-    p1->drawBackground(dim.x,dim.y,-27,13);
-    p1->scroll();
 
+    p3->drawBackground(dim.x,dim.y,-29,13);
+    p2->drawBackground(dim.x,dim.y,-28,13);
+    p1->drawBackground(dim.x,dim.y,-27,13);
+
+    if(!isPaused)
+    {
+
+
+
+
+    p3->scroll();
+    p2->scroll();
+    p1->scroll();
 
     // don't change the order of these 4 functions -- player texture breaks otherwise
     player->playerActions();
     camera->followPlayer(player);
     camera->updateCamPos();
 
+
+    player->handle_vertical();
+    player->handle_player_damage_timer();
+    player->handleHorizontalDisplacement();
+
     if(player->health < 1)
         {
             gs = GAMEOVER;
             player->health = 3;
-            background->initPrlx("images/temp_reset.png");
+            //background->initPrlx("images/temp_reset.png");
         }
 
     if(!player->blink)
@@ -718,9 +825,7 @@ void _scene::runGame()
     else
         player->blink = false;
 
-    player->handle_vertical();
-    player->handle_player_damage_timer();
-    player->handleHorizontalDisplacement();
+
 
 
     //TODO: add a way for the player's health to matter
@@ -733,17 +838,12 @@ void _scene::runGame()
         cout << "\n" << player->health;
     }
 
-
-
-    for(auto plat: platforms)
-    {
-        plat->drawPlat();
-        plat->updatePlat();
-    }
+    check_platform_collisions();
+    check_enemy_collisions();
+    checkCollectibles();
 
     for(auto b : barrels)
     {
-        b->drawBarrel();
 
         if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}) && !player->isBeingDisplacedHorz)
             {
@@ -765,22 +865,42 @@ void _scene::runGame()
 
     for(auto e : enemies)
     {
-        e->drawEnms(e->tex->tex);
         e->actions();
     }
 
-    for(auto c : collectibles)
-        c->drawColl();
+    for(auto plat: platforms)
+    {
+        plat->updatePlat();
+    }
 
-    check_platform_collisions();
-    check_enemy_collisions();
-    checkCollectibles();
+    }
+    else
+    {
+        camera->followPlayer(player);
+        camera->updateCamPos();
+        player->drawPlayer();
+    }
+
+
+
+
+
+
+
+
+    for(auto plat: platforms) plat->drawPlat();
+    for(auto b : barrels) b->drawBarrel();
+    for(auto e : enemies) e->drawEnms(e->tex->tex);
+    for(auto c : collectibles) c->drawColl();
 
     goal->drawGoal();
     checkGoal();
 
     hud->drawHearts(player->health,camera->camPos);
     //b->updateB(player->plPos, player->velocity, player->isJumping);
+
+    if(isPaused)
+        drawPausePopup();
 
 }
 
@@ -926,18 +1046,18 @@ void _scene::drawEditor()
 
     glDisable(GL_DEPTH_TEST);
     p3->drawBackground(dim.x,dim.y,-29,13);
-    p3->scroll();
     p2->drawBackground(dim.x,dim.y,-28,13);
-    p2->scroll();
     p1->drawBackground(dim.x,dim.y,-27,13);
-    p1->scroll();
+
 
 
     //background->drawBackground(dim.x, dim.y,-35,13);
     glEnable(GL_DEPTH_TEST);
 
-    camera->followPlayer(player);  // optional, keeps player centered
+    camera->followPlayer(player);
     camera->updateCamPos();
+
+
 
     for(auto plat : platforms)
         plat->drawPlat();
@@ -952,8 +1072,18 @@ void _scene::drawEditor()
         c->drawColl();
     goal->drawGoal();
 
+    if(!isPaused)
+    {
+
+
+
+
+    //p3->scroll();
+    //p2->scroll();
+    //p1->scroll();
+
         //todo: check this
-        glDisable(GL_DEPTH_TEST); // ensure ghost is always on top
+        glDisable(GL_DEPTH_TEST); // ensure preview is always on top
         glColor4f(1.0, 1.0, 1.0, 0.5); // semi transparent
 
         if(previewPlat && placeObj == PLAT)
@@ -969,6 +1099,9 @@ void _scene::drawEditor()
 
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
+    }
+        if(isPaused)
+            drawPausePopup();
 }
 
 void _scene::deleteObjectAtMouseInEditor()
@@ -1035,5 +1168,52 @@ void _scene::deleteObjectAtMouseInEditor()
                 return;
             }
     }
+}
+
+
+void _scene::initMenuButtons()
+{
+    startButton->initButton("images/StartButton.png",0,1.2,-3,1.0,0.3,1.0,2,1);
+    loadButton->initButton("images/LoadButton.png",0,0.6,-3,1.0,0.3,1.0,2,1);
+    editorButton->initButton("images/LevelEditorButton.png",0,-.1,-3,1.0,0.3,1.0,2,1);
+    exitButton->initButton("images/ExitButton.png",0,-.9,-3,1.0,0.3,1.0,2,1);
+
+    resumeButton->initButton("images/ResumeButton.png", 0, 0.3, -2, 1.0, 0.3, 1.0, 2, 1);
+    backToMenuButton->initButton("images/BackToMenuButton.png", 0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
+
+}
+
+
+void _scene::drawPausePopup()
+{
+    glDisable(GL_DEPTH_TEST);
+    glPushMatrix();
+
+    // Move the popup in front of the camera
+    glTranslatef(camera->camPos.x, camera->camPos.y, camera->camPos.z - 4.0f);
+
+
+    glScalef(2.0f, 1.5f, 1.0f);
+
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(camera->camPos.x, camera->camPos.y, camera->camPos.z - 3.5f);
+
+    float adjustedMouseX = mouseX - camera->camPos.x;
+    float adjustedMouseY = mouseY - camera->camPos.y;
+
+    resumeButton->updateHover(adjustedMouseX, adjustedMouseY);
+    backToMenuButton->updateHover(adjustedMouseX, adjustedMouseY);
+
+    //resumeButton->updateHover(mouseX, mouseY);
+    //backToMenuButton->updateHover(mouseX, mouseY);
+
+    resumeButton->drawButton();
+    backToMenuButton->drawButton();
+
+    glPopMatrix();
+
+    glEnable(GL_DEPTH_TEST);
 }
 

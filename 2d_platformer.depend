@@ -91,7 +91,7 @@
 1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
-1742987613 source:d:\codeblocks stuff\178game\main.cpp
+1745344237 source:d:\codeblocks stuff\178game\main.cpp
 	<windows.h>
 	<_common.h>
 	<_scene.h>
@@ -107,7 +107,7 @@
 	<sstream>
 	<vector>
 
-1744999152 d:\codeblocks stuff\178game\include\_scene.h
+1745349985 d:\codeblocks stuff\178game\include\_scene.h
 	<_common.h>
 	<_timer.h>
 
@@ -157,7 +157,7 @@
 1745271325 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1745271338 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1745352720 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -171,6 +171,7 @@
 	<_goal.h>
 	<_barrelCannon.h>
 	<_parallax.h>
+	<_buttons.h>
 
 1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
@@ -250,7 +251,7 @@
 	<_common.h>
 	<_textureLoader.h>
 
-1745269683 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
+1745272728 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
 1745007331 d:\codeblocks stuff\178game\include\_barrelcannon.h
@@ -316,4 +317,10 @@
 
 1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
 	"_platform.h"
+
+1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
+	"_buttons.h"
+
+1745342642 d:\codeblocks stuff\178game\include\_buttons.h
+	<_textureLoader.h>
 

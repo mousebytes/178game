@@ -13,7 +13,7 @@
 #include<_parallax.h>
 #include<_buttons.h>
 
-char *playerTex = "images/temp_player.png";
+char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
 //int player yfrm = 9;
 
@@ -78,9 +78,9 @@ GLint _scene::initGL()
    glEnable(GL_BLEND); // for transparent bg
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-   glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
-   //glDisable(GL_LIGHTING);
+   //glEnable(GL_LIGHTING);
+   //glEnable(GL_LIGHT0);
+   glDisable(GL_LIGHTING);
 
   // glEnable(GL_COLOR_MATERIAL);
    myLight->setLight(GL_LIGHT0);
@@ -379,7 +379,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             else if (placeObj == COLLECTIBLE)
             {
                 _collectible *c = new _collectible();
-                c->initColl("images/coin.png",mouseX,mouseY,-2,0.1,1,1);
+                c->initColl("images/banana.png",mouseX,mouseY,-2,0.1,1,1);
                 collectibles.push_back(c);
             }
             else if(placeObj == GOAL)
@@ -487,7 +487,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 }
             case COLLECTIBLE:
                 if (!previewCoin) previewCoin = new _collectible();
-                previewCoin->initColl("images/coin.png", mouseX, mouseY, -2, 0.1, 1, 1);
+                previewCoin->initColl("images/banana.png", mouseX, mouseY, -2, 0.1, 1, 1);
                 break;
             case GOAL:
                 if(!previewGoal) previewGoal = new _goal();
@@ -782,6 +782,7 @@ void _scene::drawMenu()
 
 void _scene::runGame()
 {
+    //glDisable(GL_LIGHTING);
 
     p3->drawBackground(dim.x,dim.y,-29,13);
     p2->drawBackground(dim.x,dim.y,-28,13);
@@ -891,7 +892,9 @@ void _scene::runGame()
     for(auto plat: platforms) plat->drawPlat();
     for(auto b : barrels) b->drawBarrel();
     for(auto e : enemies) e->drawEnms(e->tex->tex);
+    //glEnable(GL_LIGHTING);
     for(auto c : collectibles) c->drawColl();
+    //glDisable(GL_LIGHTING);
 
     goal->drawGoal();
     checkGoal();
@@ -1024,7 +1027,7 @@ void _scene::saveCustomLevel()
 
     for(auto c : collectibles)
     {
-        file << "COLLECTIBLE images/coin.png "<< c->pos.x << " " << c->pos.y << " " << c->pos.z << " "<< c->radius << " " << c->framesX << " " << c->framesY << endl;
+        file << "COLLECTIBLE images/banana.png "<< c->pos.x << " " << c->pos.y << " " << c->pos.z << " "<< c->radius << " " << c->framesX << " " << c->framesY << endl;
     }
 
     for(auto b : barrels)
@@ -1043,6 +1046,8 @@ void _scene::saveCustomLevel()
 void _scene::drawEditor()
 {
     glLoadIdentity();
+
+    //glDisable(GL_LIGHTING);
 
     glDisable(GL_DEPTH_TEST);
     p3->drawBackground(dim.x,dim.y,-29,13);

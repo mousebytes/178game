@@ -25,7 +25,7 @@ _player::_player()
     animationTimer->reset();
     facingRight = true;
 
-    framesX = 2;
+    framesX = 3;
     framesY = 1;
 
 }

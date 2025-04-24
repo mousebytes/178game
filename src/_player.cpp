@@ -37,6 +37,7 @@ _player::~_player()
 
 void _player::initPlayer(char* fileName)
 {
+
     // initialize quad
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
     vert[1].x =  1.0; vert[1].y = -1.0; vert[1].z = -1.0;

@@ -11,7 +11,7 @@ PLATFORM images/wall.png 16.5514 -2.20914 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 18.5258 -2.20914 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 20.5257 -2.20914 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 22.507 -2.20914 -2 1 1 1 1 1 0
-PLATFORM images/wall.png 25.3004 -0.134619 -2 1 1 1 1 1 0
+ENEMY 3.76244 -1.81564 -3 0.25 0
 ENEMY 14.4097 1.03553 -3 0.25 2
 ENEMY 16.5222 1.31513 -3 0.25 2
 COLLECTIBLE images/banana.png 2.07249 -1.85361 -2 0.1 1 1
@@ -26,4 +26,4 @@ COLLECTIBLE images/banana.png 15.3003 1.76041 -2 0.1 1 1
 COLLECTIBLE images/banana.png 13.281 1.5533 -2 0.1 1 1
 BARREL 11.9586 1.18741 -2 -60 0 1
 BARREL 17.9099 2.00894 -2 -50 0 1
-GOAL images/goal.png 23.3018 -1.04589 -2 0.2 1 1
+GOAL images/goal.png 18.9615 2.16427 -2 0.2 1 1

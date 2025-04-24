@@ -870,6 +870,8 @@ void _scene::checkGoal()
             gs = WIN;
             currLevel=1;
             player->health = 3;
+            player->inBarrel = false;
+            player->isBeingDisplacedHorz = false;
             return ;
         }
 
@@ -1063,6 +1065,7 @@ void _scene::saveGame()
 
 void _scene::loadGame()
 {
+    isPaused = false;
     ifstream file("saves/save1.txt");
     if(!file.is_open())return;
 

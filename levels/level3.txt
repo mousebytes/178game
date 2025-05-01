@@ -1,0 +1,43 @@
+#level where you use barrels to get acroos and it to the flag 
+PLATFORM images/wall.png -8 0 -2 5 1 1 1 1 0
+PLATFORM images/wall.png 0.497056 -1.97787 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png 1.68792 -1.97787 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png 2.88914 -1.95716 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -0.714518 -1.97787 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.03411 3.17909 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.04447 1.77076 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.05482 0.362437 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.06518 -1.02518 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.08589 -2.41279 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -3.08589 -3.55188 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png -1.89503 -1.97787 -2 0.6 0.7 1 1 1 0
+PLATFORM images/wall.png 9.89655 -2.2264 -2 1.1 0.1 1 1 1 0
+PLATFORM images/wall.png 16.6228 -0.724874 -2 1.2 0.1 1 1 1 0
+PLATFORM images/wall.png 19.7604 -2.04 -2 0.3 0.1 1 1 1 0
+PLATFORM images/wall.png 21.5726 -0.403858 -2 0.3 0.1 1 1 1 0
+PLATFORM images/wall.png 23.3123 0.838782 -2 0.3 0.1 1 1 1 0
+ENEMY -2.28853 -1.05624 -3 0.25 0
+ENEMY -4.14214 1.253 -3 0.25 0
+ENEMY 11.2174 1.03553 -3 0.25 2
+ENEMY 8.35949 -0.134619 -3 0.25 2
+ENEMY 5.98812 1.68792 -3 0.25 2
+ENEMY 2.46152 1.52223 -3 0.25 2
+ENEMY 21.5726 -0.0207107 -3 0.25 1
+ENEMY 21.2309 -1.29442 -3 0.25 2
+ENEMY 22.7842 0.227817 -3 0.25 2
+ENEMY 22.2353 2.02965 -3 0.25 2
+ENEMY 19.6258 0.787006 -3 0.25 2
+ENEMY 13.9718 1.08731 -3 0.25 2
+COLLECTIBLE images/banana.png 3 0 -2 0.3 1 1
+COLLECTIBLE images/banana.png 1.91574 -0.766295 -2 0.1 1 1
+COLLECTIBLE images/banana.png 1.72934 2.77523 -2 0.1 1 1
+COLLECTIBLE images/banana.png 6.42762 0.455635 -2 0.1 1 1
+COLLECTIBLE images/banana.png 8.00163 0.797361 -2 0.1 1 1
+COLLECTIBLE images/banana.png 9.59909 -0.486701 -2 0.1 1 1
+COLLECTIBLE images/banana.png 13.5652 -0.0414214 -2 0.1 1 1
+COLLECTIBLE images/banana.png 15.2531 0.75594 -2 0.1 1 1
+COLLECTIBLE images/banana.png 16.6304 -0.217462 -2 0.1 1 1
+COLLECTIBLE images/banana.png 15.2144 2.8063 -2 0.1 1 1
+BARREL 4.99848 -0.217462 -2 -60 0 1
+BARREL 12.5843 -0.797361 -2 -60 0 1
+GOAL images/goal.png 23.3951 1.20122 -2 0.2 1 1

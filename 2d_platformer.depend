@@ -1,0 +1,597 @@
+# depslib dependency file v1.0
+1745353385 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<vector>
+
+1738028479 c:\users\thinkpadx1\desktop\csci 178\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1745447129 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
+	<_common.h>
+	<_timer.h>
+
+1740013861 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_lightsetting.cpp
+	"_lightsetting.h"
+
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
+	<_common.h>
+
+1745452386 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+	"_scene.h"
+	<_lightsetting.h>
+	<_inputs.h>
+	<_player.h>
+	<_camera.h>
+	<_background.h>
+	<_collisionCheck.h>
+	<_platform.h>
+	<_enemies.h>
+	<_hud.h>
+	<_goal.h>
+	<_barrelCannon.h>
+	<_parallax.h>
+	<_buttons.h>
+
+1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
+	<_common.h>
+	<_textureloader.h>
+
+1742888676 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_model.cpp
+	"_model.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1668646408 c:\users\thinkpadx1\desktop\csci 178\common\include\soil.h
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_inputs.h
+	<_common.h>
+	<_player.h>
+	<_parallax.h>
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+	"_inputs.h"
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
+	"_textureloader.h"
+
+1745276838 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745452278 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+	"_player.h"
+
+1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_camera.cpp
+	"_camera.h"
+
+1742982914 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_background.h
+	<_common.h>
+	<_textureLoader.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
+	"_background.h"
+
+1745344237 source:d:\codeblocks stuff\178game\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1744814424 d:\codeblocks stuff\178game\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<vector>
+
+1745445624 d:\codeblocks stuff\178game\include\_scene.h
+	<_common.h>
+	<_timer.h>
+
+1744873351 source:d:\codeblocks stuff\178game\src\_background.cpp
+	"_background.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_background.h
+	<_common.h>
+	<_textureLoader.h>
+
+1744814660 d:\codeblocks stuff\178game\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1744634492 source:d:\codeblocks stuff\178game\src\_camera.cpp
+	"_camera.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1745270241 d:\codeblocks stuff\178game\include\_player.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745172688 source:d:\codeblocks stuff\178game\src\_inputs.cpp
+	"_inputs.h"
+
+1745170561 d:\codeblocks stuff\178game\include\_inputs.h
+	<_common.h>
+	<_player.h>
+	<_parallax.h>
+
+1742987613 d:\codeblocks stuff\178game\include\_model.h
+	<_common.h>
+	<_textureloader.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_lightsetting.cpp
+	"_lightsetting.h"
+
+1742987613 d:\codeblocks stuff\178game\include\_lightsetting.h
+	<_common.h>
+
+1742987613 source:d:\codeblocks stuff\178game\src\_model.cpp
+	"_model.h"
+
+1745369688 source:d:\codeblocks stuff\178game\src\_player.cpp
+	"_player.h"
+
+1745446708 source:d:\codeblocks stuff\178game\src\_scene.cpp
+	"_scene.h"
+	<_lightsetting.h>
+	<_inputs.h>
+	<_player.h>
+	<_camera.h>
+	<_background.h>
+	<_collisionCheck.h>
+	<_platform.h>
+	<_enemies.h>
+	<_hud.h>
+	<_goal.h>
+	<_barrelCannon.h>
+	<_parallax.h>
+	<_buttons.h>
+
+1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
+	"_textureloader.h"
+
+1742988165 d:\codeblocks stuff\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1742988165 d:\codeblocks stuff\common\include\soil.h
+
+1745276838 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collisioncheck.h
+	<_common.h>
+	<_player.h>
+	<_platform.h>
+	<_enemies.h>
+	<_collectible.h>
+
+1743027913 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_timer.h
+	<_common.h>
+
+1743027941 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_timer.cpp
+	"_timer.h"
+
+1743938911 d:\codeblocks stuff\178game\include\_timer.h
+	<_common.h>
+
+1745271076 source:d:\codeblocks stuff\178game\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1744824804 d:\codeblocks stuff\178game\include\_collisioncheck.h
+	<_common.h>
+	<_player.h>
+	<_platform.h>
+	<_enemies.h>
+	<_collectible.h>
+
+1743938911 source:d:\codeblocks stuff\178game\src\_timer.cpp
+	"_timer.h"
+
+1744821138 d:\codeblocks stuff\178game\include\_platform.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745271807 source:d:\codeblocks stuff\178game\src\_platform.cpp
+	"_platform.h"
+
+1745175014 source:d:\codeblocks stuff\178game\src\_enemies.cpp
+	"_enemies.h"
+
+1745174864 d:\codeblocks stuff\178game\include\_enemies.h
+	<_common.h>
+	<_timer.h>
+	<_textureLoader.h>
+
+1744811109 source:d:\codeblocks stuff\178game\src\_hud.cpp
+	"_hud.h"
+
+1744810121 d:\codeblocks stuff\178game\include\_hud.h
+	<_common.h>
+	<_textureLoader.h>
+
+1744875605 source:d:\codeblocks stuff\178game\src\_collectible.cpp
+	"_collectible.h"
+
+1744824334 d:\codeblocks stuff\178game\include\_collectible.h
+	<_textureLoader.h>
+
+1744829878 source:d:\codeblocks stuff\178game\src\_goal.cpp
+	"_goal.h"
+
+1744829800 d:\codeblocks stuff\178game\include\_goal.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745272728 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1745007331 d:\codeblocks stuff\178game\include\_barrelcannon.h
+	<_timer.h>
+	<_textureLoader.h>
+	<_player.h>
+
+1745173620 d:\codeblocks stuff\178game\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745173692 source:d:\codeblocks stuff\178game\src\_parallax.cpp
+	"_parallax.h"
+
+1745276838 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_barrelcannon.h
+	<_timer.h>
+	<_textureLoader.h>
+	<_player.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collectible.cpp
+	"_collectible.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collectible.h
+	<_textureLoader.h>
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_platform.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_enemies.h
+	<_common.h>
+	<_timer.h>
+	<_textureLoader.h>
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
+	"_enemies.h"
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_goal.cpp
+	"_goal.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_goal.h
+	<_common.h>
+	<_textureLoader.h>
+
+1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
+	"_hud.h"
+
+1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_hud.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
+	"_parallax.h"
+
+1745276838 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+	"_platform.h"
+
+1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
+	"_buttons.h"
+
+1745342642 d:\codeblocks stuff\178game\include\_buttons.h
+	<_textureLoader.h>
+
+1745353385 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_buttons.cpp
+	"_buttons.h"
+
+1745353385 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_buttons.h
+	<_textureLoader.h>
+
+1745641249 source:c:\users\what!\desktop\csci178\178game-main\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<vector>
+
+1738028482 c:\users\what!\desktop\csci178\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_scene.h
+	<_common.h>
+	<_timer.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_timer.h
+	<_common.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_background.cpp
+	"_background.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_background.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1739239548 c:\users\what!\desktop\csci178\common\include\soil.h
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_barrelcannon.h
+	<_timer.h>
+	<_textureLoader.h>
+	<_player.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_player.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_buttons.cpp
+	"_buttons.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_buttons.h
+	<_textureLoader.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_camera.cpp
+	"_camera.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_collectible.cpp
+	"_collectible.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_collectible.h
+	<_textureLoader.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_collisioncheck.h
+	<_common.h>
+	<_player.h>
+	<_platform.h>
+	<_enemies.h>
+	<_collectible.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_platform.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_enemies.h
+	<_common.h>
+	<_timer.h>
+	<_textureLoader.h>
+
+1745885749 source:c:\users\what!\desktop\csci178\178game-main\src\_enemies.cpp
+	"_enemies.h"
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_goal.cpp
+	"_goal.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_goal.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_hud.cpp
+	"_hud.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_hud.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_inputs.cpp
+	"_inputs.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_inputs.h
+	<_common.h>
+	<_player.h>
+	<_parallax.h>
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_lightsetting.cpp
+	"_lightsetting.h"
+
+1745641253 c:\users\what!\desktop\csci178\178game-main\include\_lightsetting.h
+	<_common.h>
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_parallax.cpp
+	"_parallax.h"
+
+1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_platform.cpp
+	"_platform.h"
+
+1745641256 source:c:\users\what!\desktop\csci178\178game-main\src\_player.cpp
+	"_player.h"
+
+1746059871 source:c:\users\what!\desktop\csci178\178game-main\src\_scene.cpp
+	"_scene.h"
+	<_lightsetting.h>
+	<_inputs.h>
+	<_player.h>
+	<_camera.h>
+	<_background.h>
+	<_collisionCheck.h>
+	<_platform.h>
+	<_enemies.h>
+	<_hud.h>
+	<_goal.h>
+	<_barrelCannon.h>
+	<_parallax.h>
+	<_buttons.h>
+	<_sounds.h>
+
+1745641256 source:c:\users\what!\desktop\csci178\178game-main\src\_textureloader.cpp
+	"_textureloader.h"
+
+1745641256 source:c:\users\what!\desktop\csci178\178game-main\src\_timer.cpp
+	"_timer.h"
+
+1742255794 c:\users\what!\desktop\csci178\178game-main\include\_sounds.h
+	<SNDS/irrKlang.h>
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1742253715 c:\users\what!\desktop\csci178\common\include\snds\ik_esoundoutputdrivers.h
+
+1742253715 c:\users\what!\desktop\csci178\common\include\snds\ik_esoundengineoptions.h
+
+1742253715 c:\users\what!\desktop\csci178\common\include\snds\ik_estreammodes.h
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742253715 c:\users\what!\desktop\csci178\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1742253717 c:\users\what!\desktop\csci178\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742253716 c:\users\what!\desktop\csci178\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1742253715 c:\users\what!\desktop\csci178\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1742256859 source:c:\users\what!\desktop\csci178\178game-main\src\_sounds.cpp
+	"_sounds.h"
+	"_common.h"
+

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="2d_platformer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/2d_platformer" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/bin" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/2d_platformer" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/ThinkpadX1/Desktop/CSCI 178/common/bin" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="../common/include" />
+		</Compiler>
+		<Linker>
+			<Add library="../common/lib/libSOIL.a" />
+			<Add library="glut32" />
+			<Add library="opengl32" />
+			<Add library="glu32" />
+			<Add library="winmm" />
+			<Add library="gdi32" />
+			<Add library="../common/lib/libirrKlang.a" />
+			<Add directory="../common/lib" />
+		</Linker>
+		<Unit filename="include/_background.h" />
+		<Unit filename="include/_barrelCannon.h" />
+		<Unit filename="include/_buttons.h" />
+		<Unit filename="include/_camera.h" />
+		<Unit filename="include/_collectible.h" />
+		<Unit filename="include/_collisionCheck.h" />
+		<Unit filename="include/_common.h" />
+		<Unit filename="include/_enemies.h" />
+		<Unit filename="include/_goal.h" />
+		<Unit filename="include/_hud.h" />
+		<Unit filename="include/_inputs.h" />
+		<Unit filename="include/_lightSetting.h" />
+		<Unit filename="include/_parallax.h" />
+		<Unit filename="include/_platform.h" />
+		<Unit filename="include/_player.h" />
+		<Unit filename="include/_scene.h" />
+		<Unit filename="include/_textureLoader.h" />
+		<Unit filename="include/_timer.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/_background.cpp" />
+		<Unit filename="src/_barrelCannon.cpp" />
+		<Unit filename="src/_buttons.cpp" />
+		<Unit filename="src/_camera.cpp" />
+		<Unit filename="src/_collectible.cpp" />
+		<Unit filename="src/_collisionCheck.cpp" />
+		<Unit filename="src/_enemies.cpp" />
+		<Unit filename="src/_goal.cpp" />
+		<Unit filename="src/_hud.cpp" />
+		<Unit filename="src/_inputs.cpp" />
+		<Unit filename="src/_lightSetting.cpp" />
+		<Unit filename="src/_parallax.cpp" />
+		<Unit filename="src/_platform.cpp" />
+		<Unit filename="src/_player.cpp" />
+		<Unit filename="src/_scene.cpp" />
+		<Unit filename="src/_textureLoader.cpp" />
+		<Unit filename="src/_timer.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

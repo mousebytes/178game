@@ -116,7 +116,7 @@ GLint _scene::initGL()
     winBG->initPrlx("images/new_images/You_Win.png");
     creditsScreenBG->initPrlx("images/new_images/Credits_Menu.png");
     helpScreenBG->initPrlx("images/new_images/help menu.png");
-  snds->initSounds();
+    snds->initSounds();
     snds->playMusic("JgMus.mp3");
 
 
@@ -124,10 +124,10 @@ GLint _scene::initGL()
 
     hud->initHud("images/heart.png",1,1,camera->camPos);
 
-    p1->initPrlx("images/temp_p1.png");
+    p1->initPrlx("images/level backgrounds/3.png");
     p1->speed = 0.001;
-    p2->initPrlx("images/temp_p2.png");
-    p3->initPrlx("images/temp_p3.png");
+    p2->initPrlx("images/level backgrounds/2.png");
+    p3->initPrlx("images/level backgrounds/1.png");
     p1->speed = 0.005;
     p2->speed = 0.002;
     p3->speed = 0.001;
@@ -260,6 +260,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            {
                switch(wParam)
                {
+                   case 'M': if(placeObj == PLAT) if(previewPlat->chooseTex == previewPlat->DIRT) previewPlat->chooseTex = previewPlat->STONE; else previewPlat->chooseTex = previewPlat->DIRT;
                    case '1': placeObj = PLAT; break;
                    case '2': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
                    case '3': placeObj = COLLECTIBLE; break;
@@ -451,7 +452,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 plat->initPlat("images/wall.png", mouseX, mouseY, -2.0,
                     previewPlat ? previewPlat->scale.x : 1.0f,
                     previewPlat ? previewPlat->scale.y : 1.0f,
-               1, 1, 1, 0, 0, 0);
+               1, 1, 1, 0, 0, 0, int(previewPlat->chooseTex));
                 platforms.push_back(plat);
             }
             else if(placeObj == ENEMY)
@@ -595,7 +596,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 float scaleX = previewPlat->scale.x;
                 float scaleY = previewPlat->scale.y;
 
-                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0);
+                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0,1);
                 break;
                 }
             case ENEMY:
@@ -734,12 +735,12 @@ void _scene::load_level_file(const char* file_name)
         {
             string img;
             float x,y,z,sx,sy,sz;
-            int fx,fy, t;
+            int fx,fy, t, chooseTex;
 
-            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t;
+            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t >> chooseTex;
 
             _platform* plat = new _platform();
-            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy,t,0,0);
+            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy,t,0,0,chooseTex);
             platforms.push_back(plat);
         }
         else if(type == "ENEMY")
@@ -781,12 +782,12 @@ void _scene::load_level_file(const char* file_name)
         {
             string img;
             float x,y,z,sx,sy,sz,range,speed;
-            int fx,fy, t;
+            int fx,fy, t, texType;
 
-            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t>>speed>>range;
+            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t>>speed>>range>>texType;
 
             _platform* plat = new _platform();
-            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy, t,range,speed);
+            plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy, t,range,speed,texType);
 
             //if(direction == 1) plat->type = plat->HORIZONTAL;
             //else if (direction==2) plat->type=plat->VERTICAL;
@@ -1163,7 +1164,7 @@ void _scene::saveCustomLevel()
 
     for(auto plat:platforms)
     {
-        file<<"PLATFORM images/wall.png " << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "<< plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " " << plat->framesX << " " << plat->framesY << " 0" << endl;
+        file<<"PLATFORM images/wall.png " << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "<< plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " " << plat->framesX << " " << plat->framesY << " " << int(plat->type) << " " << plat->patrol_range << " " << int(plat->chooseTex)<< endl;
     }
 
     for(auto e:enemies)

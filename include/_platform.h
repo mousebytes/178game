@@ -17,12 +17,16 @@ class _platform
     vec3 vert[4];
     int framesX, framesY;
 
-    void initPlat(const char*,float,float,float,float,float,float,int,int,int,float,float);
+    void initPlat(const char*,float,float,float,float,float,float,int,int,int,float,float,int);
     void drawPlat();
 
     enum PlatformType {STATIC, HORIZONTAL, VERTICAL};
 
     PlatformType type;
+
+    enum PlatTex {STONE, DIRT};
+
+    PlatTex chooseTex;
 
     float speed;
     float patrol_range, start_pos;

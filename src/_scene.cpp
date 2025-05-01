@@ -22,6 +22,7 @@ _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
 _player *player = new _player();
 _sounds *snds = new _sounds();
+_sounds *sndOof = new _sounds();
 
 
 
@@ -687,6 +688,7 @@ void _scene::check_enemy_collisions()
         }
         else if (isTouching && player->player_can_be_damaged)
         {
+            sndOof->playSounds("oof.mp3");
             player->health--;
             player->damage_timer->reset();
             player->player_can_be_damaged = false;

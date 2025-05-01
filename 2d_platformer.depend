@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1745452386 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746139698 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -46,6 +46,7 @@
 	<_barrelCannon.h>
 	<_parallax.h>
 	<_buttons.h>
+	<_sounds.h>
 
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
 	<_common.h>
@@ -185,7 +186,7 @@
 
 1742988165 d:\codeblocks stuff\common\include\soil.h
 
-1745276838 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
+1745629253 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collisioncheck.cpp
 	"_collisionCheck.h"
 
 1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collisioncheck.h
@@ -282,7 +283,7 @@
 1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collectible.h
 	<_textureLoader.h>
 
-1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_platform.h
+1746138024 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_platform.h
 	<_textureLoader.h>
 	<_timer.h>
 
@@ -291,7 +292,7 @@
 	<_timer.h>
 	<_textureLoader.h>
 
-1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
+1746137329 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
 	"_enemies.h"
 
 1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_goal.cpp
@@ -316,7 +317,7 @@
 1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
 	"_parallax.h"
 
-1745276838 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+1746138095 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
 	"_platform.h"
 
 1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
@@ -592,6 +593,110 @@
 	"ik_ISoundSource.h"
 
 1742256859 source:c:\users\what!\desktop\csci178\178game-main\src\_sounds.cpp
+	"_sounds.h"
+	"_common.h"
+
+1746137260 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_sounds.h
+	<SNDS/irrKlang.h>
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_esoundoutputdrivers.h
+
+1710977012 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_esoundengineoptions.h
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_estreammodes.h
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1710977014 c:\users\thinkpadx1\desktop\csci 178\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1746137260 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_sounds.cpp
 	"_sounds.h"
 	"_common.h"
 

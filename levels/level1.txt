@@ -1,13 +1,13 @@
 #Level where you use birds to fly and get on marker !
-PLATFORM images/wall.png 0.497056 -1.97787 -2 0.6 0.7 1 1 1 0
-PLATFORM images/wall.png 1.68792 -1.97787 -2 0.6 0.7 1 1 1 0
-PLATFORM images/wall.png 2.88914 -1.95716 -2 0.6 0.7 1 1 1 0
-PLATFORM images/wall.png -0.714518 -1.97787 -2 0.6 0.7 1 1 1 0
-PLATFORM images/wall.png -1.89503 -1.97787 -2 0.6 0.7 1 1 1 0
-PLATFORM images/wall.png 23.3123 0.838782 -2 0.3 0.1 1 1 1 0
-PLATFORM images/wall.png 20.2323 -1.08731 -2 0.3 0.1 1 1 1 0
-PLATFORM images/wall.png 16.4733 -3.07554 -2 0.3 0.1 1 1 1 0
-PLATFORM images/wall.png 8.62274 -3.11696 -2 0.2 0.1 1 1 1 0
+PLATFORM images/wall.png 0.497056 -1.97787 -2 0.6 0.7 1 1 1 0 1
+PLATFORM images/wall.png 1.68792 -1.97787 -2 0.6 0.7 1 1 1 0 1 
+PLATFORM images/wall.png 2.88914 -1.95716 -2 0.6 0.7 1 1 1 0 1
+PLATFORM images/wall.png -0.714518 -1.97787 -2 0.6 0.7 1 1 1 0 1
+PLATFORM images/wall.png -1.89503 -1.97787 -2 0.6 0.7 1 1 1 0 1
+PLATFORM images/wall.png 23.3123 0.838782 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 20.2323 -1.08731 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 16.4733 -3.07554 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 8.62274 -3.11696 -2 0.2 0.1 1 1 1 0 1
 ENEMY -2.28853 -1.05624 -3 0.25 0
 ENEMY 5.53695 -1.21157 -3 0.25 2
 ENEMY 7.91868 -0.176041 -3 0.25 2

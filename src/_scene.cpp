@@ -12,6 +12,7 @@
 #include<_barrelCannon.h>
 #include<_parallax.h>
 #include<_buttons.h>
+#include <_sounds.h>
 
 char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
@@ -20,6 +21,8 @@ char *playerTex = "images/Mk.png";
 _lightSetting *myLight = new _lightSetting();
 _inputs *input = new _inputs();
 _player *player = new _player();
+_sounds *snds = new _sounds();
+_sounds *sndOof = new _sounds();
 
 
 
@@ -113,7 +116,8 @@ GLint _scene::initGL()
     winBG->initPrlx("images/new_images/You_Win.png");
     creditsScreenBG->initPrlx("images/new_images/Credits_Menu.png");
     helpScreenBG->initPrlx("images/new_images/help menu.png");
-
+  snds->initSounds();
+    snds->playMusic("JgMus.mp3");
 
 
     load_level_file("levels/level1.txt");
@@ -249,6 +253,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 input->keyPressedPRLX(p1);
                 input->keyPressedPRLX(p2);
                 input->keyPressedPRLX(p3);
+
+           //   input->keyPressed(player_can_be_damaged);
            }
            else if(gs==LEVELEDITOR)
            {
@@ -459,6 +465,9 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 enemy->isEnmsLive = true;
                 enemy->action_trigger = enemy->WALKLEFT;
                 enemies.push_back(enemy);
+               // if(enemies->Dead){
+              //  input->keyPressed(snds,"explosion.mp3");
+              //  }
             }
             else if (placeObj == COLLECTIBLE)
             {
@@ -675,6 +684,7 @@ void _scene::check_enemy_collisions()
             player->isJumping = true;
             player->is_grounded = false;
             player->height_before_jump = player->plPos.y;
+
         }
         else if (isTouching && player->player_can_be_damaged)
         {

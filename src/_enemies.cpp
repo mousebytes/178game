@@ -116,7 +116,8 @@ void _enemies::placeEnms(vec3 p, float scl)
 
 void _enemies::actions()
 {
-    if(!isEnmsLive)
+    if(!isEnmsLive && eT!= JUMPER)
+
     {
         if(start_respawn_timer)
         {

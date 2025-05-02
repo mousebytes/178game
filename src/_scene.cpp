@@ -722,7 +722,9 @@ void _scene::check_enemy_collisions()
 
 void _scene::load_level_file(const char* file_name)
 {
-
+    player->inBarrel=false;
+    player->isBeingDisplacedHorz=false;
+    player->isJumping=false;
     for(auto p : platforms) delete p;
     for (auto e : enemies) delete e;
     for(auto c : collectibles) delete c;
@@ -1005,7 +1007,7 @@ void _scene::runGame()
     for(auto b : barrels)
     {
 
-        if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}) && !player->isBeingDisplacedHorz)
+        if(b->isPlayerInside(player->plPos, {player->plScl.x, player->plScl.y}) && b->cooldownTimer->getTicks() > 500) //&& !player->isBeingDisplacedHorz)
             {
                 b->playerInside = true;
                 player->inBarrel = true;

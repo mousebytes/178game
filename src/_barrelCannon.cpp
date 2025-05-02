@@ -14,6 +14,7 @@ _barrelCannon::_barrelCannon()
     rotation=0.0;
 
     framesX=framesY = 1;
+    cooldownTimer->reset();
 
 }
 
@@ -80,6 +81,10 @@ bool _barrelCannon::isPlayerInside(vec3 pPos, vec2 pScl)
 void _barrelCannon::updateB(_player* player)
 {
     if(!playerInside) return;
+    if(!(cooldownTimer->getTicks()> 500)) return;
+
+    player->plPos.x = pos.x;
+    player->plPos.y = pos.y;
 
     player->damage_timer->reset();
     player->player_can_be_damaged = false;
@@ -87,9 +92,11 @@ void _barrelCannon::updateB(_player* player)
     if(isAuto && fireTimer->getTicks()>fireDelay * 1000)
     {
         player->height_before_jump = player->plPos.y;
-        player->isJumping = true;
+        //player->isJumping = true;
 
         player->xBeforeHorzDisplacement = player->plPos.x;
+        player->barrelAngleDeg=rotation;
+        player->displacementTraveled=0;
         player->isBeingDisplacedHorz = true;
 
         player->inBarrel = false;
@@ -98,7 +105,7 @@ void _barrelCannon::updateB(_player* player)
         player->player_can_be_damaged = false;
         player->handle_player_damage_timer();
 
-
+        cooldownTimer->reset();
     }
 
     if(!isAuto)
@@ -106,9 +113,11 @@ void _barrelCannon::updateB(_player* player)
         if(GetAsyncKeyState(VK_SPACE) & 0x8000 && manualDelay->getTicks() > 300)
         {
             player->height_before_jump = pos.y;
-            player->isJumping = true;
+            //player->isJumping = true;
 
             player->xBeforeHorzDisplacement = pos.x;
+            player->barrelAngleDeg=rotation;
+            player->displacementTraveled=0;
             player->isBeingDisplacedHorz = true;
 
             player->inBarrel = false;
@@ -121,6 +130,8 @@ void _barrelCannon::updateB(_player* player)
             player->damage_timer->reset();
             player->player_can_be_damaged = false;
             player->handle_player_damage_timer();
+            cooldownTimer->reset();
+
         }
     }
 }

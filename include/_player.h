@@ -59,6 +59,9 @@ class _player
 
         bool facingRight;
 
+        float barrelAngleDeg;
+        float displacementTraveled;
+
     protected:
 
     private:

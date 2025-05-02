@@ -2,9 +2,9 @@
 
 #platform format: PLATFORM image x y z sx sy sz fx fy type
 # type : 0 -> STATIC || 1 -> HORIZONTAL || 2 -> VERTICAL
-PLATFORM images/wall.png 0 -2 -2 5 1 1 1 1
-PLATFORM images/wall.png 7 -2 -2 3 1 1 1 1
-PLATFORM images/wall.png 18 -2 -2 4 1 1 1 1
+PLATFORM images/wall.png 0 -2 -2 5 1 1 1 1 0 0
+PLATFORM images/wall.png 7 -2 -2 3 1 1 1 1 0 0
+PLATFORM images/wall.png 18 -2 -2 4 1 1 1 1 0 0
 
 
 # enemy format: ENEMY image x y z scale type
@@ -15,7 +15,7 @@ ENEMY 18 2 -3 0.6 1
 # moving platform format: MOVING_PLATFORM image x y z sx sy sz fx fy type range speed
 # type : 0 -> STATIC || 1 -> HORIZONTAL || 2 -> VERTICAL
 # range & speed : float
-MOVING_PLATFORM images/wall.png -8 0 -2 5 1 1 1 1 2 1.0 0.01
+MOVING_PLATFORM images/wall.png -8 0 -2 5 1 1 1 1 2 1.0 0.01 0
 
 #Collectible format: COLLECTIBLE image x y z radius framex framey
 COLLECTIBLE images/banana.png 3 0 -2 0.3 1 1

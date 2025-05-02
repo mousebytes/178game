@@ -230,8 +230,8 @@ void _player::handleHorizontalDisplacement()
         if(horzDisTimer->getTicks()>TIMER_LIMIT)
         {
             float rad = (barrelAngleDeg-90.0) * (3.1415926/180.0);
-            float stepX = -cos(rad)*jumping_speed;
-            float stepY = -sin(rad)*jumping_speed;
+            float stepX = -cos(rad)*jumping_speed*1.4;
+            float stepY = -sin(rad)*jumping_speed*1.4;
 
             plPos.x+=stepX;
             plPos.y +=stepY;

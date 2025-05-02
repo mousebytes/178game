@@ -159,7 +159,7 @@
 1746180952 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1746185243 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1746186933 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -235,12 +235,15 @@
 	<_timer.h>
 	<_textureLoader.h>
 
-1744811109 source:d:\codeblocks stuff\178game\src\_hud.cpp
+1746187346 source:d:\codeblocks stuff\178game\src\_hud.cpp
 	"_hud.h"
 
-1744810121 d:\codeblocks stuff\178game\include\_hud.h
+1746186924 d:\codeblocks stuff\178game\include\_hud.h
 	<_common.h>
 	<_textureLoader.h>
+	<_fonts.h>
+	<_camera.h>
+	<_buttons.h>
 
 1744875605 source:d:\codeblocks stuff\178game\src\_collectible.cpp
 	"_collectible.h"

@@ -32,6 +32,12 @@ void _hud::initHud(char* heartFile, int xfrm, int yfrm, vec3 camPos)
     yMin=yMax-(1/(float)framesY);
 
     heartTex->loadTexture(heartFile);
+
+    bananaCount->initFonts("images/fontsheet.png",15,8);
+    bananaCount->setPosition(6,3.5,-2);
+    bananaCount->setSize(0.1,0.1);
+
+    bananaIcon->initButton("images/banana.png",0,3.05,-2,0.1,0.1,1.0,1,1);
 }
 
 void _hud::drawHearts(int health, vec3 camPos)
@@ -64,3 +70,23 @@ void _hud::drawHearts(int health, vec3 camPos)
 
 
 }
+
+void _hud::updateBananaCount(int bananas, _camera* cam)
+{
+    bananaCount->setPosition(cam->camPos.x + 6,3, bananaCount->pos.z);
+
+    glDisable(GL_DEPTH_TEST);
+    bananaCount->drawText("x" + to_string(bananas));
+    glEnable(GL_DEPTH_TEST);
+}
+
+void _hud::drawBananaIcon(_camera* cam)
+{
+    bananaIcon->pos.x = cam->camPos.x + 5.8;
+    glDisable(GL_DEPTH_TEST);
+    bananaIcon->drawButton();
+    glEnable(GL_DEPTH_TEST);
+
+
+}
+

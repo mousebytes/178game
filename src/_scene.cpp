@@ -77,8 +77,6 @@ _buttons *helpBackButton = new _buttons();
 _buttons *loadSaveButton = new _buttons();
 _buttons *loadCustomButton = new _buttons();
 
-_fonts *blockFont = new _fonts();
-
 _scene::_scene()
 {
     //ctor
@@ -138,10 +136,6 @@ GLint _scene::initGL()
 
     initMenuButtons();
     initEditorInventory();
-
-    blockFont->initFonts("images/fontsheet.png",15,8);
-    blockFont->setPosition(-2,0,-2);
-    blockFont->setSize(0.1,0.1);
 
    return true;
 }
@@ -945,8 +939,6 @@ void _scene::drawMenu()
     menuCreditsButton->drawButton();
     menuHelpButton->drawButton();
 
-    blockFont->drawText("x86");
-
 }
 
 void _scene::runGame()
@@ -1069,6 +1061,8 @@ void _scene::runGame()
     checkGoal();
 
     hud->drawHearts(player->health,camera->camPos);
+    hud->updateBananaCount(player->coins, camera);
+    hud->drawBananaIcon(camera);
     //b->updateB(player->plPos, player->velocity, player->isJumping);
 
     if(isPaused)

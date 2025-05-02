@@ -81,6 +81,9 @@ void _barrelCannon::updateB(_player* player)
 {
     if(!playerInside) return;
 
+    player->damage_timer->reset();
+    player->player_can_be_damaged = false;
+
     if(isAuto && fireTimer->getTicks()>fireDelay * 1000)
     {
         player->height_before_jump = player->plPos.y;

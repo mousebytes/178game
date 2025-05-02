@@ -13,6 +13,7 @@
 #include<_parallax.h>
 #include<_buttons.h>
 #include <_sounds.h>
+#include<_fonts.h>
 
 char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
@@ -76,6 +77,8 @@ _buttons *helpBackButton = new _buttons();
 _buttons *loadSaveButton = new _buttons();
 _buttons *loadCustomButton = new _buttons();
 
+_fonts *blockFont = new _fonts();
+
 _scene::_scene()
 {
     //ctor
@@ -135,6 +138,10 @@ GLint _scene::initGL()
 
     initMenuButtons();
     initEditorInventory();
+
+    blockFont->initFonts("images/fontsheet.png",15,8);
+    blockFont->setPosition(-2,0,-2);
+    blockFont->setSize(0.1,0.1);
 
    return true;
 }
@@ -938,6 +945,7 @@ void _scene::drawMenu()
     menuCreditsButton->drawButton();
     menuHelpButton->drawButton();
 
+    blockFont->drawText("x86");
 
 }
 

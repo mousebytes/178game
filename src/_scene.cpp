@@ -55,6 +55,7 @@ vector<_collectible*> collectibles;
 vector<_barrelCannon*> barrels;
 
 vector<_buttons*> inventoryButtons(7);
+vector<_buttons*> platTextureButtons(2);
 
 bool playerWon = false;
 int currLevel = 1;
@@ -260,7 +261,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            {
                switch(wParam)
                {
-                   case 'M': if(placeObj == PLAT) if(previewPlat->chooseTex == previewPlat->DIRT) previewPlat->chooseTex = previewPlat->STONE; else previewPlat->chooseTex = previewPlat->DIRT;
+                   //case 'M': if(placeObj == PLAT) if(previewPlat->chooseTex == previewPlat->DIRT) previewPlat->chooseTex = previewPlat->STONE; else previewPlat->chooseTex = previewPlat->DIRT; break;
                    case '1': placeObj = PLAT; break;
                    case '2': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
                    case '3': placeObj = COLLECTIBLE; break;
@@ -269,10 +270,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
                    case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
-                   case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
+                   //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -568,6 +569,20 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             return 0;
                     }
                 }
+                for(int i =0;i<2;i++)
+                {
+
+                    if(platTextureButtons[i]->isHovered(mouseX,mouseY))
+                    {
+                        switch(i)
+                        {
+                            case 0: previewPlat->chooseTex = previewPlat->STONE; break;
+                            case 1: previewPlat->chooseTex=previewPlat->DIRT; break;
+                        }
+                    }
+                }
+
+                return 0;
                 }
     break;
         break;
@@ -596,7 +611,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 float scaleX = previewPlat->scale.x;
                 float scaleY = previewPlat->scale.y;
 
-                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0,1);
+                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0,previewPlat->chooseTex);
                 break;
                 }
             case ENEMY:
@@ -1195,6 +1210,10 @@ void _scene::drawEditor()
 {
     glLoadIdentity();
 
+    /*if(previewBarrel)
+    cout << '\n' << previewBarrel->pos.z << " " << previewBarrel->scale.x << " " << previewBarrel->scale.y;
+    */
+
     //glDisable(GL_LIGHTING);
 
     glDisable(GL_DEPTH_TEST);
@@ -1258,6 +1277,11 @@ void _scene::drawEditor()
         {
             inventoryButtons[i]->drawButton();
         }
+
+        if(placeObj==PLAT)
+            for(int i =0;i<2;i++)
+                platTextureButtons[i]->drawButton();
+
         glEnable(GL_DEPTH_TEST);
 
 
@@ -1462,6 +1486,14 @@ void _scene::initEditorInventory()
 
     inventoryButtons[6] = new _buttons();  // Barrel
     inventoryButtons[6]->initButton("images/barrel.png", 1.8, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
+
+
+    platTextureButtons[0] = new _buttons();
+    platTextureButtons[0]->initButton("images/stone_plat.png",-6.0,0.8,-2,0.5,0.5,1.0,1,1);
+
+    platTextureButtons[1] = new _buttons();
+    platTextureButtons[1]->initButton("images/dirt_plat.png",-6.0,-0.5,-2,0.5,0.5,1.0,1,1);
+
 }
 
 void _scene::drawSaveScreen()

@@ -28,6 +28,9 @@ _player::_player()
     framesX = 3;
     framesY = 1;
 
+    displacementTraveled = 0;
+    barrelAngleDeg=0;
+
 }
 
 _player::~_player()
@@ -180,6 +183,7 @@ void _player::playerActions()
 void _player::handle_vertical()
 {
     if(inBarrel) return;
+    if(isBeingDisplacedHorz) return;
 
     if(isJumping)
     {
@@ -218,18 +222,25 @@ void _player::handle_player_damage_timer()
 
 void _player::handleHorizontalDisplacement()
 {
-    if(isBeingDisplacedHorz)
+
+    if(!isBeingDisplacedHorz) return;
+
+    if(displacementTraveled<maxHorzDisplacement)
     {
-        if(plPos.x < xBeforeHorzDisplacement + maxHorzDisplacement)
+        if(horzDisTimer->getTicks()>TIMER_LIMIT)
         {
-            if(horzDisTimer->getTicks() > TIMER_LIMIT)
-            {
-                plPos.x += jumping_speed;
-                horzDisTimer->reset();
-            }
+            float rad = (barrelAngleDeg-90.0) * (3.1415926/180.0);
+            float stepX = -cos(rad)*jumping_speed;
+            float stepY = -sin(rad)*jumping_speed;
+
+            plPos.x+=stepX;
+            plPos.y +=stepY;
+            displacementTraveled+=jumping_speed;
+
+            horzDisTimer->reset();
         }
-        else
-            isBeingDisplacedHorz = false;
     }
+    else
+        isBeingDisplacedHorz=false;
 }
 

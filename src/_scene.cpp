@@ -1469,7 +1469,7 @@ void _scene::initEditorInventory()
     float yPos = 3.0;
 
     inventoryButtons[0] = new _buttons();  // Platform
-    inventoryButtons[0]->initButton("images/temp_plat.png", -3.0, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
+    inventoryButtons[0]->initButton("images/stone_plat.png", -3.0, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
 
     inventoryButtons[1] = new _buttons();  // Walker
     inventoryButtons[1]->initButton("images/temp_enemy.png", -2.2, yPos, -2, 0.5, 0.5, 1.0, 4, 1);

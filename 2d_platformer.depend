@@ -93,7 +93,7 @@
 1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
-1745344237 source:d:\codeblocks stuff\178game\main.cpp
+1746070008 source:d:\codeblocks stuff\178game\main.cpp
 	<windows.h>
 	<_common.h>
 	<_scene.h>
@@ -156,10 +156,10 @@
 1742987613 source:d:\codeblocks stuff\178game\src\_model.cpp
 	"_model.h"
 
-1745369688 source:d:\codeblocks stuff\178game\src\_player.cpp
+1745642395 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1745446708 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1746155616 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -174,6 +174,7 @@
 	<_barrelCannon.h>
 	<_parallax.h>
 	<_buttons.h>
+	<_sounds.h>
 
 1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
@@ -218,14 +219,14 @@
 1743938911 source:d:\codeblocks stuff\178game\src\_timer.cpp
 	"_timer.h"
 
-1744821138 d:\codeblocks stuff\178game\include\_platform.h
+1746148179 d:\codeblocks stuff\178game\include\_platform.h
 	<_textureLoader.h>
 	<_timer.h>
 
-1745271807 source:d:\codeblocks stuff\178game\src\_platform.cpp
+1746154052 source:d:\codeblocks stuff\178game\src\_platform.cpp
 	"_platform.h"
 
-1745175014 source:d:\codeblocks stuff\178game\src\_enemies.cpp
+1746148179 source:d:\codeblocks stuff\178game\src\_enemies.cpp
 	"_enemies.h"
 
 1745174864 d:\codeblocks stuff\178game\include\_enemies.h
@@ -253,7 +254,7 @@
 	<_common.h>
 	<_textureLoader.h>
 
-1745272728 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
+1746156436 source:d:\codeblocks stuff\178game\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
 1745007331 d:\codeblocks stuff\178game\include\_barrelcannon.h
@@ -697,6 +698,110 @@
 	"ik_ISoundSource.h"
 
 1746137260 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_sounds.cpp
+	"_sounds.h"
+	"_common.h"
+
+1746148179 d:\codeblocks stuff\178game\include\_sounds.h
+	<SNDS/irrKlang.h>
+
+1742988163 d:\codeblocks stuff\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_esoundoutputdrivers.h
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_esoundengineoptions.h
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_estreammodes.h
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1742988163 d:\codeblocks stuff\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1746148179 source:d:\codeblocks stuff\178game\src\_sounds.cpp
 	"_sounds.h"
 	"_common.h"
 

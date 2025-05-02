@@ -9,6 +9,9 @@ _barrelCannon::_barrelCannon()
     isAuto = false;
     fireDelay = 1.0;
     manualDelay = new _timer();
+    pos={0,0,-2};
+    scale={0.6,0.6};
+    rotation=0.0;
 
     framesX=framesY = 1;
 
@@ -22,22 +25,22 @@ _barrelCannon::~_barrelCannon()
 void _barrelCannon::initBarrel(const char* fileName, vec3 p, float rotDeg, bool autoF, float delay)
 {
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
-    vert[1].x =  1.0; vert[1].y = -1.0; vert[1].z = -1.0;
-    vert[2].x =  1.0; vert[2].y =  1.0; vert[2].z = -1.0;
-    vert[3].x = -1.0; vert[3].y =  1.0; vert[3].z = -1.0;
+    vert[1].x = 1.0; vert[1].y = -1.0; vert[1].z = -1.0;
+    vert[2].x = 1.0; vert[2].y = 1.0; vert[2].z = -1.0;
+    vert[3].x = -1.0; vert[3].y = 1.0; vert[3].z = -1.0;
 
     pos = p;
-    scale = {0.6,0.6};
+    scale = {.6,.6};
     rotation = rotDeg;
     isAuto = autoF;
-    fireDelay = delay;
+    fireDelay=delay;
     manualDelay->reset();
     tex->loadTexture(fileName);
     fireTimer->reset();
 
-    xMin=0;
-    xMax=1.0/(float)framesX;
-    yMax=1.0/(float)framesY;
+    xMin = 0;
+    xMax = 1.0/(float)framesX;
+    yMax = 1.0 / (float)framesY;
     yMin=yMax-(1/(float)framesY);
 
     tex->loadTexture(fileName);
@@ -45,6 +48,7 @@ void _barrelCannon::initBarrel(const char* fileName, vec3 p, float rotDeg, bool 
 
 void _barrelCannon::drawBarrel()
 {
+
     glPushMatrix();
 
     glTranslatef(pos.x,pos.y,pos.z);

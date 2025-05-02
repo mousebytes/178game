@@ -6,6 +6,8 @@ _platform::_platform()
     timer->reset();
     scale.x = scale.y = 1.0;
 
+
+
 }
 
 _platform::~_platform()

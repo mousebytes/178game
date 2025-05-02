@@ -57,6 +57,7 @@ vector<_barrelCannon*> barrels;
 
 vector<_buttons*> inventoryButtons(7);
 vector<_buttons*> platTextureButtons(2);
+vector<_buttons*> platAttributeButtons(2);
 
 bool playerWon = false;
 int currLevel = 1;
@@ -76,6 +77,9 @@ _buttons *creditsBackButton = new _buttons();
 _buttons *helpBackButton = new _buttons();
 _buttons *loadSaveButton = new _buttons();
 _buttons *loadCustomButton = new _buttons();
+
+_fonts *platAttributeMoving =new _fonts();
+_fonts *platAttributeStatic = new _fonts();
 
 _scene::_scene()
 {
@@ -136,6 +140,11 @@ GLint _scene::initGL()
 
     initMenuButtons();
     initEditorInventory();
+
+    platAttributeStatic->initFonts("images/fontsheet.png",15,8);
+    platAttributeMoving->initFonts("images/fontsheet.png",15,8);
+    platAttributeStatic->pos = {-6.2,-3,-2};
+    platAttributeMoving->pos = {-6.2,-2,-2};
 
    return true;
 }
@@ -454,7 +463,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 plat->initPlat("images/wall.png", mouseX, mouseY, -2.0,
                     previewPlat ? previewPlat->scale.x : 1.0f,
                     previewPlat ? previewPlat->scale.y : 1.0f,
-               1, 1, 1, 0, 0, 0, int(previewPlat->chooseTex));
+               1, 1, 1, int(previewPlat->type), 0.01, 1.5, int(previewPlat->chooseTex));
                 platforms.push_back(plat);
             }
             else if(placeObj == ENEMY)
@@ -569,6 +578,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         }
             return 0;
                     }
+
                 }
                 for(int i =0;i<2;i++)
                 {
@@ -581,6 +591,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                             case 1: previewPlat->chooseTex=previewPlat->DIRT; break;
                         }
                     }
+                    if(platAttributeButtons[i]->isHovered(mouseX,mouseY))
+                        previewPlat->type = i==1 ? previewPlat->STATIC : previewPlat->HORIZONTAL;
                 }
 
                 return 0;
@@ -612,7 +624,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 float scaleX = previewPlat->scale.x;
                 float scaleY = previewPlat->scale.y;
 
-                previewPlat->initPlat("images/wall.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, 0, 0, 0,previewPlat->chooseTex);
+                previewPlat->initPlat("images/dirt_plat.png", mouseX, mouseY, -2.0,scaleX, scaleY, 1,1, 1, previewPlat->type, 0, 0,previewPlat->chooseTex);
                 break;
                 }
             case ENEMY:
@@ -803,7 +815,9 @@ void _scene::load_level_file(const char* file_name)
             float x,y,z,sx,sy,sz,range,speed;
             int fx,fy, t, texType;
 
-            ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t>>speed>>range>>texType;
+            //ss>>img>>x>>y>>z>>sx>>sy>>sz>>fx>>fy>>t>>speed>>range>>texType;
+            ss >> img >> x >> y >> z >> sx >> sy >> sz >> fx >> fy >> t >> range >> speed >> texType;
+
 
             _platform* plat = new _platform();
             plat->initPlat(img.data(),x,y,z,sx,sy,sz,fx,fy, t,range,speed,texType);
@@ -1184,7 +1198,16 @@ void _scene::saveCustomLevel()
 
     for(auto plat:platforms)
     {
-        file<<"PLATFORM images/wall.png " << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "<< plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " " << plat->framesX << " " << plat->framesY << " " << int(plat->type) << " " << plat->patrol_range << " " << int(plat->chooseTex)<< endl;
+        if(int(plat->type) == 0)
+        file<<"PLATFORM images/wall.png " << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "<< plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " " << plat->framesX << " " << plat->framesY << " " << int(plat->type) << " " << int(plat->chooseTex)<< endl;
+        else
+            file << "MOVING_PLATFORM images/wall.png "
+     << plat->pos.x << " " << plat->pos.y << " " << plat->pos.z << " "
+     << plat->scale.x << " " << plat->scale.y << " " << plat->scale.z << " "
+     << plat->framesX << " " << plat->framesY << " "
+     << int(plat->type) << " " << plat->speed << " " << plat->patrol_range << " "
+     << int(plat->chooseTex) << "\n";
+
     }
 
     for(auto e:enemies)
@@ -1283,8 +1306,19 @@ void _scene::drawEditor()
         }
 
         if(placeObj==PLAT)
+        {
             for(int i =0;i<2;i++)
+            {
                 platTextureButtons[i]->drawButton();
+                platAttributeButtons[i]->drawButton();
+            }
+            glDisable(GL_DEPTH_TEST);
+            platAttributeStatic->drawText("STATIC");
+            platAttributeMoving->drawText("MOVING");
+            glEnable(GL_DEPTH_TEST);
+        }
+
+
 
         glEnable(GL_DEPTH_TEST);
 
@@ -1497,6 +1531,12 @@ void _scene::initEditorInventory()
 
     platTextureButtons[1] = new _buttons();
     platTextureButtons[1]->initButton("images/dirt_plat.png",-6.0,-0.5,-2,0.5,0.5,1.0,1,1);
+
+    platAttributeButtons[0] = new _buttons();
+    platAttributeButtons[0]->initButton("images/border.png", -5.5,-2,-2,1.2,0.2,1.0,1,1);
+
+    platAttributeButtons[1] = new _buttons();
+    platAttributeButtons[1]->initButton("images/border.png", -5.5,-3,-2,1.2,0.2,1.0,1,1);
 
 }
 

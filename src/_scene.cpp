@@ -689,6 +689,7 @@ void _scene::check_enemy_collisions()
         }
         else if (isTouching && player->player_can_be_damaged)
         {
+            sndOof->playSounds("oof.mp3");
             player->health--;
             player->damage_timer->reset();
             player->player_can_be_damaged = false;

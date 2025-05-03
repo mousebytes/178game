@@ -290,12 +290,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     break;
                     case 'R':
                     if (previewBarrel && placeObj == BARREL)
-                        previewBarrel->rotation += 5;
+                        previewBarrel->rotation -= 5;
                     break;
 
                     case 'E':
                     if (previewBarrel && placeObj == BARREL)
-                        previewBarrel->rotation -= 5;
+                        previewBarrel->rotation += 5;
                     break;
 
                     case VK_RIGHT: // Increase platform X scale
@@ -908,6 +908,11 @@ void _scene::checkCollectibles()
             cout << "Coins: " << player->coins << endl;
         }
     }
+    if(player->coins == 20)
+        {
+            player->health++;
+            player->coins = 0;
+        }
 }
 
 void _scene::checkGoal()
@@ -1078,6 +1083,8 @@ void _scene::runGame()
     {
         plat->updatePlat();
     }
+
+
 
     }
     else

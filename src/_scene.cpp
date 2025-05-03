@@ -592,8 +592,28 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         }
                     }
                     if(platAttributeButtons[i]->isHovered(mouseX,mouseY))
+                    {
                         previewPlat->type = i==1 ? previewPlat->STATIC : previewPlat->HORIZONTAL;
+                    }
                 }
+                if(previewPlat)
+                    if(previewPlat->type != previewPlat->STATIC)
+                    {
+                        platAttributeButtons[0]->xMin = 1.0f / platAttributeButtons[0]->framesX;
+                        platAttributeButtons[0]->xMax = 2.0f / platAttributeButtons[0]->framesX;
+
+                        platAttributeButtons[1]->xMin = 0 / platAttributeButtons[1]->framesX;
+                        platAttributeButtons[1]->xMax = 1.0 / platAttributeButtons[1]->framesX;
+                    }
+                else
+                {
+                    platAttributeButtons[0]->xMin = 0 / platAttributeButtons[0]->framesX;
+                    platAttributeButtons[0]->xMax = 1.0 / platAttributeButtons[0]->framesX;
+
+                    platAttributeButtons[1]->xMin = 1.0f / platAttributeButtons[1]->framesX;
+                    platAttributeButtons[1]->xMax = 2.0f / platAttributeButtons[1]->framesX;
+                }
+
 
                 return 0;
                 }
@@ -1533,10 +1553,10 @@ void _scene::initEditorInventory()
     platTextureButtons[1]->initButton("images/dirt_plat.png",-6.0,-0.5,-2,0.5,0.5,1.0,1,1);
 
     platAttributeButtons[0] = new _buttons();
-    platAttributeButtons[0]->initButton("images/border.png", -5.5,-2,-2,1.2,0.2,1.0,1,1);
+    platAttributeButtons[0]->initButton("images/border.png", -5.5,-2,-2,1.2,0.2,1.0,2,1);
 
     platAttributeButtons[1] = new _buttons();
-    platAttributeButtons[1]->initButton("images/border.png", -5.5,-3,-2,1.2,0.2,1.0,1,1);
+    platAttributeButtons[1]->initButton("images/border.png", -5.5,-3,-2,1.2,0.2,1.0,2,1);
 
 }
 

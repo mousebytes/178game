@@ -532,6 +532,16 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             player->initPlayer(playerTex);
             load_level_file("levels/custom_level.txt");
             gs = LEVELEDITOR;
+
+            /*
+            for(int i =0;i<2;++i)
+            {
+                platAttributeButtons[i]->pos.x = -5.5;
+            }*/
+
+            initEditorInventory();
+
+
             return 0;
         }
         else if(exitButton->isHovered(mouseX, mouseY))
@@ -1332,10 +1342,8 @@ void _scene::drawEditor()
                 platTextureButtons[i]->drawButton();
                 platAttributeButtons[i]->drawButton();
             }
-            glDisable(GL_DEPTH_TEST);
             platAttributeStatic->drawText("STATIC");
             platAttributeMoving->drawText("MOVING");
-            glEnable(GL_DEPTH_TEST);
         }
 
 
@@ -1557,6 +1565,9 @@ void _scene::initEditorInventory()
 
     platAttributeButtons[1] = new _buttons();
     platAttributeButtons[1]->initButton("images/border.png", -5.5,-3,-2,1.2,0.2,1.0,2,1);
+
+    platAttributeMoving->pos.x = -6.2;
+    platAttributeStatic->pos.x =-6.2;
 
 }
 

@@ -1,4 +1,13 @@
 PLATFORM images/wall.png -1.07005 -1.67756 -2 1 0.2 1 1 1 0 0
 PLATFORM images/wall.png 0.938884 -1.66376 -2 1 0.2 1 1 1 0 0
 PLATFORM images/wall.png 3.19635 -1.63614 -2 1 0.2 1 1 1 0 0
+PLATFORM images/wall.png -5.29158 -1.97787 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png -1.02518 -0.859493 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 1.02518 -0.735229 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 2.75452 -0.766295 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 2.78559 0.217462 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png -0.15533 0.486701 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 5.66437 0.372792 -2 0.3 0.1 1 1 1 0 1
+PLATFORM images/wall.png 6.61706 0.383148 -2 0.3 0.1 1 1 1 0 1
+MOVING_PLATFORM images/wall.png -1.85361 0.217462 -2 1 0.2 1 1 1 1 0.01 1.5 0
 GOAL images/goal.png 2.67858 0.207107 -2 0.2 1 1

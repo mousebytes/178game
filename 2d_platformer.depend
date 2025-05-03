@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1746179862 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -47,6 +47,7 @@
 	<_parallax.h>
 	<_buttons.h>
 	<_sounds.h>
+	<_fonts.h>
 
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_model.h
 	<_common.h>
@@ -72,11 +73,11 @@
 1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp
 	"_textureloader.h"
 
-1746173485 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
+1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_player.h
 	<_textureLoader.h>
 	<_timer.h>
 
-1746179202 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
@@ -274,7 +275,7 @@
 1745173692 source:d:\codeblocks stuff\178game\src\_parallax.cpp
 	"_parallax.h"
 
-1746179749 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
 1746179628 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_barrelcannon.h
@@ -307,12 +308,15 @@
 	<_common.h>
 	<_textureLoader.h>
 
-1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
 	"_hud.h"
 
-1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_hud.h
+1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_hud.h
 	<_common.h>
 	<_textureLoader.h>
+	<_fonts.h>
+	<_camera.h>
+	<_buttons.h>
 
 1745176049 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_parallax.h
 	<_common.h>
@@ -322,7 +326,7 @@
 1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
 	"_parallax.h"
 
-1746138095 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
 	"_platform.h"
 
 1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
@@ -813,6 +817,13 @@
 	"_fonts.h"
 
 1746182743 d:\codeblocks stuff\178game\include\_fonts.h
+	<_textureLoader.h>
+	<_common.h>
+
+1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_fonts.cpp
+	"_fonts.h"
+
+1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_fonts.h
 	<_textureLoader.h>
 	<_common.h>
 

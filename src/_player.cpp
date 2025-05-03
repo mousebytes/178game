@@ -25,11 +25,13 @@ _player::_player()
     animationTimer->reset();
     facingRight = true;
 
-    framesX = 3;
+    framesX = 6;
     framesY = 1;
 
     displacementTraveled = 0;
     barrelAngleDeg=0;
+
+    justExitedBarrel->reset();
 
 }
 
@@ -107,16 +109,25 @@ void _player::drawPlayer()
 void _player::playerActions()
 {
     if(inBarrel) return;
+    if(!player_can_be_damaged && justExitedBarrel->getTicks() > 1000)
+    {
+        xMin = 0.0;
+        xMax = 1.0/(float)framesX;
+    }
     if(!isBeingDisplacedHorz)
     if(timer->getTicks() > TIMER_LIMIT)
     {
         switch(action_trigger)
         {
         case STANDING:
-            xMin =0;
-            xMax = 1.0/(float)framesX;
-            yMax = 1.0/(float)framesY;
-            yMin = yMax- (1.0/(float)framesY);
+            if(player_can_be_damaged)
+            {
+                xMin =1.0/(float)framesX;
+                xMax = 2.0/(float)framesX;
+                yMax = 1.0/(float)framesY;
+                yMin = yMax- (1.0/(float)framesY);
+            }
+
             facingRight = facingRight;
         break;
 
@@ -124,40 +135,13 @@ void _player::playerActions()
 
             plPos.x -= speed;
             timer->reset();
+            if(player_can_be_damaged)
             if(animationTimer->getTicks() > 120)
             {
-                if(xMax== 5.0/8.0)
+                if(xMax >= 4.0/(float)framesX)
                 {
-                    xMin =0;
-                    xMax = 1.0/(float)framesX;
-                }
-                else
-                {
-                    xMax +=1.0/(float)framesX;
-                    xMin +=1.0/(float)framesX;
-
-                }
-                animationTimer->reset();
-                facingRight = false;
-            }
-
-
-        break;
-
-    case WALKRIGHT:
-            plPos.x += speed;
-            timer->reset();
-            if(animationTimer->getTicks() > 120)
-            {
-                /*xMax +=1.0/(float)framesX;
-                xMin +=1.0/(float)framesX;
-                animationTimer->reset();
-                facingRight = true;*/
-
-                if(xMax== 5.0/8.0)
-                {
-                    xMin =0;
-                    xMax = 1.0/(float)framesX;
+                    xMin =1.0/(float)framesX;
+                    xMax = 2.0/(float)framesX;
                     yMax = 1.0/(float)framesY;
                     yMin = yMax- (1.0/(float)framesY);
                 }
@@ -167,13 +151,58 @@ void _player::playerActions()
                     xMin +=1.0/(float)framesX;
 
                 }
-                facingRight = true;
                 animationTimer->reset();
-            }
 
+            }
+            facingRight = false;
 
 
         break;
+
+    case WALKRIGHT:
+            plPos.x += speed;
+            timer->reset();
+            if(player_can_be_damaged)
+            if(animationTimer->getTicks() > 120)
+            {
+                /*xMax +=1.0/(float)framesX;
+                xMin +=1.0/(float)framesX;
+                animationTimer->reset();
+                facingRight = true;*/
+
+                if(xMax >= 4.0/(float)framesX)
+                {
+                    xMin =1.0/(float)framesX;
+                    xMax = 2.0/(float)framesX;
+                    yMax = 1.0/(float)framesY;
+                    yMin = yMax- (1.0/(float)framesY);
+                }
+                else
+                {
+                    xMax +=1.0/(float)framesX;
+                    xMin +=1.0/(float)framesX;
+
+                }
+
+                animationTimer->reset();
+            }
+            facingRight = true;
+
+
+        break;
+        }
+    }
+    if(isJumping && player_can_be_damaged)
+    {
+        if(xMin >=1.0)
+        {
+            xMax = 5.0/(float)framesX;
+            xMax = 4.0/(float)framesX;
+        }
+        else
+        {
+            xMax= 1.0;
+            xMin = 5.0/(float)framesX;
         }
     }
 

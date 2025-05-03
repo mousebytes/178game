@@ -62,6 +62,8 @@ class _player
         float barrelAngleDeg;
         float displacementTraveled;
 
+        _timer *justExitedBarrel = new _timer();
+
     protected:
 
     private:

@@ -106,6 +106,7 @@ void _barrelCannon::updateB(_player* player)
         player->handle_player_damage_timer();
 
         cooldownTimer->reset();
+        player->justExitedBarrel->reset();
     }
 
     if(!isAuto)
@@ -131,6 +132,7 @@ void _barrelCannon::updateB(_player* player)
             player->player_can_be_damaged = false;
             player->handle_player_damage_timer();
             cooldownTimer->reset();
+            player->justExitedBarrel->reset();
 
         }
     }

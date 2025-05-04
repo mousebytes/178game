@@ -562,6 +562,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         }
 
+
+
         break;
     case WM_RBUTTONDOWN:
         input->wParam = wParam;
@@ -687,7 +689,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
         }
     }
-        if(gs == MAINMENU || gs == STARTSCREEN || gs == CREDITS || gs == HELP || gs == SAVESCREEN)
+        if(gs == MAINMENU || gs == STARTSCREEN || gs == CREDITS || gs == HELP || gs == SAVESCREEN || (gs == PLAYING && isPaused))
             mouseMapping(LOWORD(lParam), HIWORD(lParam));
 
     break;
@@ -1117,9 +1119,11 @@ void _scene::runGame()
     //b->updateB(player->plPos, player->velocity, player->isJumping);
 
     if(isPaused)
+    {
         drawPausePopup();
-
+    }
 }
+
 
 void _scene::drawGameOver()
 {
@@ -1460,6 +1464,8 @@ void _scene::initMenuButtons()
 void _scene::drawPausePopup()
 {
     glDisable(GL_DEPTH_TEST);
+
+
     glPushMatrix();
 
     // Move the popup in front of the camera
@@ -1473,11 +1479,10 @@ void _scene::drawPausePopup()
     glPushMatrix();
     glTranslatef(camera->camPos.x, camera->camPos.y, camera->camPos.z - 3.5f);
 
-    float adjustedMouseX = mouseX - camera->camPos.x;
-    float adjustedMouseY = mouseY - camera->camPos.y;
-
-    resumeButton->updateHover(adjustedMouseX, adjustedMouseY);
-    backToMenuButton->updateHover(adjustedMouseX, adjustedMouseY);
+    //float adjustedMouseX = mouseX - camera->camPos.x;
+    //float adjustedMouseY = mouseY - camera->camPos.y;
+    resumeButton->updateHover(mouseX, mouseY);
+    backToMenuButton->updateHover(mouseX, mouseY);
 
     //resumeButton->updateHover(mouseX, mouseY);
     //backToMenuButton->updateHover(mouseX, mouseY);

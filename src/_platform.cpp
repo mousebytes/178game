@@ -4,10 +4,7 @@ _platform::_platform()
 {
     //ctor
     timer->reset();
-    scale.x = scale.y = 1.0;
-
-
-
+    scale.x = scale.y = 0.3;
 }
 
 _platform::~_platform()

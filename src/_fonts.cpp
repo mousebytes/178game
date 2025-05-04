@@ -96,6 +96,12 @@ bool _fonts::getFontFrame(char c, int& fx, int& fy)
         fy = 4;
     }
 
+    if(c==' ')
+    {
+        fx = 0;
+        fy = 7;
+    }
+
     //clamp
     if (fx < 0 || fy < 0 || fx >= framesX || fy >= framesY)
         return false;

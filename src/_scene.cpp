@@ -78,8 +78,17 @@ _buttons *helpBackButton = new _buttons();
 _buttons *loadSaveButton = new _buttons();
 _buttons *loadCustomButton = new _buttons();
 
+_buttons *scaleDownButton = new _buttons();
+_buttons *scaleUpButton = new _buttons();
+
 _fonts *platAttributeMoving =new _fonts();
 _fonts *platAttributeStatic = new _fonts();
+_fonts *scaleDownJ = new _fonts();
+_fonts *scaleUpK = new _fonts();
+_fonts *scaleText = new _fonts();
+_fonts *rotateR = new _fonts();
+_fonts *rotateE = new _fonts();
+_fonts *rotateText = new _fonts();
 
 _scene::_scene()
 {
@@ -282,8 +291,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5;break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5;break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5;break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -311,7 +320,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         previewPlat->scale.y += 0.1;
                         break;
 
-                    case VK_OEM_4: // '[' — shrink enemy
+                    case 'J': //  shrink enemy
                     if (previewEnemy && placeObj == ENEMY)
                     previewEnemy->scale.x = previewEnemy->scale.y = max(0.05, previewEnemy->scale.x - 0.05);
 
@@ -321,7 +330,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         previewPlat->scale.y = max(0.1, previewPlat->scale.y - 0.1);
                     }
                     break;
-                    case VK_OEM_6: // ']' — enlarge enemy
+                    case 'K': //  enlarge enemy
                     if (previewEnemy && placeObj == ENEMY)
                     previewEnemy->scale.x = previewEnemy->scale.y += 0.05;
 
@@ -1358,6 +1367,29 @@ void _scene::drawEditor()
         }
 
 
+        if(placeObj == BARREL || placeObj == COLLECTIBLE || placeObj == GOAL)
+        {
+
+        }
+        else
+        {
+            scaleDownButton->drawButton();
+            scaleDownJ->drawText("J");
+            scaleUpButton->drawButton();
+            scaleUpK->drawText("K");
+
+            scaleText->drawText("Scale");
+        }
+
+        if(placeObj==BARREL)
+        {
+            scaleDownButton->drawButton();
+            scaleUpButton->drawButton();
+
+            rotateE->drawText("E");
+            rotateR->drawText("R");
+            rotateText->drawText("rotate");
+        }
 
         glEnable(GL_DEPTH_TEST);
 
@@ -1581,6 +1613,35 @@ void _scene::initEditorInventory()
     platAttributeMoving->pos.x = -6.2;
     platAttributeStatic->pos.x =-6.2;
 
+    scaleDownButton = new _buttons();
+    scaleDownButton->initButton("images/border.png",5.3,-3.0,-2,0.3,0.3,1.0,2,1);
+
+    scaleDownJ->initFonts("images/fontsheet.png",15,8);
+    scaleDownJ->setPosition(5.3,-3.0,-2);
+    scaleDownJ->setSize(0.3,0.3);
+
+    scaleUpButton = new _buttons();
+    scaleUpButton->initButton("images/border.png",6.0,-3.0,-2,0.3,0.3,1.0,2,1);
+
+    scaleUpK->initFonts("images/fontsheet.png",15,8);
+    scaleUpK->setPosition(6.0,-3.0,-2);
+    scaleUpK->setSize(0.3,0.3);
+
+    scaleText->initFonts("images/fontsheet.png",15,8);
+    scaleText->setPosition(5.3,-2.5,-2);
+    scaleText->setSize(0.1,0.1);
+
+    rotateE->initFonts("images/fontsheet.png",15,8);
+    rotateE->setPosition(5.3,-3.0,-2);
+    rotateE->setSize(0.3,0.3);
+
+    rotateR->initFonts("images/fontsheet.png",15,8);
+    rotateR->setPosition(6.0,-3.0,-2);
+    rotateR->setSize(0.3,0.3);
+
+    rotateText->initFonts("images/fontsheet.png",15,8);
+    rotateText->setPosition(5.25,-2.5,-2);
+    rotateText->setSize(0.1,0.1);
 }
 
 void _scene::drawSaveScreen()

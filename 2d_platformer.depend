@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746411889 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -326,7 +326,7 @@
 1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
 	"_parallax.h"
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+1746406341 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
 	"_platform.h"
 
 1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
@@ -820,7 +820,7 @@
 	<_textureLoader.h>
 	<_common.h>
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_fonts.cpp
+1746406341 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_fonts.cpp
 	"_fonts.h"
 
 1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_fonts.h

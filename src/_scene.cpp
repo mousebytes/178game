@@ -80,6 +80,7 @@ _buttons *loadCustomButton = new _buttons();
 
 _buttons *scaleDownButton = new _buttons();
 _buttons *scaleUpButton = new _buttons();
+_buttons *rightClickEditorButton = new _buttons();
 
 _fonts *platAttributeMoving =new _fonts();
 _fonts *platAttributeStatic = new _fonts();
@@ -89,6 +90,7 @@ _fonts *scaleText = new _fonts();
 _fonts *rotateR = new _fonts();
 _fonts *rotateE = new _fonts();
 _fonts *rotateText = new _fonts();
+_fonts *rightClickEditorFont = new _fonts();
 
 _scene::_scene()
 {
@@ -291,8 +293,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5;break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5;break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -1391,6 +1393,9 @@ void _scene::drawEditor()
             rotateText->drawText("rotate");
         }
 
+        rightClickEditorButton->drawButton();
+        rightClickEditorFont->drawText("to select");
+
         glEnable(GL_DEPTH_TEST);
 
 
@@ -1642,7 +1647,14 @@ void _scene::initEditorInventory()
     rotateText->initFonts("images/fontsheet.png",15,8);
     rotateText->setPosition(5.25,-2.5,-2);
     rotateText->setSize(0.1,0.1);
-}
+
+    rightClickEditorButton->initButton("images/rightclick.png",5.85,3.2,-2,0.5,0.5,1.0,1,1);
+
+    rightClickEditorFont->initFonts("images/fontsheet.png",15,8);
+    rightClickEditorFont->setPosition(5.25,2.5,-2);
+    rightClickEditorFont->setSize(0.1,0.1);
+
+    }
 
 void _scene::drawSaveScreen()
 {

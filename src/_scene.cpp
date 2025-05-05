@@ -81,6 +81,11 @@ _buttons *loadCustomButton = new _buttons();
 _buttons *scaleDownButton = new _buttons();
 _buttons *scaleUpButton = new _buttons();
 _buttons *rightClickEditorButton = new _buttons();
+_buttons *upKey = new _buttons();
+_buttons *downKey = new _buttons();
+_buttons *leftKey = new _buttons();
+_buttons *rightKey = new _buttons();
+
 
 _fonts *platAttributeMoving =new _fonts();
 _fonts *platAttributeStatic = new _fonts();
@@ -91,6 +96,8 @@ _fonts *rotateR = new _fonts();
 _fonts *rotateE = new _fonts();
 _fonts *rotateText = new _fonts();
 _fonts *rightClickEditorFont = new _fonts();
+_fonts *backspaceText = new _fonts();
+_fonts *toReset = new _fonts();
 
 _scene::_scene()
 {
@@ -293,8 +300,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5;break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -345,8 +352,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     case VK_BACK:
                         if (placeObj == PLAT && previewPlat)
                         {
-                            previewPlat->scale.x = 1.0;
-                            previewPlat->scale.y = 1.0;
+                            previewPlat->scale.x = .3;
+                            previewPlat->scale.y = .3;
                         }
                         else if (placeObj == ENEMY && previewEnemy)
                         {
@@ -1366,6 +1373,10 @@ void _scene::drawEditor()
             }
             platAttributeStatic->drawText("STATIC");
             platAttributeMoving->drawText("MOVING");
+            upKey->drawButton();
+            downKey->drawButton();
+            leftKey->drawButton();
+            rightKey->drawButton();
         }
 
 
@@ -1381,6 +1392,8 @@ void _scene::drawEditor()
             scaleUpK->drawText("K");
 
             scaleText->drawText("Scale");
+            backspaceText->drawText("backspace");
+            toReset->drawText("to reset");
         }
 
         if(placeObj==BARREL)
@@ -1394,7 +1407,7 @@ void _scene::drawEditor()
         }
 
         rightClickEditorButton->drawButton();
-        rightClickEditorFont->drawText("to select");
+        rightClickEditorFont->drawText("select");
 
         glEnable(GL_DEPTH_TEST);
 
@@ -1652,7 +1665,20 @@ void _scene::initEditorInventory()
 
     rightClickEditorFont->initFonts("images/fontsheet.png",15,8);
     rightClickEditorFont->setPosition(5.25,2.5,-2);
-    rightClickEditorFont->setSize(0.1,0.1);
+    rightClickEditorFont->setSize(0.15,0.15);
+
+    backspaceText->initFonts("images/fontsheet.png",15,8);
+    backspaceText->setPosition(2.5,3.0,-2);
+    backspaceText->setSize(0.2,0.2);
+
+    toReset->initFonts("images/fontsheet.png",15,8);
+    toReset->setPosition(2.6,2.5,-2);
+    toReset->setSize(0.2,0.2);
+
+    upKey->initButton("images/upkey.png",5.7,-1.55,-2,.2,.2,1.0,1,1);
+    leftKey->initButton("images/leftkey.png",5.25,-2,-2,.2,.2,1.0,1,1);
+    downKey->initButton("images/downkey.png",5.7,-2,-2,.2,.2,1.0,1,1);
+    rightKey->initButton("images/rightkey.png",6.15,-2,-2,.2,.2,1.0,1,1);
 
     }
 

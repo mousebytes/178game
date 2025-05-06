@@ -64,6 +64,8 @@ class _player
 
         _timer *justExitedBarrel = new _timer();
 
+        _timer *justBounced = new _timer();
+
     protected:
 
     private:

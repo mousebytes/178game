@@ -610,6 +610,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             player->initPlayer(playerTex);
             gs = PLAYING;
             playerWon = false;
+            player->health = 3;
             return 0;
         }
         else if(loadButton->isHovered(mouseX, mouseY))
@@ -841,6 +842,8 @@ void _scene::check_enemy_collisions()
             player->isJumping = true;
             player->is_grounded = false;
             player->height_before_jump = player->plPos.y;
+
+            player->justBounced->reset();
 
         }
         else if (isTouching && player->player_can_be_damaged)

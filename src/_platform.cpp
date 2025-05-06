@@ -4,16 +4,17 @@ _platform::_platform()
 {
     //ctor
     timer->reset();
-    scale.x = scale.y = 1.0;
-
+    scale.x = scale.y = 0.3;
 }
 
 _platform::~_platform()
 {
     //dtor
+    delete tex;
+    delete timer;
 }
 
-void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm, int t, float s, float p_r)
+void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm, int t, float s, float p_r, int texType)
 {
     vert[0].x = -1.0; vert[0].y = -1.0; vert[0].z = -1.0;
     vert[1].x =  1.0; vert[1].y = -1.0; vert[1].z = -1.0;
@@ -56,6 +57,26 @@ case 2:
 
     //tex->loadTexture(file_name);
     tex->loadTexture("images/temp_plat.png");
+
+    switch(texType)
+    {
+    case 0:
+        chooseTex = STONE;
+        break;
+    case 1:
+        chooseTex=DIRT;
+        break;
+    }
+
+    switch(chooseTex)
+    {
+    case STONE:
+        tex->loadTexture("images/stone_plat.png");
+        break;
+    case DIRT:
+        tex->loadTexture("images/dirt_plat.png");
+        break;
+    }
 }
 
 void _platform::drawPlat()

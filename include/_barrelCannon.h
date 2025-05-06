@@ -31,6 +31,8 @@ class _barrelCannon
         vec3 vert[4];
         int framesX, framesY;
 
+        _timer *cooldownTimer = new _timer();
+
     protected:
 
     private:

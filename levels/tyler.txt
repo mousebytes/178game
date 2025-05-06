@@ -1,0 +1,144 @@
+PLATFORM images/wall.png -3.08052 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png -1.04934 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 0.98184 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 3.00075 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 5.03806 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 8.58975 -2.21604 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 10.5918 -2.21604 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 12.5593 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 14.5562 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 16.5514 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 18.5258 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 20.5257 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 22.507 -2.20914 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 25.3004 -0.134619 -2 1 1 1 1 1 0
+PLATFORM images/wall.png 33.8032 -2.74416 -2 6.2 0.6 1 1 1 0
+ENEMY 14.4097 1.03553 -3 0.25 2
+ENEMY 16.5222 1.31513 -3 0.25 2
+ENEMY 8.09036 0.46599 -3 1.7 0
+ENEMY 3.65543 -0.714518 -3 2.7 2
+ENEMY 2.54741 1.04589 -3 0.8 1
+ENEMY 10.1552 -0.331371 -3 0.85 1
+ENEMY 24.4985 1.35655 -3 0.5 0
+ENEMY 26.1036 1.35655 -3 1.2 2
+ENEMY 0.0576641 -0.921625 -3 3.85 2
+ENEMY 0.0576641 -0.921625 -3 3.85 2
+ENEMY -1.00894 -1.253 -3 3.85 2
+ENEMY -1.76488 1.35655 -3 1.35 1
+ENEMY 33.7618 0.0103553 -3 2.25 1
+ENEMY 30.1064 0.673097 -3 0.95 0
+ENEMY 34.9009 -0.124264 -3 0.25 2
+ENEMY 32.6331 -0.124264 -3 0.25 2
+ENEMY 37.2826 0.227817 -3 1 2
+COLLECTIBLE images/banana.png 8.64335 -0.362437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 8.72619 -0.44528 -2 0.1 1 1
+COLLECTIBLE images/banana.png 12.5473 1.52223 -2 0.1 1 1
+COLLECTIBLE images/banana.png 23.784 3.0134 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.6597 -1.24264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.5251 -1.13909 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3387 -1.11838 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0901 -0.973402 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0591 -0.942336 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0591 -0.942336 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.852 -0.952691 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2765 -1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2765 -1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0073 -1.0666 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0073 -1.0666 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2973 -1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3801 -1.52223 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.5044 -1.1598 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3697 -1.01482 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3697 -1.01482 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2973 -0.838782 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.9866 -0.289949 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.997 0.0103553 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0694 0.165685 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1833 0.113909 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2144 -0.124264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2144 -0.124264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1937 -0.538478 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1937 -0.217462 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.2144 -0.362437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.4008 -0.93198 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.5458 -1.24264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3801 -1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3801 -1.33584 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.8934 -0.383148 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.531 -0.44528 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.6818 1.01482 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.7647 0.673097 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.8889 0.321016 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.0753 0 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.1271 -0.165685 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.3401 0.745584 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.4954 0.062132 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.6093 -0.362437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.7647 -0.610965 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.0236 -0.890559 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.1996 -0.93198 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.2617 -0.963046 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.7174 -1.12873 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.7174 -1.12873 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.562 -1.02518 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.0487 -1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.3387 -1.56366 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.3505 0.46599 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.1021 -1.35655 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.4335 -1.27371 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.6199 -1.17015 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.7338 -1.0666 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.7856 -0.983757 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.827 -0.673097 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.827 -0.403858 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.8684 -0.196751 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.0652 -0.403858 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.1791 -0.559188 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.2309 -0.559188 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.4276 -0.258883 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.4276 -0.258883 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5001 0.093198 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5312 0.44528 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5312 0.507412 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5312 0.289949 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.4897 0.062132 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.4897 -0.124264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.3448 -0.46599 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5726 0.828427 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.7279 0.610965 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.759 0.383148 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.9247 0.0517767 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.8625 -0.362437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.9143 -0.165685 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.7176 -0.579899 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.5829 -0.838782 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.469 -1.22193 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.1998 -1.40833 -2 0.1 1 1
+COLLECTIBLE images/banana.png 37.0445 -1.42904 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.9823 -1.43939 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.5681 -1.52223 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.3714 -1.54295 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.2057 -1.58437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 36.6717 -1.49117 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.4481 -1.0666 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1316 0.238173 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.883 0.362437 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.6966 0.46599 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.4895 0.507412 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.7381 0.548833 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1626 0.321016 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.1937 0.0724874 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.8727 -0.714518 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.3446 -0.590254 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.3446 -0.590254 -2 0.1 1 1
+COLLECTIBLE images/banana.png 30.0339 -0.424569 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.8579 -0.248528 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.7025 -0.0724874 -2 0.1 1 1
+BARREL 11.9586 1.18741 -2 -60 0 1
+BARREL 17.9099 2.00894 -2 -50 0 1
+BARREL -1.92325 0.590254 -2 0 0 1
+BARREL 20.1391 -0.662742 -2 0 0 1
+BARREL 22.5519 -0.673097 -2 0 0 1
+BARREL 5.71888 0.548833 -2 1.62821e-027 0 1
+BARREL 33.7515 -0.673097 -2 -360 0 1
+GOAL images/goal.png 30.1271 1.67756 -2 0.2 1 1

@@ -44,6 +44,13 @@ _enemies::_enemies()
 _enemies::~_enemies()
 {
     //dtor
+    delete timer;
+    delete fall_timer;
+    delete tex;
+    delete respawn_timer;
+    delete jumpT;
+    delete jumpTimer;
+    delete pTmer;
 }
 
 void _enemies::initEnms()
@@ -116,7 +123,8 @@ void _enemies::placeEnms(vec3 p, float scl)
 
 void _enemies::actions()
 {
-    if(!isEnmsLive)
+    if(!isEnmsLive && eT!= JUMPER)
+
     {
         if(start_respawn_timer)
         {

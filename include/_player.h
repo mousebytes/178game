@@ -59,6 +59,11 @@ class _player
 
         bool facingRight;
 
+        float barrelAngleDeg;
+        float displacementTraveled;
+
+        _timer *justExitedBarrel = new _timer();
+
     protected:
 
     private:

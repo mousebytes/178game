@@ -28,9 +28,9 @@ class _scene
         void loadGame();
         void mouseMapping(int x, int y);
 
-        enum GameState {MAINMENU,PLAYING,GAMEOVER,LEVELEDITOR, PAUSED, WIN, STARTSCREEN, CREDITS, HELP, SAVESCREEN};
+        enum GameState {MAINMENU,PLAYING,GAMEOVER,LEVELEDITOR, PAUSED};
 
-        GameState gs = STARTSCREEN;
+        GameState gs = MAINMENU;
         GameState previousGS;
 
         double mouseX, mouseY, mouseZ;
@@ -53,14 +53,6 @@ class _scene
         bool SceneDone, isPaused;
 
         void drawPausePopup();
-
-        void drawWinScreen();
-        void drawstartScreen();
-        void drawHelpScreen();
-        void drawCreditsScreen();
-        void drawSaveScreen();
-
-        void initEditorInventory();
 
     protected:
 

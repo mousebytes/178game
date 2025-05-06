@@ -3,6 +3,7 @@ PLATFORM images/wall.png -1.04934 -2.44846 -2 1 0.3 1 1 1 0
 PLATFORM images/wall.png 0.98184 -2.44846 -2 1 0.3 1 1 1 0
 PLATFORM images/wall.png 3.00075 -2.44846 -2 1 0.3 1 1 1 0
 PLATFORM images/wall.png 5.03806 -2.44846 -2 1 0.3 1 1 1 0
+PLATFORM images/wall.png 1.22335 -1.3669 -2 1 0.2 1 1 1 0
 PLATFORM images/wall.png 8.58975 -2.21604 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 10.5918 -2.21604 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 12.5593 -2.20914 -2 1 1 1 1 1 0
@@ -12,18 +13,15 @@ PLATFORM images/wall.png 18.5258 -2.20914 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 20.5257 -2.20914 -2 1 1 1 1 1 0
 PLATFORM images/wall.png 22.507 -2.20914 -2 1 1 1 1 1 0
 ENEMY 3.76244 -1.81564 -3 0.25 0
-ENEMY 14.4097 1.03553 -3 0.25 2
-ENEMY 16.5222 1.31513 -3 0.25 2
-COLLECTIBLE images/banana.png 2.07249 -1.85361 -2 0.1 1 1
-COLLECTIBLE images/banana.png -0.392083 -1.60508 -2 0.1 1 1
-COLLECTIBLE images/banana.png -2.2664 -1.78112 -2 0.1 1 1
-COLLECTIBLE images/banana.png -1.57259 -1.69828 -2 0.1 1 1
-COLLECTIBLE images/banana.png 1.19228 -1.72934 -2 0.1 1 1
-COLLECTIBLE images/banana.png 3.40833 -1.93645 -2 0.1 1 1
-COLLECTIBLE images/banana.png 4.21604 -1.89503 -2 0.1 1 1
-COLLECTIBLE images/banana.png 0.486701 -0.517767 -2 0.1 1 1
-COLLECTIBLE images/banana.png 15.3003 1.76041 -2 0.1 1 1
-COLLECTIBLE images/banana.png 13.281 1.5533 -2 0.1 1 1
-BARREL 11.9586 1.18741 -2 -60 0 1
-BARREL 17.9099 2.00894 -2 -50 0 1
-GOAL images/goal.png 18.9615 2.16427 -2 0.2 1 1
+ENEMY 18.0504 1.56711 -3 2.3 1
+ENEMY 1.98823 -0.890559 -3 0.25 1
+ENEMY 2.37137 0.062132 -3 0.25 2
+ENEMY 1.26335 0.528122 -3 0.85 2
+COLLECTIBLE images/coin.png 2.07249 -1.85361 -2 0.1 1 1
+COLLECTIBLE images/coin.png -0.392083 -1.60508 -2 0.1 1 1
+COLLECTIBLE images/coin.png -2.2664 -1.78112 -2 0.1 1 1
+COLLECTIBLE images/coin.png -1.57259 -1.69828 -2 0.1 1 1
+COLLECTIBLE images/coin.png 1.19228 -1.72934 -2 0.1 1 1
+COLLECTIBLE images/coin.png 3.40833 -1.93645 -2 0.1 1 1
+COLLECTIBLE images/coin.png 4.21604 -1.89503 -2 0.1 1 1
+GOAL images/goal.png 23.432 -0.966498 -2 0.2 1 1

@@ -331,3 +331,154 @@
 1745353385 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_buttons.h
 	<_textureLoader.h>
 
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\main.cpp
+	<windows.h>
+	<_common.h>
+	<_scene.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_common.h
+	<windows.h>
+	<iostream>
+	<gl/gl.h>
+	<GL/glut.h>
+	<time.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<vector>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_scene.h
+	<_common.h>
+	<_timer.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_timer.h
+	<_common.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_background.cpp
+	"_background.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_background.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_textureloader.h
+	<_common.h>
+	<SOIL.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_barrelcannon.cpp
+	"_barrelCannon.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_barrelcannon.h
+	<_timer.h>
+	<_textureLoader.h>
+	<_player.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_player.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_buttons.cpp
+	"_buttons.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_buttons.h
+	<_textureLoader.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_camera.cpp
+	"_camera.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_camera.h
+	<_common.h>
+	<_player.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_collectible.cpp
+	"_collectible.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_collectible.h
+	<_textureLoader.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_collisioncheck.cpp
+	"_collisionCheck.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_collisioncheck.h
+	<_common.h>
+	<_player.h>
+	<_platform.h>
+	<_enemies.h>
+	<_collectible.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_platform.h
+	<_textureLoader.h>
+	<_timer.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_enemies.h
+	<_common.h>
+	<_timer.h>
+	<_textureLoader.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_enemies.cpp
+	"_enemies.h"
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_goal.cpp
+	"_goal.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_goal.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_hud.cpp
+	"_hud.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_hud.h
+	<_common.h>
+	<_textureLoader.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_inputs.cpp
+	"_inputs.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_inputs.h
+	<_common.h>
+	<_player.h>
+	<_parallax.h>
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_parallax.h
+	<_common.h>
+	<_textureloader.h>
+	<_timer.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_lightsetting.cpp
+	"_lightsetting.h"
+
+1745376172 c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\include\_lightsetting.h
+	<_common.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_parallax.cpp
+	"_parallax.h"
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_platform.cpp
+	"_platform.h"
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_player.cpp
+	"_player.h"
+
+1745441361 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_scene.cpp
+	"_scene.h"
+	<_lightsetting.h>
+	<_inputs.h>
+	<_player.h>
+	<_camera.h>
+	<_background.h>
+	<_collisionCheck.h>
+	<_platform.h>
+	<_enemies.h>
+	<_hud.h>
+	<_goal.h>
+	<_barrelCannon.h>
+	<_parallax.h>
+	<_buttons.h>
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_textureloader.cpp
+	"_textureloader.h"
+
+1745376172 source:c:\users\delar\onedrive\desktop\csci 178\178game_copy\178game\src\_timer.cpp
+	"_timer.h"
+

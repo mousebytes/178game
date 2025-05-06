@@ -33,11 +33,6 @@ _parallax *p1 = new _parallax();
 _parallax *p2 = new _parallax();
 _parallax *p3 = new _parallax();
 _parallax *background = new _parallax();
-_parallax *deathScreen = new _parallax();
-_parallax *winBG = new _parallax();
-_parallax *startScreenBG = new _parallax();
-_parallax *creditsScreenBG = new _parallax();
-_parallax *helpScreenBG = new _parallax();
 
 
 _platform* previewPlat = nullptr;
@@ -51,8 +46,6 @@ vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
 vector<_barrelCannon*> barrels;
 
-vector<_buttons*> inventoryButtons(7);
-
 bool playerWon = false;
 int currLevel = 1;
 
@@ -63,21 +56,12 @@ _buttons *loadButton = new _buttons();
 
 _buttons *resumeButton = new _buttons();
 _buttons *backToMenuButton = new _buttons();
-_buttons *startScreenButton = new _buttons();
-_buttons *jungleAdventureSS = new _buttons();
-_buttons *menuCreditsButton = new _buttons();
-_buttons *menuHelpButton = new _buttons();
-_buttons *creditsBackButton = new _buttons();
-_buttons *helpBackButton = new _buttons();
-_buttons *loadSaveButton = new _buttons();
-_buttons *loadCustomButton = new _buttons();
 
 _scene::_scene()
 {
     //ctor
     SceneDone = false;
     isPaused = false;
-
 }
 
 _scene::~_scene()
@@ -107,14 +91,7 @@ GLint _scene::initGL()
     dim.x = GetSystemMetrics(SM_CXSCREEN);
     dim.y = GetSystemMetrics(SM_CYSCREEN);
 
-    background->initPrlx("images/new_images/New_Bg.png");
-    deathScreen->initPrlx("images/new_images/Game_Over.png");
-    startScreenBG->initPrlx("images/new_images/New_Bg.png");
-    winBG->initPrlx("images/new_images/You_Win.png");
-    creditsScreenBG->initPrlx("images/new_images/Credits_Menu.png");
-    helpScreenBG->initPrlx("images/new_images/help menu.png");
-
-
+    background->initPrlx("images/New_Bg.png");
 
     load_level_file("levels/level1.txt");
 
@@ -129,7 +106,6 @@ GLint _scene::initGL()
     p3->speed = 0.001;
 
     initMenuButtons();
-    initEditorInventory();
 
    return true;
 }
@@ -156,11 +132,12 @@ void _scene::drawScene()
     glLoadIdentity();
 
 
+
+
+
+
     switch(gs)
     {
-    case STARTSCREEN:
-        drawstartScreen();
-        break;
     case MAINMENU:
         drawMenu();
         break;
@@ -172,19 +149,6 @@ void _scene::drawScene()
         break;
     case LEVELEDITOR:
         drawEditor();
-        break;
-    case WIN:
-        drawWinScreen();
-        break;
-    case CREDITS:
-        drawCreditsScreen();
-        break;
-    case HELP:
-        drawHelpScreen();
-        break;
-    case SAVESCREEN:
-        drawSaveScreen();
-        break;
     }
 
 
@@ -201,12 +165,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
            input->wParam = wParam;
 
-           if((gs == PLAYING || gs == LEVELEDITOR || gs == SAVESCREEN) && wParam == VK_ESCAPE)
+           if((gs == PLAYING || gs == LEVELEDITOR) && wParam == VK_ESCAPE)
            {
                 isPaused = !isPaused;
            }
-           if((gs == WIN || gs == CREDITS || gs == HELP)&& wParam == VK_ESCAPE)
-                gs = MAINMENU;
         if(!isPaused)
         {
 
@@ -220,7 +182,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 gs = PLAYING;
                 playerWon= false;
            }
-            else if (gs == GAMEOVER && wParam == VK_ESCAPE)
+            else if (gs == GAMEOVER && wParam == 'R')
            {
                //background->initPrlx("images/temp_mainmenu.png");
                gs = MAINMENU;
@@ -264,8 +226,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; break;
+                   case 'A': player->plPos.x -=0.5; break;
+                   case 'D': player->plPos.x +=0.5; break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -299,8 +261,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
                     if(previewPlat && placeObj == PLAT)
                     {
-                        previewPlat->scale.x = max(0.1, previewPlat->scale.y - 0.1);
-                        previewPlat->scale.y = max(0.1, previewPlat->scale.y - 0.1);
+                        previewPlat->scale.x -= 0.1;
+                        previewPlat->scale.y -=0.1;
                     }
                     break;
                     case VK_OEM_6: // ']' — enlarge enemy
@@ -367,7 +329,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
         mouseMapping(LOWORD(lParam), HIWORD(lParam));
 
-        float adjustedMouseX = mouseX - camera->camPos.x;
+         float adjustedMouseX = mouseX - camera->camPos.x;
         float adjustedMouseY = mouseY - camera->camPos.y;
 
         if(resumeButton->isHovered(adjustedMouseX, adjustedMouseY))
@@ -378,59 +340,13 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             isPaused = false;
             gs = MAINMENU;
-            return 0;
         }
-
+        return 0;
         }
-        if(gs == SAVESCREEN)
-        {
-            if(loadSaveButton->isHovered(mouseX,mouseY))
-            {
-                gs = PLAYING;
-                loadGame();
-            }
-
-            if(loadCustomButton->isHovered(mouseX,mouseY))
-            {
-                load_level_file("levels/custom_level.txt");
-                player->initPlayer(playerTex);
-                player->plPos = {0, 0, -3};
-                player->health = 3;
-                player->coins = 0;
-                playerWon = false;
-                gs = PLAYING;
-                currLevel = 0;
-                cout << "Loaded custom_level.txt and started game" << endl;
-            }
-
-        }
-
-        if(gs == STARTSCREEN)
-        {
-            if( startScreenButton->isHovered(mouseX,mouseY))
-            {
-                gs = MAINMENU;
-                return 0;
-            }
-
-        }
-        if(gs == CREDITS || gs == SAVESCREEN)
-            if(creditsBackButton->isHovered(mouseX,mouseY))
-            {
-                gs = MAINMENU;
-                return 0;
-            }
-
-        if(gs == HELP)
-            if(helpBackButton->isHovered(mouseX,mouseY))
-            {
-                gs = MAINMENU;
-                return 0;
-            }
-
 
         if(!isPaused)
         {
+
 
 
         if(gs==LEVELEDITOR)
@@ -493,14 +409,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             player->initPlayer(playerTex);
             gs = PLAYING;
             playerWon = false;
-            return 0;
         }
         else if(loadButton->isHovered(mouseX, mouseY))
         {
             //background->initPrlx("images/marce.png");
-            //loadGame();
-            gs = SAVESCREEN;
-            return 0;
+            loadGame();
+            gs = PLAYING;
         }
         else if(editorButton->isHovered(mouseX, mouseY))
         {
@@ -511,26 +425,13 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             player->initPlayer(playerTex);
             load_level_file("levels/custom_level.txt");
             gs = LEVELEDITOR;
-            return 0;
         }
         else if(exitButton->isHovered(mouseX, mouseY))
         {
             SceneDone = true;  // exit game
         }
 
-        else if(menuCreditsButton->isHovered(mouseX,mouseY))
-        {
-            gs = CREDITS;
-            return 0;
         }
-        else if(menuHelpButton->isHovered(mouseX,mouseY))
-        {
-            gs = HELP;
-            return 0;
-        }
-
-        }
-
         break;
     case WM_RBUTTONDOWN:
         input->wParam = wParam;
@@ -539,26 +440,6 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 mouseMapping(LOWORD(lParam), HIWORD(lParam));
                 deleteObjectAtMouseInEditor();
             }
-            if(gs == LEVELEDITOR)
-                {
-                for(int i = 0; i < 7; i++)
-                {
-                    if(inventoryButtons[i]->isHovered(mouseX, mouseY))
-                    {
-                    switch(i)
-                        {
-                        case 0: placeObj = PLAT; break;
-                        case 1: placeObj = ENEMY; previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
-                        case 2: placeObj = ENEMY; previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
-                        case 3: placeObj = ENEMY; previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
-                        case 4: placeObj = COLLECTIBLE; break;
-                        case 5: placeObj = GOAL; break;
-                        case 6: placeObj = BARREL; break;
-                        }
-            return 0;
-                    }
-                }
-                }
     break;
         break;
     case WM_LBUTTONUP:
@@ -619,9 +500,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
         }
     }
-        if(gs == MAINMENU || gs == STARTSCREEN || gs == CREDITS || gs == HELP || gs == SAVESCREEN)
+        if(gs == MAINMENU)
             mouseMapping(LOWORD(lParam), HIWORD(lParam));
-
     break;
         break;
     case WM_MOUSEWHEEL:
@@ -699,9 +579,6 @@ void _scene::load_level_file(const char* file_name)
     for(auto p : platforms) delete p;
     for (auto e : enemies) delete e;
     for(auto c : collectibles) delete c;
-    for(auto b : barrels) delete b;
-
-    barrels.clear();
     platforms.clear();
     enemies.clear();
     collectibles.clear();
@@ -867,11 +744,9 @@ void _scene::checkGoal()
         if(!test.good())
         {
             //background->initPrlx("images/temp_reset.png");
-            gs = WIN;
+            gs = GAMEOVER;
             currLevel=1;
             player->health = 3;
-            player->inBarrel = false;
-            player->isBeingDisplacedHorz = false;
             return ;
         }
 
@@ -896,18 +771,11 @@ void _scene::drawMenu()
     loadButton->updateHover(mouseX, mouseY);
     editorButton->updateHover(mouseX, mouseY);
     exitButton->updateHover(mouseX, mouseY);
-    menuCreditsButton->updateHover(mouseX, mouseY);
-    menuHelpButton->updateHover(mouseX, mouseY);
 
     startButton->drawButton();
     loadButton->drawButton();
     editorButton->drawButton();
     exitButton->drawButton();
-    menuCreditsButton->drawButton();
-    menuHelpButton->drawButton();
-
-    menuCreditsButton->drawButton();
-    menuHelpButton->drawButton();
 
 
 }
@@ -1015,12 +883,6 @@ void _scene::runGame()
     }
 
 
-
-
-
-
-
-
     for(auto plat: platforms) plat->drawPlat();
     for(auto b : barrels) b->drawBarrel();
     for(auto e : enemies) e->drawEnms(e->tex->tex);
@@ -1042,11 +904,8 @@ void _scene::runGame()
 void _scene::drawGameOver()
 {
     glDisable(GL_DEPTH_TEST);
-    deathScreen->drawBackground(dim.x,dim.y,-30,13);
-    //background->drawBackground(dim.x, dim.y,-21,13);
+    background->drawBackground(dim.x, dim.y,-35,13);
     glEnable(GL_DEPTH_TEST);
-
-
 }
 
 void _scene::saveGame()
@@ -1065,7 +924,6 @@ void _scene::saveGame()
 
 void _scene::loadGame()
 {
-    isPaused = false;
     ifstream file("saves/save1.txt");
     if(!file.is_open())return;
 
@@ -1240,15 +1098,6 @@ void _scene::drawEditor()
 
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
-
-        glDisable(GL_DEPTH_TEST);
-        for(int i = 0; i < 7; i++)
-        {
-            inventoryButtons[i]->drawButton();
-        }
-        glEnable(GL_DEPTH_TEST);
-
-
     }
         if(isPaused)
             drawPausePopup();
@@ -1323,27 +1172,13 @@ void _scene::deleteObjectAtMouseInEditor()
 
 void _scene::initMenuButtons()
 {
-    startButton->initButton("images/new_images/newgame_buttons.png",0,1.2,-3,1.0,0.3,1.0,2,1);
-    loadButton->initButton("images/new_images/load_buttons.png",0,0.6,-3,1.0,0.3,1.0,2,1);
-    editorButton->initButton("images/new_images/editor_buttons.png",0,-.1,-3,1.0,0.3,1.0,2,1);
-    exitButton->initButton("images/new_images/quit_buttons.png",0,-.9,-3,1.0,0.3,1.0,2,1);
-    menuCreditsButton->initButton("images/new_images/credits_buttons.png",-2.2,-.9,-3,1.0,0.3,1.0,2,1);
-    menuHelpButton->initButton("images/new_images/help_buttons.png",2.2,-.9,-3,1.0,0.3,1.0,2,1);
+    startButton->initButton("images/StartButton.png",0,1.2,-3,1.0,0.3,1.0,2,1);
+    loadButton->initButton("images/LoadButton.png",0,0.6,-3,1.0,0.3,1.0,2,1);
+    editorButton->initButton("images/LevelEditorButton.png",0,-.1,-3,1.0,0.3,1.0,2,1);
+    exitButton->initButton("images/ExitButton.png",0,-.9,-3,1.0,0.3,1.0,2,1);
 
-
-    resumeButton->initButton("images/new_images/continue_buttons.png", 0, 0.3, -2, 1.0, 0.3, 1.0, 2, 1);
-    backToMenuButton->initButton("images/new_images/mainmenu_buttons.png", 0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
-
-    startScreenButton->initButton("images/new_images/playnow_buttons.png",0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
-    jungleAdventureSS->initButton("images/new_images/Game_Title.png", 0, 0.5, -2, 1.0, 1.0, 1.0, 1,1);
-
-    creditsBackButton->initButton("images/new_images/mainmenu_buttons.png",-1.5, -.9, -2, 1.0, .5, 1.0, 2,1);
-    helpBackButton->initButton("images/new_images/mainmenu_buttons.png",-1.8, -1.0, -2, .7, .3, 1.0, 2,1);
-
-    loadSaveButton->initButton("images/new_images/saved_button.png",0,0.7,-3,1.0,0.3,1.0,2,1);
-    loadCustomButton->initButton("images/new_images/saved_button.png",0,-.1,-3,1.0,0.3,1.0,2,1);
-
-
+    resumeButton->initButton("images/ResumeButton.png", 0, 0.3, -2, 1.0, 0.3, 1.0, 2, 1);
+    backToMenuButton->initButton("images/BackToMenuButton.png", 0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
 
 }
 
@@ -1380,92 +1215,4 @@ void _scene::drawPausePopup()
 
     glEnable(GL_DEPTH_TEST);
 }
-
-
-
-void _scene::drawWinScreen()
-{
-    glDisable(GL_DEPTH_TEST);
-    winBG->drawBackground(dim.x,dim.y,-30,13);
-    glEnable(GL_DEPTH_TEST);
-
-}
-
-void _scene::drawstartScreen()
-{
-    glDisable(GL_DEPTH_TEST);
-    startScreenBG->drawBackground(dim.x,dim.y,-30,13);
-    glEnable(GL_DEPTH_TEST);
-
-    jungleAdventureSS->drawButton();
-    startScreenButton->drawButton();
-
-    startScreenButton->updateHover(mouseX,mouseY);
-}
-
-
-void _scene::drawHelpScreen()
-{
-    glDisable(GL_DEPTH_TEST);
-    helpScreenBG->drawBackground(dim.x,dim.y,-30,13);
-    glEnable(GL_DEPTH_TEST);
-
-    helpBackButton->drawButton();
-
-    helpBackButton->updateHover(mouseX,mouseY);
-
-}
-
-void _scene::drawCreditsScreen()
-{
-    glDisable(GL_DEPTH_TEST);
-    creditsScreenBG->drawBackground(dim.x,dim.y,-30,13);
-    glEnable(GL_DEPTH_TEST);
-
-    creditsBackButton->drawButton();
-    creditsBackButton->updateHover(mouseX,mouseY);
-}
-
-void _scene::initEditorInventory()
-{
-    float yPos = 3.0;
-
-    inventoryButtons[0] = new _buttons();  // Platform
-    inventoryButtons[0]->initButton("images/temp_plat.png", -3.0, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
-
-    inventoryButtons[1] = new _buttons();  // Walker
-    inventoryButtons[1]->initButton("images/temp_enemy.png", -2.2, yPos, -2, 0.5, 0.5, 1.0, 4, 1);
-
-    inventoryButtons[2] = new _buttons();  // Jumper
-    inventoryButtons[2]->initButton("images/temp_jumper.png", -1.4, yPos, -2, 0.5, 0.5, 1.0, 3, 1);
-
-    inventoryButtons[3] = new _buttons();  // Flyer
-    inventoryButtons[3]->initButton("images/temp_flyer.png", -0.6, yPos, -2, 0.5, 0.5, 1.0, 3, 1);
-
-    inventoryButtons[4] = new _buttons();  // Collectible
-    inventoryButtons[4]->initButton("images/banana.png", 0.2, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
-
-    inventoryButtons[5] = new _buttons();  // Goal
-    inventoryButtons[5]->initButton("images/goal.png", 1.0, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
-
-    inventoryButtons[6] = new _buttons();  // Barrel
-    inventoryButtons[6]->initButton("images/barrel.png", 1.8, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
-}
-
-void _scene::drawSaveScreen()
-{
-    glDisable(GL_DEPTH_TEST);
-    background->drawBackground(dim.x,dim.y,-30,13);
-    glEnable(GL_DEPTH_TEST);
-
-    creditsBackButton->drawButton();
-    loadSaveButton->drawButton();
-    loadCustomButton->drawButton();
-
-    creditsBackButton->updateHover(mouseX,mouseY);
-    loadSaveButton->updateHover(mouseX,mouseY);
-    loadCustomButton->updateHover(mouseX,mouseY);
-
-}
-
 

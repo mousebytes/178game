@@ -38,6 +38,13 @@ _player::_player()
 _player::~_player()
 {
     //dtor
+    delete pTex;
+    delete timer;
+    delete jump_timer;
+    delete damage_timer;
+    delete horzDisTimer;
+    delete animationTimer;
+    delete justExitedBarrel;
 }
 
 void _player::initPlayer(char* fileName)

@@ -8,6 +8,7 @@ _buttons::_buttons()
 _buttons::~_buttons()
 {
     //dtor
+    delete tex;
 }
 
 void _buttons::initButton(const char* fileName, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm)

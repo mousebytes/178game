@@ -15,6 +15,8 @@ _parallax::_parallax()
 _parallax::~_parallax()
 {
     //dtor
+    delete background;
+    delete tmr;
 }
 void _parallax::drawBackground(float width, float height,float z, float s)
 {

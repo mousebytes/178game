@@ -16,6 +16,7 @@ _fonts::_fonts()
 _fonts::~_fonts()
 {
     //dtor
+    delete tex;
 }
 
 void _fonts::initFonts(const char* fileName, int fx, int fy)

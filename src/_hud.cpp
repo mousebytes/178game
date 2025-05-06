@@ -8,6 +8,9 @@ _hud::_hud()
 _hud::~_hud()
 {
     //dtor
+    delete heartTex;
+    delete bananaCount;
+    delete bananaIcon;
 }
 
 void _hud::initHud(char* heartFile, int xfrm, int yfrm, vec3 camPos)

@@ -21,6 +21,10 @@ _barrelCannon::_barrelCannon()
 _barrelCannon::~_barrelCannon()
 {
     //dtor
+    delete tex;
+    delete fireTimer;
+    delete manualDelay;
+    delete cooldownTimer;
 }
 
 void _barrelCannon::initBarrel(const char* fileName, vec3 p, float rotDeg, bool autoF, float delay)

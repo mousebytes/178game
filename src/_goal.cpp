@@ -8,6 +8,7 @@ _goal::_goal()
 _goal::~_goal()
 {
     //dtor
+    delete tex;
 }
 
 void _goal::initGoal(const char* fileName, float x, float y, float z, float r,int xfrm, int yfrm)

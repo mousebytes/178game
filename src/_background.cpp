@@ -13,6 +13,7 @@ _background::_background()
 _background::~_background()
 {
     //dtor
+    delete background;
 }
 
 void _background::drawBackground(float width, float height)

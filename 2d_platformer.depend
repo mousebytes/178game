@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1745353385 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
+1746552146 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\main.cpp
 	<windows.h>
 	<_common.h>
 	<_scene.h>
@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1746415827 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746417112 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -77,7 +77,7 @@
 	<_textureLoader.h>
 	<_timer.h>
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1746550573 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
@@ -91,7 +91,7 @@
 	<_common.h>
 	<_textureLoader.h>
 
-1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
+1746549909 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_background.cpp
 	"_background.h"
 
 1746070008 source:d:\codeblocks stuff\178game\main.cpp
@@ -275,7 +275,7 @@
 1745173692 source:d:\codeblocks stuff\178game\src\_parallax.cpp
 	"_parallax.h"
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
+1746549966 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
 1746179628 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_barrelcannon.h
@@ -283,7 +283,7 @@
 	<_textureLoader.h>
 	<_player.h>
 
-1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collectible.cpp
+1746550059 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_collectible.cpp
 	"_collectible.h"
 
 1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_collectible.h
@@ -298,17 +298,17 @@
 	<_timer.h>
 	<_textureLoader.h>
 
-1746137329 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
+1746550216 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_enemies.cpp
 	"_enemies.h"
 
-1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_goal.cpp
+1746550298 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_goal.cpp
 	"_goal.h"
 
 1744908381 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_goal.h
 	<_common.h>
 	<_textureLoader.h>
 
-1746256282 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
+1746550340 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_hud.cpp
 	"_hud.h"
 
 1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_hud.h
@@ -323,10 +323,10 @@
 	<_textureloader.h>
 	<_timer.h>
 
-1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
+1746550428 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_parallax.cpp
 	"_parallax.h"
 
-1746406341 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
+1746550452 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_platform.cpp
 	"_platform.h"
 
 1745342769 source:d:\codeblocks stuff\178game\src\_buttons.cpp
@@ -335,7 +335,7 @@
 1745342642 d:\codeblocks stuff\178game\include\_buttons.h
 	<_textureLoader.h>
 
-1745353385 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_buttons.cpp
+1746549998 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_buttons.cpp
 	"_buttons.h"
 
 1745353385 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_buttons.h
@@ -820,7 +820,7 @@
 	<_textureLoader.h>
 	<_common.h>
 
-1746406341 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_fonts.cpp
+1746550267 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_fonts.cpp
 	"_fonts.h"
 
 1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_fonts.h

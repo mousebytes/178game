@@ -110,6 +110,84 @@ _scene::_scene()
 _scene::~_scene()
 {
     //dtor
+    delete myLight;
+    delete input;
+    delete player;
+    delete camera;
+    delete collision;
+    delete hud;
+    delete goal;
+    delete snds;
+    delete sndOof;
+
+    delete p1;
+    delete p2;
+    delete p3;
+    delete background;
+    delete deathScreen;
+    delete winBG;
+    delete startScreenBG;
+    delete creditsScreenBG;
+    delete helpScreenBG;
+
+// Preview objects
+    delete previewPlat;
+    delete previewEnemy;
+    delete previewCoin;
+    delete previewGoal;
+    delete previewBarrel;
+
+    for (auto p : platforms) delete p;
+    for (auto e : enemies) delete e;
+    for (auto c : collectibles) delete c;
+    for (auto b : barrels) delete b;
+
+    for (auto b : inventoryButtons) delete b;
+    for (auto b : platTextureButtons) delete b;
+    for (auto b : platAttributeButtons) delete b;
+
+    delete platAttributeMoving;
+    delete platAttributeStatic;
+    delete scaleDownJ;
+    delete scaleUpK;
+    delete scaleText;
+    delete rotateR;
+    delete rotateE;
+    delete rotateText;
+    delete rightClickEditorFont;
+    delete backspaceText;
+    delete toReset;
+
+    delete startButton;
+    delete editorButton;
+    delete exitButton;
+    delete loadButton;
+    delete resumeButton;
+    delete backToMenuButton;
+    delete startScreenButton;
+    delete jungleAdventureSS;
+    delete menuCreditsButton;
+    delete menuHelpButton;
+    delete creditsBackButton;
+    delete helpBackButton;
+    delete loadSaveButton;
+    delete loadCustomButton;
+    delete scaleDownButton;
+    delete scaleUpButton;
+    delete rightClickEditorButton;
+    delete upKey;
+    delete downKey;
+    delete leftKey;
+    delete rightKey;
+
+    platforms.clear();
+    enemies.clear();
+    collectibles.clear();
+    barrels.clear();
+    inventoryButtons.clear();
+    platTextureButtons.clear();
+    platAttributeButtons.clear();
+
 }
 GLint _scene::initGL()
 {

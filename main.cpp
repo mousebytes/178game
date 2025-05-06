@@ -370,7 +370,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				KillGLWindow();						// Kill Our Current Window
 				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
 				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+				if (!CreateGLWindow("Jungle Adventure",fullscreenWidth,fullscreenHeight,256,fullscreen))
 				{
 					return 0;						// Quit If Window Was Not Created
 				}
@@ -379,7 +379,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	}
 
 	// Shutdown
-	KillGLWindow();									// Kill The Window
+	KillGLWindow();	                                // Kill The Window
+	delete Scene;
 	return (msg.wParam);							// Exit The Program
 }
 

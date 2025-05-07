@@ -548,8 +548,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             gs = MAINMENU;
             return 0;
         }
-        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY))
+        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY) && gs == LEVELEDITOR)
             saveCustomLevel();
+        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY) && gs == PLAYING)
+            saveGame();
 
         else if(pauseHelpButton->isHovered(adjustedMouseX,adjustedMouseY))
         {

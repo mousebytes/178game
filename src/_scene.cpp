@@ -915,21 +915,32 @@ void _scene::check_enemy_collisions()
         bool isTouching = collision->isPlayerTouchingEnemy(player,e);
         bool isAbove = player->plPos.y > e->pos.y + e->scale.y;
 
-        if(isTouching && isAbove)
+        if(isTouching && isAbove && e->justHit->getTicks() > 200)
         {
             _explosion* ex = new _explosion();
             ex->initExpl("images/temp_explo.png",e->pos,e->scale.x,6,1);
 
             explosions.push_back(ex);
 
-            e->isEnmsLive=false;
-            e->start_respawn_timer = true;
+            e->health--;
+            if(e->health < 1)
+            {
+                e->isEnmsLive=false;
+                e->start_respawn_timer = true;
+            }
+
 
             player->isJumping = true;
             player->is_grounded = false;
             player->height_before_jump = player->plPos.y;
 
             player->justBounced->reset();
+            e->justHit->reset();
+
+            player->damage_timer->reset();
+            player->player_can_be_damaged = false;
+            player->handle_player_damage_timer();
+            player->justExitedBarrel->reset();
 
         }
         else if (isTouching && player->player_can_be_damaged)

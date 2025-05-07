@@ -15,6 +15,7 @@ void _sounds::playMusic(char* fileName)
     sndEng->play2D(fileName,true);//true means runs on loop
 }
 
+
 void _sounds::playSounds(char* fileName)
 {// unmute iff and plays sound
   //  if(!sndEng->isCurrentlyPlaying(fileName)) //currently not playing

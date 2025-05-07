@@ -228,7 +228,9 @@ GLint _scene::initGL()
     creditsScreenBG->initPrlx("images/new_images/Credits_Menu.png");
     helpScreenBG->initPrlx("images/new_images/help menu.png");
     snds->initSounds();
-    snds->playMusic("JgMus.mp3");
+    snds->playMusic("sounds/JgMus.wav");
+
+
 
 
     load_level_file("levels/level1.txt");
@@ -907,7 +909,7 @@ void _scene::check_enemy_collisions()
         }
         else if (isTouching && player->player_can_be_damaged)
         {
-            sndOof->playSounds("oof.mp3");
+            sndOof->playSounds("sounds/oof.wav");
             player->health--;
             player->damage_timer->reset();
             player->player_can_be_damaged = false;

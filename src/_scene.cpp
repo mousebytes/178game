@@ -80,6 +80,7 @@ _buttons *creditsBackButton = new _buttons();
 _buttons *helpBackButton = new _buttons();
 _buttons *loadSaveButton = new _buttons();
 _buttons *loadCustomButton = new _buttons();
+_buttons *playerPosRep = new _buttons();
 
 _buttons *scaleDownButton = new _buttons();
 _buttons *scaleUpButton = new _buttons();
@@ -189,6 +190,7 @@ _scene::~_scene()
     delete leftKey;
     delete rightKey;
     delete saveCustomButton;
+    delete playerPosRep;
 
     platforms.clear();
     enemies.clear();
@@ -198,6 +200,7 @@ _scene::~_scene()
     platTextureButtons.clear();
     platAttributeButtons.clear();
     fonts.clear();
+    explosions.clear();
 
 }
 GLint _scene::initGL()
@@ -1501,7 +1504,7 @@ void _scene::drawEditor()
     camera->followPlayer(player);
     camera->updateCamPos();
 
-
+    playerPosRep->drawButton();
 
     for(auto plat : platforms)
         plat->drawPlat();
@@ -1823,7 +1826,7 @@ void _scene::initEditorInventory()
     inventoryButtons[5]->initButton("images/goal.png", 1.0, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
 
     inventoryButtons[6] = new _buttons();  // Barrel
-    inventoryButtons[6]->initButton("images/barrel.png", 1.8, yPos, -2, 0.5, 0.5, 1.0, 1, 1);
+    inventoryButtons[6]->initButton("images/barrel.png", 1.8, yPos, -2, 0.5, 0.5, 1.0, 2, 1);
 
 
     platTextureButtons[0] = new _buttons();
@@ -1889,6 +1892,10 @@ void _scene::initEditorInventory()
     leftKey->initButton("images/leftkey.png",5.25,-2,-2,.2,.2,1.0,1,1);
     downKey->initButton("images/downkey.png",5.7,-2,-2,.2,.2,1.0,1,1);
     rightKey->initButton("images/rightkey.png",6.15,-2,-2,.2,.2,1.0,1,1);
+
+    playerPosRep->initButton("images/Mk.png",0,0,-3,.5,.5,1.0,6,1);
+    playerPosRep->xMax = 2.0/6.0;
+    playerPosRep->xMin= 1.0/6.0;
 
     }
 

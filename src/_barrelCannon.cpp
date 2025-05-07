@@ -13,7 +13,8 @@ _barrelCannon::_barrelCannon()
     scale={0.6,0.6};
     rotation=0.0;
 
-    framesX=framesY = 1;
+    framesX = 2;
+    framesY = 1;
     cooldownTimer->reset();
 
 }
@@ -84,7 +85,16 @@ bool _barrelCannon::isPlayerInside(vec3 pPos, vec2 pScl)
 
 void _barrelCannon::updateB(_player* player)
 {
-    if(!playerInside) return;
+    if(!playerInside)
+    {
+        xMin = 0;
+        xMax = 1.0/(float)framesX;
+        return;
+    }
+
+    xMin = 1.0;
+    xMax = 1.0/2.0;
+
     if(!(cooldownTimer->getTicks()> 500)) return;
 
     player->plPos.x = pos.x;

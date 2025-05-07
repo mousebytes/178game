@@ -14,6 +14,7 @@
 #include<_buttons.h>
 #include <_sounds.h>
 #include<_fonts.h>
+#include<_explosion.h>
 
 char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
@@ -54,6 +55,7 @@ vector<_platform*> platforms;
 vector<_enemies*> enemies;
 vector<_collectible*> collectibles;
 vector<_barrelCannon*> barrels;
+vector<_explosion*> explosions;
 
 vector<_buttons*> inventoryButtons(7);
 vector<_buttons*> platTextureButtons(2);
@@ -895,6 +897,11 @@ void _scene::check_enemy_collisions()
 
         if(isTouching && isAbove)
         {
+            _explosion* ex = new _explosion();
+            ex->initExpl("images/temp_explo.png",e->pos,e->scale.x,6,1);
+
+            explosions.push_back(ex);
+
             e->isEnmsLive=false;
             e->start_respawn_timer = true;
 
@@ -1256,6 +1263,19 @@ void _scene::runGame()
     for(auto e : enemies)
     {
         e->actions();
+    }
+
+    for(int i =0;i<explosions.size();++i)
+    {
+        explosions[i]->update();
+        explosions[i]->draw();
+
+        if(explosions[i]->isDone())
+        {
+            delete explosions[i];
+            explosions.erase(explosions.begin()+i);
+            --i;
+        }
     }
 
     for(auto plat: platforms)

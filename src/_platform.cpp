@@ -76,6 +76,8 @@ case 2:
     case DIRT:
         tex->loadTexture("images/dirt_plat.png");
         break;
+    case BARN:
+        tex->loadTexture("images/temp_plat.png");
     }
 }
 

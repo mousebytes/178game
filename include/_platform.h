@@ -24,7 +24,7 @@ class _platform
 
     PlatformType type;
 
-    enum PlatTex {STONE, DIRT};
+    enum PlatTex {STONE, DIRT,BARN};
 
     PlatTex chooseTex;
 

@@ -64,6 +64,7 @@
 		<Unit filename="include/_platform.h" />
 		<Unit filename="include/_player.h" />
 		<Unit filename="include/_scene.h" />
+		<Unit filename="include/_scorePopUp.h" />
 		<Unit filename="include/_sounds.h" />
 		<Unit filename="include/_textureLoader.h" />
 		<Unit filename="include/_timer.h" />
@@ -85,6 +86,7 @@
 		<Unit filename="src/_platform.cpp" />
 		<Unit filename="src/_player.cpp" />
 		<Unit filename="src/_scene.cpp" />
+		<Unit filename="src/_scorePopUp.cpp" />
 		<Unit filename="src/_sounds.cpp" />
 		<Unit filename="src/_textureLoader.cpp" />
 		<Unit filename="src/_timer.cpp" />

@@ -12,6 +12,7 @@ _sounds::~_sounds()
 }
 void _sounds::playMusic(char* fileName)
 {
+    sndEng->stopAllSounds();
     sndEng->play2D(fileName,true);//true means runs on loop
 }
 

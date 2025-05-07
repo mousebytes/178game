@@ -402,6 +402,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
                player->health = 3;
                player->coins = 0;
+               snds->playMusic("sounds/JgMus.wav");
            }
             else if(gs == PLAYING && wParam == 'K') // press K to save
             {
@@ -1287,6 +1288,7 @@ void _scene::runGame()
             gs = GAMEOVER;
             player->health = 3;
             //background->initPrlx("images/temp_reset.png");
+            snds->playMusic("sounds/flames.mp3");
         }
 
     if(!player->blink)

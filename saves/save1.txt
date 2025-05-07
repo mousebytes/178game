@@ -1,4 +1,4 @@
-level=2
-health=3
-coins=8
-highScore=390
+level=4
+health=2
+coins=7
+highScore=2170

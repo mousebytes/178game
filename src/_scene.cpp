@@ -61,6 +61,7 @@ vector<_explosion*> explosions;
 vector<_buttons*> inventoryButtons(7);
 vector<_buttons*> platTextureButtons(2);
 vector<_buttons*> platAttributeButtons(2);
+_buttons *platTextureButton3 = new _buttons();
 
 bool playerWon = false;
 int currLevel = 1;
@@ -222,6 +223,7 @@ _scene::~_scene()
     delete editorOrText;
 
     delete savedTimer;
+    delete platTextureButton3;
 
     platforms.clear();
     enemies.clear();
@@ -457,8 +459,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    //case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    //case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;editorDeleteText->pos.x-=.5;editorOrText->pos.x-=.5;break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;editorDeleteText->pos.x+=.5;editorOrText->pos.x+=.5;break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;editorDeleteText->pos.x-=.5;editorOrText->pos.x-=.5;platTextureButton3->pos.x-=.5;break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;editorDeleteText->pos.x+=.5;editorOrText->pos.x+=.5;platTextureButton3->pos.x+=.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -661,7 +663,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 plat->initPlat("images/wall.png", mouseX, mouseY, -2.0,
                     previewPlat ? previewPlat->scale.x : 1.0f,
                     previewPlat ? previewPlat->scale.y : 1.0f,
-               1, 1, 1, int(previewPlat->type), 0.01, 1.5, int(previewPlat->chooseTex));
+               1, 1, 1, int(previewPlat->type), 0.05, 1.5, int(previewPlat->chooseTex));
                 platforms.push_back(plat);
             }
             else if(placeObj == ENEMY)
@@ -821,6 +823,10 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         previewPlat->type = i==1 ? previewPlat->STATIC : previewPlat->HORIZONTAL;
                     }
                 }
+                if (platTextureButton3->isHovered(mouseX,mouseY))
+                {
+                    previewPlat->chooseTex = previewPlat->BARN;
+                }
                 if(previewPlat)
                     if(previewPlat->type != previewPlat->STATIC)
                     {
@@ -970,9 +976,7 @@ void _scene::check_enemy_collisions()
             {
                 e->isEnmsLive=false;
                 e->start_respawn_timer = true;
-
             }
-
 
             player->isJumping = true;
             player->is_grounded = false;
@@ -1010,15 +1014,18 @@ void _scene::load_level_file(const char* file_name)
     player->inBarrel=false;
     player->isBeingDisplacedHorz=false;
     player->isJumping=false;
-    for(auto p : platforms) delete p;
-    for (auto e : enemies) delete e;
-    for(auto c : collectibles) delete c;
-    for(auto b : barrels) delete b;
+    for(auto &p : platforms) delete p;
+    for (auto &e : enemies) delete e;
+    for(auto &c : collectibles) delete c;
+    for(auto &b : barrels) delete b;
+    for(auto &p : fonts) delete p.first;
 
     barrels.clear();
     platforms.clear();
     enemies.clear();
     collectibles.clear();
+    fonts.clear();
+    fonts.clear();
 
     ifstream file(file_name);
     string line;
@@ -1170,6 +1177,7 @@ void _scene::checkCollectibles()
             c->isCollected = true;
             player->coins++;
             currentScore +=10;
+            sndOof->playSounds("sounds/pickupCoin.wav");
 
             scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
@@ -1713,6 +1721,7 @@ void _scene::drawEditor()
             downKey->drawButton();
             leftKey->drawButton();
             rightKey->drawButton();
+            platTextureButton3->drawButton();
         }
 
 
@@ -2003,6 +2012,8 @@ void _scene::initEditorInventory()
 
     platTextureButtons[1] = new _buttons();
     platTextureButtons[1]->initButton("images/dirt_plat.png",-6.0,-0.5,-2,0.5,0.5,1.0,1,1);
+
+    platTextureButton3->initButton("images/temp_plat.png",-6.0,2.1,-2,0.5,0.5,1.0,1,1);
 
     platAttributeButtons[0] = new _buttons();
     platAttributeButtons[0]->initButton("images/border.png", -5.5,-2,-2,1.2,0.2,1.0,2,1);

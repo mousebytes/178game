@@ -15,6 +15,7 @@
 #include <_sounds.h>
 #include<_fonts.h>
 #include<_explosion.h>
+#include<_scorePopUp.h>
 
 char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
@@ -103,6 +104,7 @@ _fonts *rotateText = new _fonts();
 _fonts *rightClickEditorFont = new _fonts();
 _fonts *backspaceText = new _fonts();
 _fonts *toReset = new _fonts();
+_fonts *scoreCounter = new _fonts();
 
 vector<pair<_fonts*,string>> fonts;
 _fonts* previewFont = nullptr;
@@ -110,6 +112,14 @@ string previewText = "";
 bool typingFontText = false;
 
 bool showPauseHelpMenu = false;
+
+vector<_scorePopUp*> scorePopups;
+
+int currentScore = 0;
+int highestScore = 0;
+bool inCustomLevel = false;
+
+
 
 _scene::_scene()
 {
@@ -148,6 +158,7 @@ _scene::~_scene()
     delete previewCoin;
     delete previewGoal;
     delete previewBarrel;
+    delete previewFont;
 
     for (auto p : platforms) delete p;
     for (auto e : enemies) delete e;
@@ -158,6 +169,9 @@ _scene::~_scene()
     for (auto b : platTextureButtons) delete b;
     for (auto b : platAttributeButtons) delete b;
     for(auto&f:fonts)delete f.first;
+    for(auto &s :scorePopups) delete s;
+    for(auto &e : explosions) delete e;
+
 
     delete platAttributeMoving;
     delete platAttributeStatic;
@@ -170,6 +184,7 @@ _scene::~_scene()
     delete rightClickEditorFont;
     delete backspaceText;
     delete toReset;
+    delete scoreCounter;
 
     delete startButton;
     delete editorButton;
@@ -205,6 +220,7 @@ _scene::~_scene()
     platAttributeButtons.clear();
     fonts.clear();
     explosions.clear();
+    scorePopups.clear();
 
 }
 GLint _scene::initGL()
@@ -261,6 +277,10 @@ GLint _scene::initGL()
     platAttributeMoving->initFonts("images/fontsheet.png",15,8);
     platAttributeStatic->pos = {-6.2,-3,-2};
     platAttributeMoving->pos = {-6.2,-2,-2};
+
+    scoreCounter = new _fonts();
+    scoreCounter->initFonts("images/fontsheet.png",15,8);
+    scoreCounter->setSize(0.2,0.2);
 
    return true;
 }
@@ -410,16 +430,16 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                switch(wParam)
                {
                    //case 'M': if(placeObj == PLAT) if(previewPlat->chooseTex == previewPlat->DIRT) previewPlat->chooseTex = previewPlat->STONE; else previewPlat->chooseTex = previewPlat->DIRT; break;
-                   case '1': placeObj = PLAT; break;
-                   case '2': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
-                   case '3': placeObj = COLLECTIBLE; break;
-                   case '4': placeObj = GOAL; break;
-                   case '5': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
-                   case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
-                   case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
-                   case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
+                   //case '1': placeObj = PLAT; break;
+                   //case '2': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
+                   //case '3': placeObj = COLLECTIBLE; break;
+                   //case '4': placeObj = GOAL; break;
+                   //case '5': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->WALKER; break;
+                   //case '6': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->JUMPER; break;
+                   //case '7': placeObj = ENEMY; if(!previewEnemy) previewEnemy = new _enemies(); previewEnemy->eT = previewEnemy->FLYER; break;
+                   //case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
-                   case 'S': saveCustomLevel();break;
+                   //case 'S': saveCustomLevel();break;
                    case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;break;
                    case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;break;
                    case VK_LEFT:  // Decrease platform X scale
@@ -546,11 +566,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             isPaused = false;
             gs = MAINMENU;
+            inCustomLevel=false;
             return 0;
         }
         else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY) && gs == LEVELEDITOR)
             saveCustomLevel();
-        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY) && gs == PLAYING)
+        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY) && gs == PLAYING && !inCustomLevel)
             saveGame();
 
         else if(pauseHelpButton->isHovered(adjustedMouseX,adjustedMouseY))
@@ -578,6 +599,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 playerWon = false;
                 gs = PLAYING;
                 currLevel = 0;
+                inCustomLevel=true;
             }
 
         }
@@ -686,6 +708,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             gs = PLAYING;
             playerWon = false;
             player->health = 3;
+            currentScore = 0;
             return 0;
         }
         else if(loadButton->isHovered(mouseX, mouseY))
@@ -704,6 +727,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             player->initPlayer(playerTex);
             load_level_file("levels/custom_level.txt");
             gs = LEVELEDITOR;
+            currentScore=0;
 
             /*
             for(int i =0;i<2;++i)
@@ -921,12 +945,15 @@ void _scene::check_enemy_collisions()
             ex->initExpl("images/temp_explo.png",e->pos,e->scale.x,6,1);
 
             explosions.push_back(ex);
+            scorePopups.push_back(new _scorePopUp("+50",e->pos));
+            currentScore += 50;
 
             e->health--;
             if(e->health < 1)
             {
                 e->isEnmsLive=false;
                 e->start_respawn_timer = true;
+
             }
 
 
@@ -1125,6 +1152,9 @@ void _scene::checkCollectibles()
         {
             c->isCollected = true;
             player->coins++;
+            currentScore +=10;
+
+            scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
     }
     if(player->coins == 20)
@@ -1247,7 +1277,7 @@ void _scene::runGame()
     {
         player->drawPlayer();
     }
-    if(!player->player_can_be_damaged)
+    if(!player->player_can_be_damaged && !player->justBounced->getTicks() > 1000 && player->justExitedBarrel->getTicks() > 1000)
     {
         player->blink = !player->blink;
     }
@@ -1309,6 +1339,18 @@ void _scene::runGame()
         }
     }
 
+    for(int i = 0;i<scorePopups.size();++i)
+    {
+        if(!scorePopups[i]->update())
+        {
+            delete scorePopups[i];
+            scorePopups.erase(scorePopups.begin()+i);
+            --i;
+        }
+        else
+            scorePopups[i]->draw();
+    }
+
     for(auto plat: platforms)
     {
         plat->updatePlat();
@@ -1323,6 +1365,7 @@ void _scene::runGame()
         camera->updateCamPos();
         player->drawPlayer();
     }
+
 
 
 
@@ -1348,6 +1391,10 @@ void _scene::runGame()
     hud->drawBananaIcon(camera);
     //b->updateB(player->plPos, player->velocity, player->isJumping);
 
+    string s = to_string(currentScore);
+    scoreCounter->setPosition(camera->camPos.x-0.5,camera->camPos.y+3.4,-2);
+    scoreCounter->drawText(s);
+
     if(isPaused)
     {
         drawPausePopup();
@@ -1367,12 +1414,32 @@ void _scene::drawGameOver()
 
 void _scene::saveGame()
 {
+
+    //if(!file.is_open()) return;
+
+    int oldHigh = 0;
+
+    ifstream in("saves/save1.txt");
+
+    string line;
+    while(getline(in,line))
+    {
+
+        if(line.rfind("highScore=",0)==0)
+        {
+            oldHigh = stoi(line.substr(10));
+            break;
+        }
+    }
+
+
+    highestScore = max(oldHigh,currentScore);
     ofstream file("saves/save1.txt");
-    if(!file.is_open()) return;
 
     file << "level="<<currLevel << endl;
     file << "health="<<player->health<<endl;
     file<<"coins="<<player->coins<<endl;
+    file <<"highScore="<<highestScore<<endl;
 
     file.close();
 
@@ -1395,6 +1462,7 @@ void _scene::loadGame()
         if(key=="level") ss >>currLevel;
         else if(key=="health") ss >> player->health;
         else if (key=="coins")ss >> player->coins;
+        else if (key=="highScore") ss >> highestScore;
     }
 
     file.close();
@@ -1945,6 +2013,10 @@ void _scene::drawSaveScreen()
     loadSaveButton->updateHover(mouseX,mouseY);
     loadCustomButton->updateHover(mouseX,mouseY);
 
+    string h = "Best Score: " + to_string(highestScore);
+    scoreCounter->setPosition(-1.0,1.0,-2.0);
+    scoreCounter->setSize(.1,.1);
+    scoreCounter->drawText(h);
 }
 
 void _scene::drawPauseHelpButton()

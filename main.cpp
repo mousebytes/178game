@@ -326,13 +326,13 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
     int	fullscreenHeight = GetSystemMetrics(SM_CYSCREEN);
 
 	// Ask The User Which Screen Mode They Prefer
-	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
+	/*if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
 	{
 		fullscreen=FALSE;							// Windowed Mode
-	}
+	}*/
 
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+	if (!CreateGLWindow("Jungle Adventure",fullscreenWidth,fullscreenHeight,256,fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}

@@ -15,6 +15,7 @@
 #include <_sounds.h>
 #include<_fonts.h>
 #include<_explosion.h>
+#include<_scorePopUp.h>
 
 char *playerTex = "images/Mk.png";
 //int player xfrm = 8;
@@ -103,6 +104,7 @@ _fonts *rotateText = new _fonts();
 _fonts *rightClickEditorFont = new _fonts();
 _fonts *backspaceText = new _fonts();
 _fonts *toReset = new _fonts();
+_fonts *scoreCounter = new _fonts();
 
 vector<pair<_fonts*,string>> fonts;
 _fonts* previewFont = nullptr;
@@ -110,6 +112,8 @@ string previewText = "";
 bool typingFontText = false;
 
 bool showPauseHelpMenu = false;
+
+vector<_scorePopUp*> scorePopups;
 
 _scene::_scene()
 {
@@ -148,6 +152,7 @@ _scene::~_scene()
     delete previewCoin;
     delete previewGoal;
     delete previewBarrel;
+    delete previewFont;
 
     for (auto p : platforms) delete p;
     for (auto e : enemies) delete e;
@@ -158,6 +163,9 @@ _scene::~_scene()
     for (auto b : platTextureButtons) delete b;
     for (auto b : platAttributeButtons) delete b;
     for(auto&f:fonts)delete f.first;
+    for(auto &s :scorePopups) delete s;
+    for(auto &e : explosions) delete e;
+
 
     delete platAttributeMoving;
     delete platAttributeStatic;
@@ -170,6 +178,7 @@ _scene::~_scene()
     delete rightClickEditorFont;
     delete backspaceText;
     delete toReset;
+    delete scoreCounter;
 
     delete startButton;
     delete editorButton;
@@ -205,6 +214,7 @@ _scene::~_scene()
     platAttributeButtons.clear();
     fonts.clear();
     explosions.clear();
+    scorePopups.clear();
 
 }
 GLint _scene::initGL()
@@ -921,6 +931,7 @@ void _scene::check_enemy_collisions()
             ex->initExpl("images/temp_explo.png",e->pos,e->scale.x,6,1);
 
             explosions.push_back(ex);
+            scorePopups.push_back(new _scorePopUp("+50",e->pos));
 
             e->health--;
             if(e->health < 1)
@@ -1125,6 +1136,8 @@ void _scene::checkCollectibles()
         {
             c->isCollected = true;
             player->coins++;
+
+            scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
     }
     if(player->coins == 20)
@@ -1247,7 +1260,7 @@ void _scene::runGame()
     {
         player->drawPlayer();
     }
-    if(!player->player_can_be_damaged)
+    if(!player->player_can_be_damaged && !player->justBounced->getTicks() > 1000 && player->justExitedBarrel->getTicks() > 1000)
     {
         player->blink = !player->blink;
     }
@@ -1307,6 +1320,18 @@ void _scene::runGame()
             explosions.erase(explosions.begin()+i);
             --i;
         }
+    }
+
+    for(int i = 0;i<scorePopups.size();++i)
+    {
+        if(!scorePopups[i]->update())
+        {
+            delete scorePopups[i];
+            scorePopups.erase(scorePopups.begin()+i);
+            --i;
+        }
+        else
+            scorePopups[i]->draw();
     }
 
     for(auto plat: platforms)

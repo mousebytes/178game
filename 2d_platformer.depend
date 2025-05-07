@@ -160,7 +160,7 @@
 1746621963 source:d:\codeblocks stuff\178game\src\_player.cpp
 	"_player.h"
 
-1746629585 source:d:\codeblocks stuff\178game\src\_scene.cpp
+1746631361 source:d:\codeblocks stuff\178game\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -178,6 +178,7 @@
 	<_sounds.h>
 	<_fonts.h>
 	<_explosion.h>
+	<_scorePopUp.h>
 
 1744814652 source:d:\codeblocks stuff\178game\src\_textureloader.cpp
 	"_textureloader.h"
@@ -814,7 +815,7 @@
 	"_sounds.h"
 	"_common.h"
 
-1746621963 source:d:\codeblocks stuff\178game\src\_fonts.cpp
+1746631836 source:d:\codeblocks stuff\178game\src\_fonts.cpp
 	"_fonts.h"
 
 1746182743 d:\codeblocks stuff\178game\include\_fonts.h
@@ -835,4 +836,12 @@
 	<_common.h>
 	<_textureLoader.h>
 	<_timer.h>
+
+1746631864 source:d:\codeblocks stuff\178game\src\_scorepopup.cpp
+	"_scorePopUp.h"
+
+1746631496 d:\codeblocks stuff\178game\include\_scorepopup.h
+	<_timer.h>
+	<_common.h>
+	<_fonts.h>
 

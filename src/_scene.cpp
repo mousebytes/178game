@@ -504,7 +504,6 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 playerWon = false;
                 gs = PLAYING;
                 currLevel = 0;
-                cout << "Loaded custom_level.txt and started game" << endl;
             }
         }
         break;
@@ -557,7 +556,6 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 playerWon = false;
                 gs = PLAYING;
                 currLevel = 0;
-                cout << "Loaded custom_level.txt and started game" << endl;
             }
 
         }
@@ -1089,7 +1087,6 @@ void _scene::checkCollectibles()
         {
             c->isCollected = true;
             player->coins++;
-            cout << "Coins: " << player->coins << endl;
         }
     }
     if(player->coins == 20)
@@ -1110,7 +1107,6 @@ void _scene::checkGoal()
     if(dist < (player->plScl.x + goal->scl.x))
     {
         playerWon = true;
-        cout << "player won";
 
         if(currLevel == 0)
         {
@@ -1230,7 +1226,6 @@ void _scene::runGame()
         player->health--;
         player->plPos = {0,0,-3};
 
-        cout << "\n" << player->health;
     }
 
     check_platform_collisions();
@@ -1330,7 +1325,6 @@ void _scene::saveGame()
 
     file.close();
 
-    cout <<"\nsaved" << endl;
 }
 
 void _scene::loadGame()
@@ -1361,7 +1355,6 @@ void _scene::loadGame()
     player->initPlayer(playerTex);
     player->plPos = {0,0,-3};
 
-    cout << "\nloaded";
 }
 
 
@@ -1416,10 +1409,7 @@ void _scene::saveCustomLevel()
 {
     ofstream file("levels/custom_level.txt");
 
-    if(!file.is_open())
-    {
-        cout << "\ncustom level file not loaded";
-    }
+
 
     for(auto plat:platforms)
     {
@@ -1467,7 +1457,6 @@ void _scene::saveCustomLevel()
 
 
     file.close();
-    cout << "saved to levels/custom_level.txt"<<endl;
 }
 
 
@@ -1475,9 +1464,7 @@ void _scene::drawEditor()
 {
     glLoadIdentity();
 
-    /*if(previewBarrel)
-    cout << '\n' << previewBarrel->pos.z << " " << previewBarrel->scale.x << " " << previewBarrel->scale.y;
-    */
+
 
     //glDisable(GL_LIGHTING);
 
@@ -1617,7 +1604,6 @@ void _scene::deleteObjectAtMouseInEditor()
         {
             delete p;
             platforms.erase(platforms.begin() + i);
-            cout << "Deleted platform.\n";
             return;
         }
     }
@@ -1633,7 +1619,6 @@ void _scene::deleteObjectAtMouseInEditor()
         {
             delete e;
             enemies.erase(enemies.begin() + i);
-            cout << "Deleted enemy.\n";
             return;
         }
     }
@@ -1649,7 +1634,6 @@ void _scene::deleteObjectAtMouseInEditor()
         {
             delete c;
             collectibles.erase(collectibles.begin() + i);
-            cout << "Deleted coin.\n";
             return;
         }
     }

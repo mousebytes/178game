@@ -31,7 +31,6 @@ void _sounds::pauseSounds(char* fileName)
 int _sounds::initSounds()
 {
     if(!sndEng){
-        cout << "Error:** Sound Engine could not start"<< endl;
      return 0; //if no music stop playing
     }
 

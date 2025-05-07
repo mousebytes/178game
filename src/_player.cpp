@@ -32,12 +32,21 @@ _player::_player()
     barrelAngleDeg=0;
 
     justExitedBarrel->reset();
+    justBounced->reset();
 
 }
 
 _player::~_player()
 {
     //dtor
+    delete pTex;
+    delete timer;
+    delete jump_timer;
+    delete damage_timer;
+    delete horzDisTimer;
+    delete animationTimer;
+    delete justExitedBarrel;
+    delete justBounced;
 }
 
 void _player::initPlayer(char* fileName)

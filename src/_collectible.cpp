@@ -10,6 +10,7 @@ _collectible::_collectible()
 _collectible::~_collectible()
 {
     //dtor
+    delete tex;
 }
 
 void _collectible::initColl(const char* fileName, float x, float y, float z, float r, int xfrm, int yfrm)

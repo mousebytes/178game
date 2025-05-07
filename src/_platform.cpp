@@ -10,6 +10,8 @@ _platform::_platform()
 _platform::~_platform()
 {
     //dtor
+    delete tex;
+    delete timer;
 }
 
 void _platform::initPlat(const char* file_name, float xCoord, float yCoord, float zCoord, float xScl, float yScl, float zScl, int xFrm, int yFrm, int t, float s, float p_r, int texType)

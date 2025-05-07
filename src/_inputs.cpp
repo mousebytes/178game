@@ -76,7 +76,7 @@ void _inputs::keyUP(_player *player)
 
         case VK_SPACE:
             wParam = temp_wParam;
-            if(!player->isBeingDisplacedHorz)
+            if(!player->isBeingDisplacedHorz && player->justBounced->getTicks() > 1000)
                 player->isJumping = false;
             break;
 

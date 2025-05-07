@@ -115,6 +115,11 @@ bool showPauseHelpMenu = false;
 
 vector<_scorePopUp*> scorePopups;
 
+int currentScore = 0;
+int highestScore = 0;
+
+
+
 _scene::_scene()
 {
     //ctor
@@ -271,6 +276,10 @@ GLint _scene::initGL()
     platAttributeMoving->initFonts("images/fontsheet.png",15,8);
     platAttributeStatic->pos = {-6.2,-3,-2};
     platAttributeMoving->pos = {-6.2,-2,-2};
+
+    scoreCounter = new _fonts();
+    scoreCounter->initFonts("images/fontsheet.png",15,8);
+    scoreCounter->setSize(0.2,0.2);
 
    return true;
 }
@@ -932,12 +941,14 @@ void _scene::check_enemy_collisions()
 
             explosions.push_back(ex);
             scorePopups.push_back(new _scorePopUp("+50",e->pos));
+            currentScore += 50;
 
             e->health--;
             if(e->health < 1)
             {
                 e->isEnmsLive=false;
                 e->start_respawn_timer = true;
+
             }
 
 
@@ -1136,6 +1147,7 @@ void _scene::checkCollectibles()
         {
             c->isCollected = true;
             player->coins++;
+            currentScore +=10;
 
             scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
@@ -1372,6 +1384,10 @@ void _scene::runGame()
     hud->updateBananaCount(player->coins, camera);
     hud->drawBananaIcon(camera);
     //b->updateB(player->plPos, player->velocity, player->isJumping);
+
+    string s = to_string(currentScore);
+    scoreCounter->setPosition(camera->camPos.x-0.5,camera->camPos.y+3.4,-2);
+    scoreCounter->drawText(s);
 
     if(isPaused)
     {

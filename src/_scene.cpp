@@ -105,6 +105,12 @@ _fonts *rightClickEditorFont = new _fonts();
 _fonts *backspaceText = new _fonts();
 _fonts *toReset = new _fonts();
 _fonts *scoreCounter = new _fonts();
+_fonts *editorOrText = new _fonts();
+_fonts *editorDeleteText = new _fonts();
+_fonts *savedFont = new _fonts();
+
+_timer *savedTimer = new _timer();
+
 
 vector<pair<_fonts*,string>> fonts;
 _fonts* previewFont = nullptr;
@@ -118,6 +124,7 @@ vector<_scorePopUp*> scorePopups;
 int currentScore = 0;
 int highestScore = 0;
 bool inCustomLevel = false;
+bool showSaved = false;
 
 
 
@@ -211,6 +218,11 @@ _scene::~_scene()
     delete playerPosRep;
     delete pauseHelpButton;
 
+    delete editorDeleteText;
+    delete editorOrText;
+
+    delete savedTimer;
+
     platforms.clear();
     enemies.clear();
     collectibles.clear();
@@ -281,6 +293,10 @@ GLint _scene::initGL()
     scoreCounter = new _fonts();
     scoreCounter->initFonts("images/fontsheet.png",15,8);
     scoreCounter->setSize(0.2,0.2);
+
+    savedFont->initFonts("images/fontsheet.png",15,8);
+    savedFont->setSize(.1,.1);
+    savedTimer->reset();
 
    return true;
 }
@@ -440,8 +456,8 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                    //case '8': placeObj = BARREL; if(!previewBarrel) previewBarrel = new _barrelCannon(); previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY},90,true,1); break;
                    //case 'Q': gs = MAINMENU; /*background->initPrlx("images/temp_mainmenu.png");*/ break;
                    //case 'S': saveCustomLevel();break;
-                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;break;
-                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;break;
+                   case 'A': player->plPos.x -=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x -=0.5; for(int i = 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x-=0.5; for(int i = 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x-=0.5; platAttributeMoving->pos.x -= 0.5; platAttributeStatic->pos.x -= 0.5; scaleText->pos.x-=0.5; scaleDownButton->pos.x-=0.5; scaleUpButton->pos.x-=0.5; scaleUpK->pos.x -=0.5; scaleDownJ->pos.x-=0.5; rotateText->pos.x-=0.5; rotateE->pos.x-=0.5; rotateR->pos.x-=0.5; rightClickEditorButton->pos.x-=.5; rightClickEditorFont->pos.x-=.5; toReset->pos.x-=0.5; backspaceText->pos.x-=0.5;upKey->pos.x-=0.5;leftKey->pos.x-=0.5;rightKey->pos.x-=0.5; downKey->pos.x-=0.5;editorDeleteText->pos.x-=.5;editorOrText->pos.x-=.5;break;
+                   case 'D': player->plPos.x +=0.5; for(int i = 0; i < inventoryButtons.size(); i++) inventoryButtons[i]->pos.x +=0.5; for(int  i= 0;i<platTextureButtons.size();++i) platTextureButtons[i]->pos.x += 0.5; for(int  i= 0;i<platAttributeButtons.size();++i) platAttributeButtons[i]->pos.x += 0.5; platAttributeMoving->pos.x += 0.5; platAttributeStatic->pos.x += 0.5; scaleText->pos.x+=0.5; scaleDownButton->pos.x+=0.5; scaleUpButton->pos.x+=0.5; scaleUpK->pos.x +=0.5; scaleDownJ->pos.x+=0.5; rotateText->pos.x+=0.5; rotateE->pos.x+=0.5; rotateR->pos.x+=0.5;rightClickEditorButton->pos.x+=.5;rightClickEditorFont->pos.x+=.5;toReset->pos.x+=0.5; backspaceText->pos.x+=0.5;upKey->pos.x+=0.5;leftKey->pos.x+=0.5;rightKey->pos.x+=0.5; downKey->pos.x+=0.5;editorDeleteText->pos.x+=.5;editorOrText->pos.x+=.5;break;
                    case VK_LEFT:  // Decrease platform X scale
                     if (previewPlat && placeObj == PLAT)
                         previewPlat->scale.x = max(0.1f, previewPlat->scale.x - 0.1f);
@@ -1398,6 +1414,26 @@ void _scene::runGame()
     if(isPaused)
     {
         drawPausePopup();
+
+        if (showSaved)
+        {
+        float elapsed = (float)savedTimer->getTicks();
+        if (elapsed < 2000.0f)
+        {
+        // fade out over time
+        float alpha = 1.0 - elapsed/2000.0;
+        glColor4f(1, 1, 1, alpha);
+
+        savedFont->setPosition(camera->camPos.x,camera->camPos.y + 1.0,-2);
+        savedFont->drawText("Saved");
+
+        glColor4f(1,1,1,1); // reset
+        }
+    else
+        {
+        showSaved = false;
+        }
+        }
     }
 }
 
@@ -1442,6 +1478,9 @@ void _scene::saveGame()
     file <<"highScore="<<highestScore<<endl;
 
     file.close();
+
+    showSaved = true;
+    savedTimer->reset();
 
 }
 
@@ -1576,6 +1615,8 @@ void _scene::saveCustomLevel()
 
 
     file.close();
+    showSaved=true;
+    savedTimer->reset();
 }
 
 
@@ -1702,12 +1743,38 @@ void _scene::drawEditor()
         rightClickEditorButton->drawButton();
         rightClickEditorFont->drawText("select");
 
+        editorDeleteText->drawText("delete");
+        editorOrText->drawText("or");
+
+
         glEnable(GL_DEPTH_TEST);
 
 
     }
         if(isPaused)
+        {
             drawPausePopup();
+            if (showSaved)
+        {
+        float elapsed = (float)savedTimer->getTicks();
+        if (elapsed < 2000.0f)
+        {
+        // fade out over time
+        float alpha = 1.0 - elapsed/2000.0;
+        glColor4f(1, 1, 1, alpha);
+
+        savedFont->setPosition(camera->camPos.x,camera->camPos.y + 1.0,-2);
+        savedFont->drawText("Saved");
+
+        glColor4f(1,1,1,1); // reset
+        }
+    else
+        {
+        showSaved = false;
+        }
+        }
+        }
+
 }
 
 void _scene::deleteObjectAtMouseInEditor()
@@ -1997,7 +2064,14 @@ void _scene::initEditorInventory()
     playerPosRep->xMax = 2.0/6.0;
     playerPosRep->xMin= 1.0/6.0;
 
-    }
+    editorOrText->initFonts("images/fontsheet.png",15,8);
+    editorOrText->setPosition(5.7,2.2,-2);
+    editorOrText->setSize(0.15,0.15);
+
+    editorDeleteText->initFonts("images/fontsheet.png",15,8);
+    editorDeleteText->setPosition(5.25,1.9,-2);
+    editorDeleteText->setSize(0.15,0.15);
+}
 
 void _scene::drawSaveScreen()
 {

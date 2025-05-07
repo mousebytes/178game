@@ -1,2 +1,4 @@
 PLATFORM images/wall.png -0.821524 -1.49807 -2 2.4 0.3 1 1 1 0 0
+COLLECTIBLE images/banana.png -1.66376 0.0483249 -2 0.1 1 1
+COLLECTIBLE images/banana.png -2.47838 -0.31066 -2 0.1 1 1
 GOAL images/goal.png 1.52569 -0.787006 -2 0.2 1 1

@@ -70,6 +70,7 @@ _buttons *exitButton = new _buttons();
 _buttons *loadButton = new _buttons();
 _buttons *saveCustomButton = new _buttons();
 
+_buttons *pauseHelpButton = new _buttons();
 _buttons *resumeButton = new _buttons();
 _buttons *backToMenuButton = new _buttons();
 _buttons *startScreenButton = new _buttons();
@@ -107,6 +108,8 @@ vector<pair<_fonts*,string>> fonts;
 _fonts* previewFont = nullptr;
 string previewText = "";
 bool typingFontText = false;
+
+bool showPauseHelpMenu = false;
 
 _scene::_scene()
 {
@@ -191,6 +194,7 @@ _scene::~_scene()
     delete rightKey;
     delete saveCustomButton;
     delete playerPosRep;
+    delete pauseHelpButton;
 
     platforms.clear();
     enemies.clear();
@@ -328,10 +332,13 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:
            input->wParam = wParam;
 
-           if((gs == PLAYING || gs == LEVELEDITOR || gs == SAVESCREEN) && wParam == VK_ESCAPE)
+           if((gs == PLAYING || gs == LEVELEDITOR || gs == SAVESCREEN) && wParam == VK_ESCAPE && !showPauseHelpMenu)
            {
                 isPaused = !isPaused;
            }
+           else if (showPauseHelpMenu && wParam == VK_ESCAPE)
+                showPauseHelpMenu = false;
+
            if((gs == WIN || gs == CREDITS || gs == HELP)&& wParam == VK_ESCAPE)
                 gs = MAINMENU;
         if(!isPaused)
@@ -541,8 +548,16 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             gs = MAINMENU;
             return 0;
         }
+        else if(saveCustomButton->isHovered(adjustedMouseX,adjustedMouseY))
+            saveCustomLevel();
+
+        else if(pauseHelpButton->isHovered(adjustedMouseX,adjustedMouseY))
+        {
+            showPauseHelpMenu = true;
+        }
 
         }
+
         if(gs == SAVESCREEN)
         {
             if(loadSaveButton->isHovered(mouseX,mouseY))
@@ -1704,6 +1719,7 @@ void _scene::initMenuButtons()
     resumeButton->initButton("images/new_images/continue_buttons.png", 0, 0.7, -2, 1.0, 0.3, 1.0, 2, 1);
     backToMenuButton->initButton("images/new_images/mainmenu_buttons.png", 0, -.7, -2, 1.0, 0.3, 1.0, 2, 1);
     saveCustomButton->initButton("images/new_images/save_buttons.png",0,-0,-3,1.0,0.3,1.0,2,1);
+    pauseHelpButton->initButton("images/new_images/images_buttons/button_Help.png",3,0,-3,1.0,0.3,1.0,1,1);
 
     startScreenButton->initButton("images/new_images/playnow_buttons.png",0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
     jungleAdventureSS->initButton("images/new_images/Game_Title.png", 0, 0.5, -2, 1.0, 1.0, 1.0, 1,1);
@@ -1712,7 +1728,7 @@ void _scene::initMenuButtons()
     helpBackButton->initButton("images/new_images/mainmenu_buttons.png",-1.8, -1.0, -2, .7, .3, 1.0, 2,1);
 
     loadSaveButton->initButton("images/new_images/saved_button.png",0,0.7,-3,1.0,0.3,1.0,2,1);
-    loadCustomButton->initButton("images/new_images/saved_button.png",0,-.1,-3,1.0,0.3,1.0,2,1);
+    loadCustomButton->initButton("images/new_images/custom_buttons.png",0,-.1,-3,1.0,0.3,1.0,2,1);
 
 
 
@@ -1752,6 +1768,9 @@ void _scene::drawPausePopup()
     resumeButton->drawButton();
     backToMenuButton->drawButton();
     saveCustomButton->drawButton();
+    pauseHelpButton->drawButton();
+
+    drawPauseHelpButton();
 
     glPopMatrix();
 
@@ -1914,5 +1933,14 @@ void _scene::drawSaveScreen()
     loadCustomButton->updateHover(mouseX,mouseY);
 
 }
+
+void _scene::drawPauseHelpButton()
+{
+    if(showPauseHelpMenu)
+    {
+        helpScreenBG->drawBackground(100,100,-2,2);
+    }
+}
+
 
 

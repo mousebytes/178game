@@ -62,6 +62,8 @@ class _scene
 
         void initEditorInventory();
 
+        void drawPauseHelpButton();
+
     protected:
 
     private:

@@ -66,6 +66,7 @@ _buttons* startButton = new _buttons();
 _buttons *editorButton = new _buttons();
 _buttons *exitButton = new _buttons();
 _buttons *loadButton = new _buttons();
+_buttons *saveCustomButton = new _buttons();
 
 _buttons *resumeButton = new _buttons();
 _buttons *backToMenuButton = new _buttons();
@@ -185,6 +186,7 @@ _scene::~_scene()
     delete downKey;
     delete leftKey;
     delete rightKey;
+    delete saveCustomButton;
 
     platforms.clear();
     enemies.clear();
@@ -1690,8 +1692,9 @@ void _scene::initMenuButtons()
     menuHelpButton->initButton("images/new_images/help_buttons.png",2.2,-.9,-3,1.0,0.3,1.0,2,1);
 
 
-    resumeButton->initButton("images/new_images/continue_buttons.png", 0, 0.3, -2, 1.0, 0.3, 1.0, 2, 1);
-    backToMenuButton->initButton("images/new_images/mainmenu_buttons.png", 0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
+    resumeButton->initButton("images/new_images/continue_buttons.png", 0, 0.7, -2, 1.0, 0.3, 1.0, 2, 1);
+    backToMenuButton->initButton("images/new_images/mainmenu_buttons.png", 0, -.7, -2, 1.0, 0.3, 1.0, 2, 1);
+    saveCustomButton->initButton("images/new_images/save_buttons.png",0,-0,-3,1.0,0.3,1.0,2,1);
 
     startScreenButton->initButton("images/new_images/playnow_buttons.png",0, -0.5, -2, 1.0, 0.3, 1.0, 2, 1);
     jungleAdventureSS->initButton("images/new_images/Game_Title.png", 0, 0.5, -2, 1.0, 1.0, 1.0, 1,1);
@@ -1701,6 +1704,9 @@ void _scene::initMenuButtons()
 
     loadSaveButton->initButton("images/new_images/saved_button.png",0,0.7,-3,1.0,0.3,1.0,2,1);
     loadCustomButton->initButton("images/new_images/saved_button.png",0,-.1,-3,1.0,0.3,1.0,2,1);
+
+
+
 
 
 
@@ -1729,12 +1735,14 @@ void _scene::drawPausePopup()
     //float adjustedMouseY = mouseY - camera->camPos.y;
     resumeButton->updateHover(mouseX, mouseY);
     backToMenuButton->updateHover(mouseX, mouseY);
+    saveCustomButton->updateHover(mouseX,mouseY);
 
     //resumeButton->updateHover(mouseX, mouseY);
     //backToMenuButton->updateHover(mouseX, mouseY);
 
     resumeButton->drawButton();
     backToMenuButton->drawButton();
+    saveCustomButton->drawButton();
 
     glPopMatrix();
 

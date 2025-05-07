@@ -809,7 +809,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1746623023 source:d:\codeblocks stuff\178game\src\_sounds.cpp
+1746624676 source:d:\codeblocks stuff\178game\src\_sounds.cpp
 	"_sounds.h"
 	"_common.h"
 
@@ -826,4 +826,12 @@
 1746256282 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_fonts.h
 	<_textureLoader.h>
 	<_common.h>
+
+1746625736 source:d:\codeblocks stuff\178game\src\_explosion.cpp
+	"_explosion.h"
+
+1746625411 d:\codeblocks stuff\178game\include\_explosion.h
+	<_common.h>
+	<_textureLoader.h>
+	<_timer.h>
 

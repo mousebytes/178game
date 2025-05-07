@@ -2,7 +2,6 @@ PLATFORM images/wall.png 1.72335 -1.41868 -2 0.3 0.3 1 1 1 0 0
 PLATFORM images/wall.png 2.61391 -1.92609 -2 0.3 0.3 1 1 1 0 0
 PLATFORM images/wall.png 3.02812 -1.08731 -2 0.3 0.3 1 1 1 0 0
 PLATFORM images/wall.png 3.84619 -1.89503 -2 0.3 0.3 1 1 1 0 0
-PLATFORM images/wall.png 1.01919 -1.31513 -2 0.3 0.3 1 1 1 0 0
 PLATFORM images/wall.png 4.72924 -1.54295 -2 0.3 0.3 1 1 1 0 1
 PLATFORM images/wall.png 5.37127 -1.56366 -2 0.3 0.3 1 1 1 0 1
 PLATFORM images/wall.png 5.88904 -1.53259 -2 0.3 0.3 1 1 1 0 1

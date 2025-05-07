@@ -99,6 +99,11 @@ _fonts *rightClickEditorFont = new _fonts();
 _fonts *backspaceText = new _fonts();
 _fonts *toReset = new _fonts();
 
+vector<pair<_fonts*,string>> fonts;
+_fonts* previewFont = nullptr;
+string previewText = "";
+bool typingFontText = false;
+
 _scene::_scene()
 {
     //ctor
@@ -145,6 +150,7 @@ _scene::~_scene()
     for (auto b : inventoryButtons) delete b;
     for (auto b : platTextureButtons) delete b;
     for (auto b : platAttributeButtons) delete b;
+    for(auto&f:fonts)delete f.first;
 
     delete platAttributeMoving;
     delete platAttributeStatic;
@@ -187,6 +193,7 @@ _scene::~_scene()
     inventoryButtons.clear();
     platTextureButtons.clear();
     platAttributeButtons.clear();
+    fonts.clear();
 
 }
 GLint _scene::initGL()
@@ -365,6 +372,25 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
            }
            else if(gs==LEVELEDITOR)
            {
+               if (placeObj == FONT && previewFont)
+{
+
+
+        if (wParam == VK_BACK && !previewText.empty())
+        {
+            previewText.pop_back();
+            return 0;
+        }
+        else if (wParam >= 32 && wParam <= 126)
+        {
+            previewText += static_cast<char>(wParam);
+            return 0;
+        }
+
+
+
+}
+
                switch(wParam)
                {
                    //case 'M': if(placeObj == PLAT) if(previewPlat->chooseTex == previewPlat->DIRT) previewPlat->chooseTex = previewPlat->STONE; else previewPlat->chooseTex = previewPlat->DIRT; break;
@@ -438,7 +464,20 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                             previewEnemy->scale.x = previewEnemy->scale.y = 0.25f;
                         }
                     break;
+                    case '9':
+                        placeObj = FONT;
+                        if(!previewFont)
+                        {
+                            previewFont = new _fonts();
+                            previewFont->initFonts("images/fontsheet.png",15,8);
+                            previewFont->setPosition(mouseX,mouseY,-2);
+                            previewFont->setSize(0.2,0.2);
+                            previewText = "";
+                        }
+                    break;
+
                }
+
            }
            else if(gs == MAINMENU && wParam == 'E')
            {
@@ -594,6 +633,18 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 _barrelCannon* b = new _barrelCannon();
                 b->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, false, previewBarrel->fireDelay);
                 barrels.push_back(b);
+            }
+            else if(placeObj == FONT)
+            {
+                if(previewText!="")
+                {
+                    _fonts* f = new _fonts();
+                    f->initFonts("images/fontsheet.png",15,8);
+                    f->setPosition(mouseX,mouseY,-2);
+                    f->setSize(0.2,0.2);
+                    fonts.push_back({f,previewText});
+                }
+
             }
         }
         }
@@ -784,6 +835,12 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     previewBarrel = new _barrelCannon();
                 previewBarrel->initBarrel("images/barrel.png",{mouseX,mouseY,-2},previewBarrel->rotation, previewBarrel->isAuto, previewBarrel->fireDelay);
                 break;
+            case FONT:
+                if(previewFont)
+                {
+                    previewFont->setPosition(mouseX,mouseY,-2);
+                }
+            break;
         }
     }
         if(gs == MAINMENU || gs == STARTSCREEN || gs == CREDITS || gs == HELP || gs == SAVESCREEN || (gs == PLAYING && isPaused))
@@ -992,6 +1049,28 @@ void _scene::load_level_file(const char* file_name)
             _barrelCannon* b = new _barrelCannon();
             b->initBarrel("images/barrel.png",{x,y,z},rotation,(bool)isAuto,fireDelay);
             barrels.push_back(b);
+        }
+        else if(type =="FONT")
+        {
+            float x,y,scale;
+            string text;
+
+            ss >> x >> y >> scale;
+
+            getline(ss,text);
+            size_t firstTxt = text.find('"');
+            size_t lastTxt = text.rfind('"');
+            string text2 = "";
+
+            if(firstTxt != string::npos && lastTxt != string::npos && lastTxt > firstTxt)
+                text2=text.substr(firstTxt+1,lastTxt-firstTxt-1);
+
+            _fonts* f = new _fonts();
+            f->initFonts("images/fontsheet.png",15,8);
+            f->setPosition(x,y,-2);
+            f->setSize(scale,scale);
+
+            fonts.push_back({f,text2});
         }
     }
 }
@@ -1208,6 +1287,8 @@ void _scene::runGame()
     //glEnable(GL_LIGHTING);
     for(auto c : collectibles) c->drawColl();
     //glDisable(GL_LIGHTING);
+    for(auto &f : fonts)
+        f.first->drawText(f.second);
 
     goal->drawGoal();
     checkGoal();
@@ -1368,6 +1449,19 @@ void _scene::saveCustomLevel()
     file << "GOAL images/goal.png " << goal->pos.x << " " << goal->pos.y << " " << goal->pos.z
      << " " << goal->scl.x << " " << goal->framesX << " " << goal->framesY << endl;
 
+    for(auto &f:fonts)
+    {
+
+            file << "FONT ";
+        file << f.first->pos.x << " "<< f.first->pos.y << " "<< f.first->scale.x << " ";
+
+        // save the text in quotes to preserve spacing
+        file << "\"" << f.second << "\"\n";
+
+
+    }
+
+
     file.close();
     cout << "saved to levels/custom_level.txt"<<endl;
 }
@@ -1411,6 +1505,11 @@ void _scene::drawEditor()
         c->drawColl();
     goal->drawGoal();
 
+    for(auto &f:fonts)
+    {
+        f.first->drawText(f.second);
+    }
+
     if(!isPaused)
     {
 
@@ -1435,6 +1534,9 @@ void _scene::drawEditor()
             previewGoal->drawGoal();
         if(previewBarrel && placeObj == BARREL)
             previewBarrel->drawBarrel();
+        if(previewFont && placeObj == FONT)
+            previewFont->drawText(previewText);
+
 
         glEnable(GL_DEPTH_TEST);
         glColor4f(1.0, 1.0, 1.0, 1.0); // reset color
@@ -1562,6 +1664,19 @@ void _scene::deleteObjectAtMouseInEditor()
                 return;
             }
     }
+    for (int i = 0; i < fonts.size(); i++)
+        {
+    _fonts* f = fonts[i].first;
+        float w = 0.5, h = 0.2;  // adjust if needed
+        if (mouseX > f->pos.x - w && mouseX < f->pos.x + w &&
+            mouseY > f->pos.y - h && mouseY < f->pos.y + h) {
+            delete f;
+            fonts.erase(fonts.begin() + i);
+            return;
+    }
+}
+
+
 }
 
 

@@ -21,7 +21,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1745447129 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
+1746555037 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_scene.h
 	<_common.h>
 	<_timer.h>
 
@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1746554014 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746579732 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -67,7 +67,7 @@
 	<_player.h>
 	<_parallax.h>
 
-1745176049 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
+1746554065 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_inputs.cpp
 	"_inputs.h"
 
 1744908381 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_textureloader.cpp

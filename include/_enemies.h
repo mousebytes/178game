@@ -62,6 +62,10 @@ class _enemies
         float jumping_speed;
         _timer *jumpTimer = new _timer();
 
+        int health;
+
+        _timer *justHit = new _timer();
+
     protected:
 
     private:

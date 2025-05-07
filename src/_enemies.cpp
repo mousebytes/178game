@@ -39,6 +39,7 @@ _enemies::_enemies()
     max_jump_height = 1.7;
     jumping_speed = 0.09;
     jumpTimer->reset();
+    justHit->reset();
 }
 
 _enemies::~_enemies()
@@ -58,9 +59,9 @@ void _enemies::initEnms()
     //tex->loadTexture(file_name);
     switch (eT)
     {
-        case WALKER: tex->loadTexture("images/temp_enemy.png"); frames = 4;break;
-        case JUMPER: tex->loadTexture("images/temp_jumper.png"); frames=3;break;
-        case FLYER:  tex->loadTexture("images/temp_flyer.png"); frames = 4; break;
+        case WALKER: tex->loadTexture("images/temp_enemy.png"); frames = 4; health = 1;break;
+        case JUMPER: tex->loadTexture("images/temp_jumper.png"); frames=3;health = 3;break;
+        case FLYER:  tex->loadTexture("images/temp_flyer.png"); frames = 4;health = 1; break;
     }
     xMin = 0;
     xMax = 1.0/frames;
@@ -133,6 +134,7 @@ void _enemies::actions()
         }
         else if(respawn_timer->getTicks() > 6000)
         {
+            health =1;
             isEnmsLive = true;
             respawn_timer->reset();
         }

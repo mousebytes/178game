@@ -345,7 +345,7 @@
 1745353385 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_buttons.h
 	<_textureLoader.h>
 
-1745641249 source:c:\users\what!\desktop\csci178\178game-main\main.cpp
+1746654405 source:c:\users\what!\desktop\csci178\178game-main\main.cpp
 	<windows.h>
 	<_common.h>
 	<_scene.h>
@@ -367,14 +367,14 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_scene.h
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_scene.h
 	<_common.h>
 	<_timer.h>
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_timer.h
 	<_common.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_background.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_background.cpp
 	"_background.h"
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_background.h
@@ -387,19 +387,19 @@
 
 1739239548 c:\users\what!\desktop\csci178\common\include\soil.h
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_barrelcannon.cpp
+1746665298 source:c:\users\what!\desktop\csci178\178game-main\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_barrelcannon.h
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_barrelcannon.h
 	<_timer.h>
 	<_textureLoader.h>
 	<_player.h>
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_player.h
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_player.h
 	<_textureLoader.h>
 	<_timer.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_buttons.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_buttons.cpp
 	"_buttons.h"
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_buttons.h
@@ -412,7 +412,7 @@
 	<_common.h>
 	<_player.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_collectible.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_collectible.cpp
 	"_collectible.h"
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_collectible.h
@@ -428,33 +428,36 @@
 	<_enemies.h>
 	<_collectible.h>
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_platform.h
+1746661600 c:\users\what!\desktop\csci178\178game-main\include\_platform.h
 	<_textureLoader.h>
 	<_timer.h>
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_enemies.h
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_enemies.h
 	<_common.h>
 	<_timer.h>
 	<_textureLoader.h>
 
-1745885749 source:c:\users\what!\desktop\csci178\178game-main\src\_enemies.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_enemies.cpp
 	"_enemies.h"
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_goal.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_goal.cpp
 	"_goal.h"
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_goal.h
 	<_common.h>
 	<_textureLoader.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_hud.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_hud.cpp
 	"_hud.h"
 
-1745641253 c:\users\what!\desktop\csci178\178game-main\include\_hud.h
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_hud.h
 	<_common.h>
 	<_textureLoader.h>
+	<_fonts.h>
+	<_camera.h>
+	<_buttons.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_inputs.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_inputs.cpp
 	"_inputs.h"
 
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_inputs.h
@@ -473,16 +476,16 @@
 1745641253 c:\users\what!\desktop\csci178\178game-main\include\_lightsetting.h
 	<_common.h>
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_parallax.cpp
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_parallax.cpp
 	"_parallax.h"
 
-1745641255 source:c:\users\what!\desktop\csci178\178game-main\src\_platform.cpp
+1746668451 source:c:\users\what!\desktop\csci178\178game-main\src\_platform.cpp
 	"_platform.h"
 
-1745641256 source:c:\users\what!\desktop\csci178\178game-main\src\_player.cpp
+1746665298 source:c:\users\what!\desktop\csci178\178game-main\src\_player.cpp
 	"_player.h"
 
-1746068329 source:c:\users\what!\desktop\csci178\178game-main\src\_scene.cpp
+1746668451 source:c:\users\what!\desktop\csci178\178game-main\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -498,6 +501,9 @@
 	<_parallax.h>
 	<_buttons.h>
 	<_sounds.h>
+	<_fonts.h>
+	<_explosion.h>
+	<_scorePopUp.h>
 
 1745641256 source:c:\users\what!\desktop\csci178\178game-main\src\_textureloader.cpp
 	"_textureloader.h"
@@ -605,7 +611,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1742256859 source:c:\users\what!\desktop\csci178\178game-main\src\_sounds.cpp
+1746661600 source:c:\users\what!\desktop\csci178\178game-main\src\_sounds.cpp
 	"_sounds.h"
 	"_common.h"
 
@@ -861,5 +867,28 @@
 	<_fonts.h>
 
 1746641210 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scorepopup.cpp
+	"_scorePopUp.h"
+
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_explosion.cpp
+	"_explosion.h"
+
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_explosion.h
+	<_common.h>
+	<_textureLoader.h>
+	<_timer.h>
+
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_fonts.cpp
+	"_fonts.h"
+
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_fonts.h
+	<_textureLoader.h>
+	<_common.h>
+
+1746654405 c:\users\what!\desktop\csci178\178game-main\include\_scorepopup.h
+	<_timer.h>
+	<_common.h>
+	<_fonts.h>
+
+1746654406 source:c:\users\what!\desktop\csci178\178game-main\src\_scorepopup.cpp
 	"_scorePopUp.h"
 

@@ -37,3 +37,4 @@ COLLECTIBLE images/banana.png 8.55766 -2.66132 -2 0.1 1 1
 COLLECTIBLE images/banana.png 20.8654 -0.0414214 -2 0.1 1 1
 COLLECTIBLE images/banana.png 21.9009 0.673097 -2 0.1 1 1
 GOAL images/goal.png 23.3034 1.19086 -2 0.2 1 1
+FONT -0.787006 1.12873 0.2 "LEVEL 3"

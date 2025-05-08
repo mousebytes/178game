@@ -1018,7 +1018,7 @@ void _scene::check_enemy_collisions()
 
 void _scene::load_level_file(const char* file_name)
 {
-    if(currLevel == 6)
+    if(currLevel == 5)
     {
         p1->initPrlx("images/temp_p1.png");
         p2->initPrlx("images/temp_p2.png");

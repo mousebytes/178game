@@ -277,9 +277,10 @@ GLint _scene::initGL()
     hud->initHud("images/heart.png",1,1,camera->camPos);
 
     p1->initPrlx("images/level backgrounds/3.png");
-    p1->speed = 0.001;
     p2->initPrlx("images/level backgrounds/2.png");
     p3->initPrlx("images/level backgrounds/1.png");
+    p1->speed = 0.001;
+
     p1->speed = 0.005;
     p2->speed = 0.002;
     p3->speed = 0.001;
@@ -378,7 +379,11 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 showPauseHelpMenu = false;
 
            if((gs == WIN || gs == CREDITS || gs == HELP)&& wParam == VK_ESCAPE)
-                gs = MAINMENU;
+           {
+               gs = MAINMENU;
+               snds->playMusic("sounds/JgMus.wav");
+           }
+
         if(!isPaused)
         {
 
@@ -976,6 +981,7 @@ void _scene::check_enemy_collisions()
             {
                 e->isEnmsLive=false;
                 e->start_respawn_timer = true;
+                sndOof->playSounds("sounds/enemyDie.wav");
             }
 
             player->isJumping = true;
@@ -1011,6 +1017,19 @@ void _scene::check_enemy_collisions()
 
 void _scene::load_level_file(const char* file_name)
 {
+    if(currLevel == 6)
+    {
+        p1->initPrlx("images/temp_p1.png");
+        p2->initPrlx("images/temp_p2.png");
+        p3->initPrlx("images/temp_p3.png");
+    }
+    else
+    {
+        p1->initPrlx("images/level backgrounds/3.png");
+        p2->initPrlx("images/level backgrounds/2.png");
+        p3->initPrlx("images/level backgrounds/1.png");
+    }
+
     player->xMin = 0.0;
     player->xMax = 1.0/6.0;
     player->inBarrel=false;
@@ -1184,10 +1203,11 @@ void _scene::checkCollectibles()
             scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
     }
-    if(player->coins > 20)
+    if(player->coins > 19)
         {
             player->health++;
             player->coins -= 20;
+            sndOof->playSounds("sounds/1up.wav");
         }
 }
 
@@ -1226,6 +1246,7 @@ void _scene::checkGoal()
             player->health = 3;
             player->inBarrel = false;
             player->isBeingDisplacedHorz = false;
+            snds->playMusic("sounds/win.wav");
             return ;
         }
 

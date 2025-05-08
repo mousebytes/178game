@@ -66,6 +66,8 @@ case 2:
     case 1:
         chooseTex=DIRT;
         break;
+    case 2:
+        chooseTex=BARN;
     }
 
     switch(chooseTex)

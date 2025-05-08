@@ -669,6 +669,7 @@ int _scene::winMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     previewPlat ? previewPlat->scale.x : 1.0f,
                     previewPlat ? previewPlat->scale.y : 1.0f,
                1, 1, 1, int(previewPlat->type), 0.05, 1.5, int(previewPlat->chooseTex));
+               plat->chooseTex = previewPlat->chooseTex;
                 platforms.push_back(plat);
             }
             else if(placeObj == ENEMY)
@@ -1247,6 +1248,7 @@ void _scene::checkGoal()
             player->inBarrel = false;
             player->isBeingDisplacedHorz = false;
             snds->playMusic("sounds/win.wav");
+            highestScore = max (highestScore,currentScore);
             return ;
         }
 

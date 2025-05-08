@@ -31,7 +31,7 @@
 1740013861 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_lightsetting.h
 	<_common.h>
 
-1746660438 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
+1746664646 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_scene.cpp
 	"_scene.h"
 	<_lightsetting.h>
 	<_inputs.h>
@@ -79,7 +79,7 @@
 	<_textureLoader.h>
 	<_timer.h>
 
-1746553876 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
+1746664126 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_player.cpp
 	"_player.h"
 
 1742975345 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_camera.h
@@ -279,7 +279,7 @@
 1746621963 source:d:\codeblocks stuff\178game\src\_parallax.cpp
 	"_parallax.h"
 
-1746641210 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
+1746664200 source:c:\users\thinkpadx1\desktop\csci 178\2d_platformer\src\_barrelcannon.cpp
 	"_barrelCannon.h"
 
 1746179628 c:\users\thinkpadx1\desktop\csci 178\2d_platformer\include\_barrelcannon.h

@@ -1011,6 +1011,8 @@ void _scene::check_enemy_collisions()
 
 void _scene::load_level_file(const char* file_name)
 {
+    player->xMin = 0.0;
+    player->xMax = 1.0/6.0;
     player->inBarrel=false;
     player->isBeingDisplacedHorz=false;
     player->isJumping=false;
@@ -1282,6 +1284,8 @@ void _scene::runGame()
     p1->scroll();
 
     // don't change the order of these 4 functions -- player texture breaks otherwise
+    player->handleHorizontalDisplacement();
+
     player->playerActions();
     camera->followPlayer(player);
     camera->updateCamPos();
@@ -1289,7 +1293,6 @@ void _scene::runGame()
 
     player->handle_vertical();
     player->handle_player_damage_timer();
-    player->handleHorizontalDisplacement();
 
     if(player->health < 1)
         {

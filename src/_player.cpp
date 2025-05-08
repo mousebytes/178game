@@ -118,7 +118,7 @@ void _player::drawPlayer()
 void _player::playerActions()
 {
     if(inBarrel) return;
-    if(!player_can_be_damaged && justExitedBarrel->getTicks() > 1000)
+    if(!player_can_be_damaged && justExitedBarrel->getTicks() > 1300)
     {
         xMin = 0.0;
         xMax = 1.0/(float)framesX;
@@ -206,7 +206,7 @@ void _player::playerActions()
         if(xMin >=1.0)
         {
             xMax = 5.0/(float)framesX;
-            xMax = 4.0/(float)framesX;
+            xMin = 4.0/(float)framesX;
         }
         else
         {
@@ -262,6 +262,9 @@ void _player::handleHorizontalDisplacement()
 {
 
     if(!isBeingDisplacedHorz) return;
+
+    xMin = 5.0/(float)framesX;  // force jump frame
+    xMax = 1.0;
 
     if(displacementTraveled<maxHorzDisplacement)
     {

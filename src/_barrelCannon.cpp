@@ -92,8 +92,12 @@ void _barrelCannon::updateB(_player* player)
         return;
     }
 
-    xMin = 1.0;
-    xMax = 1.0/2.0;
+
+    xMin = 1.0/2.0;
+    xMax = 1.0;
+
+
+
 
     if(!(cooldownTimer->getTicks()> 500)) return;
 

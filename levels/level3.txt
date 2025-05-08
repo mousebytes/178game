@@ -1,43 +1,98 @@
-#level where you use barrels to get acroos and it to the flag 
-PLATFORM images/wall.png -8 0 -2 5 1 1 1 1 0
-PLATFORM images/wall.png 0.497056 -1.97787 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png 1.68792 -1.97787 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png 2.88914 -1.95716 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png -0.714518 -1.97787 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png -3.03411 3.17909 -2 0.6 0.7 1 1 1 0 0
 PLATFORM images/wall.png -3.04447 1.77076 -2 0.6 0.7 1 1 1 0 0
 PLATFORM images/wall.png -3.05482 0.362437 -2 0.6 0.7 1 1 1 0 0
 PLATFORM images/wall.png -3.06518 -1.02518 -2 0.6 0.7 1 1 1 0 0
 PLATFORM images/wall.png -3.08589 -2.41279 -2 0.6 0.7 1 1 1 0 0
 PLATFORM images/wall.png -3.08589 -3.55188 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png -1.89503 -1.97787 -2 0.6 0.7 1 1 1 0 0
-PLATFORM images/wall.png 9.89655 -2.2264 -2 1.1 0.1 1 1 1 0 0
-PLATFORM images/wall.png 16.6228 -0.724874 -2 1.2 0.1 1 1 1 0 0
-PLATFORM images/wall.png 19.7604 -2.04 -2 0.3 0.1 1 1 1 0 0
-PLATFORM images/wall.png 21.5726 -0.403858 -2 0.3 0.1 1 1 1 0 0
-PLATFORM images/wall.png 23.3123 0.838782 -2 0.3 0.1 1 1 1 0 0
-ENEMY -2.28853 -1.05624 -3 0.25 0
-ENEMY -4.14214 1.253 -3 0.25 0
-ENEMY 11.2174 1.03553 -3 0.25 2
-ENEMY 8.35949 -0.134619 -3 0.25 2
-ENEMY 5.98812 1.68792 -3 0.25 2
-ENEMY 2.46152 1.52223 -3 0.25 2
-ENEMY 21.5726 -0.0207107 -3 0.25 1
-ENEMY 21.2309 -1.29442 -3 0.25 2
-ENEMY 22.7842 0.227817 -3 0.25 2
-ENEMY 22.2353 2.02965 -3 0.25 2
-ENEMY 19.6258 0.787006 -3 0.25 2
-ENEMY 13.9718 1.08731 -3 0.25 2
-COLLECTIBLE images/banana.png 3 0 -2 0.3 1 1
-COLLECTIBLE images/banana.png 1.91574 -0.766295 -2 0.1 1 1
+PLATFORM images/wall.png -3.88325 0.569544 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -3.95574 0.693808 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -4.48386 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -4.91879 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -5.51036 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -6.11096 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -6.69086 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -7.18792 0.704163 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -7.73675 0.714518 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -8.33736 0.714518 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -8.82406 0.714518 -2 0.3 0.3 1 1 1 0 0
+PLATFORM images/wall.png -2.18203 -1.19086 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png -1.59178 -1.19086 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png -0.980813 -1.1598 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png -0.452691 -1.17015 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 0.137563 -1.18051 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 0.686396 -1.19086 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 1.25594 -1.19086 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 1.81513 -1.17015 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 2.35361 -1.17015 -2 0.3 0.3 1 1 1 0 1
+PLATFORM images/wall.png 7.49553 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 7.66122 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 7.84761 -1.14944 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 7.84761 -1.14944 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 7.84761 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.02365 -1.11838 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.16863 -1.10802 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.33431 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.41716 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.32396 -1.10802 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.5932 -1.11838 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.8003 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 8.9867 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 9.15239 -1.12873 -2 0.1 0.1 1 1 1 0 0
+PLATFORM images/wall.png 29.8329 -0.528122 -2 1.7 0.1 1 1 1 0 0
+PLATFORM images/wall.png -3.05635 3.07554 -2 0.6 0.6 1 1 1 0 0
+PLATFORM images/wall.png -3.03564 3.72792 -2 0.6 0.6 1 1 1 0 0
+PLATFORM images/wall.png 21.5415 0.15533 -2 0.2 0.2 1 1 1 0 0
+PLATFORM images/wall.png 21.904 0.15533 -2 0.2 0.2 1 1 1 0 0
+PLATFORM images/wall.png 22.2768 0.15533 -2 0.2 0.2 1 1 1 0 0
+PLATFORM images/wall.png 22.6599 0.15533 -2 0.2 0.2 1 1 1 0 0
+ENEMY -6.3802 1.24264 -3 0.25 0
+ENEMY 15.4497 -0.579899 -3 0.25 2
+ENEMY 8.3802 -0.714518 -3 0.25 0
+ENEMY 10.5591 -0.0103553 -3 0.25 2
+ENEMY 13.5518 2.28853 -3 0.25 2
+ENEMY 30.7426 -0.176041 -3 0.25 0
+ENEMY 22.1421 0.610965 -3 0.25 1
+ENEMY -5.02213 -2.41279 -3 0.25 2
+ENEMY -7.02071 -1.44975 -3 0.25 2
+ENEMY -7.92163 -2.63026 -3 0.25 2
+ENEMY -10.0755 -1.65685 -3 0.25 2
+ENEMY 6.91279 -2.51635 -3 0.25 2
+ENEMY 17.0933 -3.05482 -3 0.25 2
 COLLECTIBLE images/banana.png 1.72934 2.77523 -2 0.1 1 1
-COLLECTIBLE images/banana.png 6.42762 0.455635 -2 0.1 1 1
-COLLECTIBLE images/banana.png 8.00163 0.797361 -2 0.1 1 1
-COLLECTIBLE images/banana.png 9.59909 -0.486701 -2 0.1 1 1
-COLLECTIBLE images/banana.png 13.5652 -0.0414214 -2 0.1 1 1
-COLLECTIBLE images/banana.png 15.2531 0.75594 -2 0.1 1 1
-COLLECTIBLE images/banana.png 16.6304 -0.217462 -2 0.1 1 1
-COLLECTIBLE images/banana.png 15.2144 2.8063 -2 0.1 1 1
-BARREL 4.99848 -0.217462 -2 -60 0 1
-BARREL 12.5843 -0.797361 -2 -60 0 1
-GOAL images/goal.png 23.3951 1.20122 -2 0.2 1 1
+COLLECTIBLE images/banana.png -8.3063 1.86396 -2 0.1 1 1
+COLLECTIBLE images/banana.png -7.67462 1.87432 -2 0.1 1 1
+COLLECTIBLE images/banana.png -8.67909 1.35655 -2 0.1 1 1
+COLLECTIBLE images/banana.png -8.20274 1.18051 -2 0.1 1 1
+COLLECTIBLE images/banana.png -7.64356 1.24264 -2 0.1 1 1
+COLLECTIBLE images/banana.png -7.4468 1.39797 -2 0.1 1 1
+COLLECTIBLE images/banana.png -7.85066 1.17015 -2 0.1 1 1
+COLLECTIBLE images/banana.png -7.95422 1.17015 -2 0.1 1 1
+COLLECTIBLE images/banana.png -8.40985 1.17015 -2 0.1 1 1
+COLLECTIBLE images/banana.png -8.52376 1.253 -2 0.1 1 1
+COLLECTIBLE images/banana.png 7.63767 -0.642031 -2 0.1 1 1
+COLLECTIBLE images/banana.png 8.19686 -0.652386 -2 0.1 1 1
+COLLECTIBLE images/banana.png 8.77676 -0.62132 -2 0.1 1 1
+COLLECTIBLE images/banana.png 15.5073 1.54295 -2 0.1 1 1
+COLLECTIBLE images/banana.png 12.0976 -0.859493 -2 0.1 1 1
+COLLECTIBLE images/banana.png 12.8224 -0.0517767 -2 0.1 1 1
+COLLECTIBLE images/banana.png 3.74863 -1.20122 -2 0.1 1 1
+COLLECTIBLE images/banana.png 5.69523 -1.04589 -2 0.1 1 1
+COLLECTIBLE images/banana.png 29.0356 -0.134619 -2 0.1 1 1
+COLLECTIBLE images/banana.png 16.6509 1.99858 -2 0.1 1 1
+COLLECTIBLE images/banana.png 21.614 0.766295 -2 0.1 1 1
+COLLECTIBLE images/banana.png 22.1111 0.75594 -2 0.1 1 1
+COLLECTIBLE images/banana.png 22.6806 0.75594 -2 0.1 1 1
+COLLECTIBLE images/banana.png 25.5222 0.393503 -2 0.1 1 1
+COLLECTIBLE images/banana.png 26.1436 1.03553 -2 0.1 1 1
+COLLECTIBLE images/banana.png 20.1362 -0.331371 -2 0.1 1 1
+COLLECTIBLE images/banana.png 18.7383 -0.124264 -2 0.1 1 1
+COLLECTIBLE images/banana.png 33.7708 0.258883 -2 0.1 1 1
+COLLECTIBLE images/banana.png 32.8802 0.890559 -2 0.1 1 1
+COLLECTIBLE images/banana.png 31.5754 0.497056 -2 0.1 1 1
+BARREL 3.96599 -2.41279 -2 -45 0 1
+BARREL 11.4733 -1.68792 -2 -40 0 1
+BARREL 14.3831 1.23229 -2 -70 0 1
+BARREL 19.2944 -1.21157 -2 -50 0 1
+BARREL 24.9009 -0.631676 -2 -35 0 1
+BARREL 34.2885 -0.693808 -2 30 0 1
+GOAL images/goal.png 29.9157 -0.207107 -2 0.2 1 1
+FONT -0.787006 1.12873 0.2 "LEVEL 2"

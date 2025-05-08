@@ -38,7 +38,7 @@ case 2:
     break;
 }
 
-    speed = s;
+    speed = .15;
     patrol_range = p_r;
     moving_forward = true;
 

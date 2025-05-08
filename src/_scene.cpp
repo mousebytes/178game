@@ -1184,10 +1184,10 @@ void _scene::checkCollectibles()
             scorePopups.push_back(new _scorePopUp("+10",c->pos));
         }
     }
-    if(player->coins == 20)
+    if(player->coins > 20)
         {
             player->health++;
-            player->coins = 0;
+            player->coins -= 20;
         }
 }
 
